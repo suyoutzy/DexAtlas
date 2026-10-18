@@ -18,6 +18,13 @@ export function overviewFrame(nodes,{position,target,up,fov,aspect},coverage=.78
   return {center:point(center),distance,position:point(center.clone().addScaledVector(front,distance)),front:point(front),right:point(right),up:point(viewUp)};
 }
 
-export function shouldExitFocus({manual,flight,focusedKind,previous,current,overviewDistance,percent}) {
-  return manual&&!flight&&focusedKind==='term'&&current>previous+.05&&current>=overviewDistance*percent/100;
+export function shouldExitFocus({manual,flight,focusedKind,previous,current,overviewDistance}) {
+  return manual&&!flight&&focusedKind==='term'&&current>previous+.05&&current>=overviewDistance*.8;
+}
+
+export function configureOrbitNavigation(controls,focused) {
+  // Keep the target on the view-center ray after cursor zoom, rather than
+  // projecting it back to a ground plane or a fixed graph centroid.
+  controls.screenSpacePanning=true;
+  controls.zoomToCursor=!focused;
 }

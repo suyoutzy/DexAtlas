@@ -10,6 +10,7 @@ export function createEngineeringLabels(container,nodes,getPoint,getCamera) {
   layer.append(svg);
   const entries=nodes.filter(n=>n.kind==='stage').sort((a,b)=>Number(a.branch)-Number(b.branch)||a.step.localeCompare(b.step)).map(node=>{
     const element=document.createElement('div');element.className='engineering-label';element.dataset.nodeId=node.id;
+    element.style.setProperty('--node-color',node.color);
     const number=document.createElement('span');number.className='engineering-step';number.textContent=node.step;
     const title=document.createElement('strong');title.textContent=node.label;
     element.append(number,title);layer.append(element);

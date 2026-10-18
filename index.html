@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#0A0B19">
-  <meta name="application-version" content="0.2.1">
+  <meta name="application-version" content="0.2.2">
   <meta name="description" content="在三维图谱中探索灵巧操作与策略学习，理解技术的工程位置与概念关系。">
   <title>DexAtlas · 灵巧操作术语图谱</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
@@ -16,8 +16,7 @@
   <a class="skip-link" href="#search-panel">跳转到术语搜索</a>
   <main id="atlas" aria-label="DexAtlas 术语图谱">
     <div id="graph" role="img" aria-label="三维工程与术语图谱，可通过搜索访问全部节点" data-ready="false" data-focused=""></div>
-    <header class="wordmark"><a href="./" aria-label="DexAtlas 首页"><span class="atlas-emblem" aria-hidden="true">⌘</span>Dex<span>Atlas</span></a><span class="brand-caption">DEXTEROUS MANIPULATION</span></header>
-    <div id="scene-caption" aria-hidden="true"><span class="caption-line"></span><span>EXPLORE THE CONNECTIONS</span></div>
+    <header class="wordmark"><a href="./" aria-label="DexAtlas 首页"><span class="atlas-emblem" aria-hidden="true">⌘</span>Dex<span>Atlas</span></a></header>
     <nav class="tool-rail" aria-label="图谱工具">
       <button id="back-button" class="tool" type="button" aria-label="返回上一位置" data-tip="返回上一位置" hidden></button>
       <span class="rail-separator" id="back-separator" hidden></span>
@@ -34,12 +33,9 @@
     </section>
     <section id="settings-panel" class="glass settings-panel" aria-label="图谱设置" hidden>
       <div class="panel-header"><h2>图谱设置</h2><button class="close-button" data-action="close-settings" aria-label="关闭设置">×</button></div>
-      <label class="range-label" for="glow">发光强度 <output id="glow-value" for="glow">0</output></label>
-      <input id="glow" type="range" min="0" max="100" value="0" step="1" aria-label="发光强度">
-      <p class="quiet">0 为关闭，只在需要时点亮图谱。</p>
-      <label class="range-label" for="exit-scale">缩小退出阈值 <output id="exit-scale-value" for="exit-scale">80%</output></label>
-      <input id="exit-scale" type="range" min="50" max="120" value="80" step="5" aria-label="缩小退出阈值">
-      <p class="quiet">相对当前视角的全图距离。数值越低，向外缩小时越早退出术语；退出后以整体为旋转中心。</p>
+      <p class="quiet">探索灵巧操作术语与工程关系。<br>点击节点阅读 · 滚轮缩放 · 拖动画布旋转。</p>
+      <label class="range-label" for="glow">发光强度 <output id="glow-value" for="glow">50</output></label>
+      <input id="glow" type="range" min="0" max="100" value="50" step="1" aria-label="发光强度">
       <details><summary>节点配色</summary><div id="color-legend"></div></details>
       <details><summary>关于与来源</summary><p>22 个研究样例。工程导航参考教材、综述、具体研究与官方框架作编辑性归纳，六阶段并非统一标准流程；连线可查看说明与出处。</p><div id="about-sources"></div></details>
     </section>

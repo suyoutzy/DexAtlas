@@ -4,7 +4,7 @@ import {Color,Vector3,Group,Line,BufferGeometry,Float32BufferAttribute,LineBasic
 import {UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from 'three/examples/jsm/postprocessing/OutputPass.js';
 import {nodeTextVisible,deriveHighlights} from './atlas-model.mjs';
-import {overviewFrame,shouldExitFocus} from './graph-view.mjs';
+import {overviewFrame,shouldExitFocus,configureOrbitNavigation} from './graph-view.mjs';
 import {applyEngineeringLayout,createEngineeringMotion} from './layout.mjs';
 import {createEngineeringLabels} from './stage-labels.mjs';
 import {placeScreenLabel} from './label-layout.mjs';
@@ -16,7 +16,7 @@ export function supportsWebGL() {
 export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZoomExit,reducedMotion}) {
   let state={focused:null,hovered:null,hoveredLink:null,showLabels:false};
   let animationFrame,flightFrame,navigationFrame;
-  let manual=false,flight=false,exitScale=80,previousDistance=0;
+  let manual=false,flight=false,previousDistance=0;
   let pointerInside=false,pendingHoverExit=false,forwardingPointer=false,lastPointer;
   const nodeLabels=new Map(),nodes=new Map(data.nodes.map(n=>[n.id,n]));
   let highlightedNodes=new Set(),highlightedLinks=new Set();
@@ -40,7 +40,7 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZ
     .nodeThreeObjectExtend(true)
     .nodeThreeObject(node=>{
       if(node.kind==='stage')return null;
-      const text=makeText(node.label,'#e0e9fa');
+      const text=makeText(node.label,node.color);
       const leader=new Line(new BufferGeometry().setAttribute('position',new Float32BufferAttribute([0,0,0,0,0,0],3)),new LineBasicMaterial({color:'#889abc',transparent:true,opacity:.45,depthTest:false,depthWrite:false}));
       leader.visible=false;leader.frustumCulled=false;leader.renderOrder=4;leader.raycast=()=>{};
       nodeLabels.set(node.id,{...text,node,leader});
@@ -89,6 +89,7 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZ
   graph.scene().background=new Color('#0A0B19');
   const controls=graph.controls();
   controls.enableDamping=true; controls.dampingFactor=.1;
+  configureOrbitNavigation(controls,state.focused);
   const initial=framing();
   graph.cameraPosition(initial.position,initial.center,0);
   previousDistance=graph.camera().position.distanceTo(controls.target);
@@ -100,9 +101,11 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZ
   for(const target of [composer.renderTarget1,composer.renderTarget2])target.samples=Math.min(4,graph.renderer().capabilities.maxSamples);
   composer.addPass(bloom);
   composer.addPass(output);
+  setGlow(50);
   const stageLabels=createEngineeringLabels(container,data.nodes,node=>graph.graph2ScreenCoords(node.x,node.y,node.z),()=>graph.camera());
 
   function refresh() {
+    configureOrbitNavigation(controls,state.focused);
     const highlights=deriveHighlights(data.links,state);
     highlightedNodes=highlights.nodes;highlightedLinks=highlights.links;
     graph.nodeColor(graph.nodeColor()).linkColor(graph.linkColor()).linkWidth(graph.linkWidth()).linkDirectionalParticles(graph.linkDirectionalParticles());
@@ -193,15 +196,9 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZ
   function endNavigation(){manual=false;}
   function cameraChanged(){
     const current=graph.camera().position.distanceTo(controls.target);
-    const exit=shouldExitFocus({manual,flight,focusedKind:nodes.get(state.focused)?.kind,previous:previousDistance,current,overviewDistance:framing().distance,percent:exitScale});
+    const exit=shouldExitFocus({manual,flight,focusedKind:nodes.get(state.focused)?.kind,previous:previousDistance,current,overviewDistance:framing().distance});
     previousDistance=current;
     if(exit){manual=false;onZoomExit();}
-  }
-  function recenterOverview(){
-    stopFlight();
-    const c=framing().center,center=new Vector3(c.x,c.y,c.z);
-    const position=graph.camera().position.clone().add(center.clone().sub(controls.target));
-    graph.cameraPosition(position,center,0);
   }
   function overview(){
     stopFlight();
@@ -220,12 +217,11 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZ
   controls.addEventListener('change',cameraChanged);
   const resize=new ResizeObserver(()=>graph.width(container.clientWidth).height(container.clientHeight));
   resize.observe(container);
+  function setGlow(value){bloom.strength=1.2*Math.pow(value/100,1.8);bloom.enabled=value>0;}
   return {
     update(next){state={...state,...next};refresh();},
     focus,
-    overview,recenterOverview,
-    setExitScale(value){exitScale=value;},
-    setGlow(value){bloom.strength=1.2*Math.pow(value/100,1.8);bloom.enabled=value>0;},
+    overview,setGlow,
     dispose(){stopFlight();cancelAnimationFrame(animationFrame);cancelAnimationFrame(navigationFrame);resize.disconnect();stageLabels.dispose();controls.removeEventListener('start',startNavigation);controls.removeEventListener('end',endNavigation);controls.removeEventListener('change',cameraChanged);container.removeEventListener('pointerleave',leaveCanvas);container.removeEventListener('pointerenter',enterCanvas);container.removeEventListener('pointermove',movePointer);bloom.dispose();output.dispose();graph._destructor();}
   };
 }

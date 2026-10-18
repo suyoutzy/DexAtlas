@@ -45,7 +45,7 @@ async function find(page,query) {
     assert.equal(await page.getByRole('button',{name:'显示节点名称',exact:true}).getAttribute('aria-pressed'),'true');
     await page.getByRole('button',{name:'图谱设置',exact:true}).click();
     const glow=page.getByRole('slider',{name:'发光强度'});
-    assert.equal(await glow.inputValue(),'0');
+    assert.equal(await glow.inputValue(),'50');
     await glow.fill('40');
     await glow.dispatchEvent('input');
     assert.equal(await page.locator('#glow-value').innerText(),'40');

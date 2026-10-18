@@ -12,17 +12,18 @@ async function halo(page){return page.evaluate(()=>new Promise(resolve=>requestA
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(base);await page.locator('#graph[data-ready="true"]').waitFor();
   const dark=await background(page);
-  const unlitHalo=await halo(page);
+  const defaultHalo=await halo(page);
   assert.ok(dark[0]>=8&&dark[0]<=12&&dark[2]>=23&&dark[2]<=27,'sample a rendered dark background, not an empty buffer: '+dark);
   await page.locator('#settings-button').click();
+  assert.equal(await page.locator('#glow').inputValue(),'50');await page.locator('#glow').fill('0');await page.locator('#glow').dispatchEvent('input');await page.waitForTimeout(100);
+  const unlitHalo=await halo(page);assert.ok(defaultHalo[0]+defaultHalo[1]+defaultHalo[2]>unlitHalo[0]+unlitHalo[1]+unlitHalo[2]+3,'default 50 actually enables a local halo');
   for(const value of [1,25,100,0]){
    await page.locator('#glow').fill(String(value));await page.locator('#glow').dispatchEvent('input');await page.waitForTimeout(100);
    const pixel=await background(page);
    assert.ok(pixel.every((n,i)=>Math.abs(n-dark[i])<=2),'Bloom '+value+' must preserve the dark background: '+pixel+' vs '+dark);
    if(value===100){const lit=await halo(page);assert.ok(lit[0]+lit[1]+lit[2]>unlitHalo[0]+unlitHalo[1]+unlitHalo[2]+10,'the slider must still create a visible local halo');}
   }
-  const exit=page.getByRole('slider',{name:'缩小退出阈值',exact:true});assert.equal(await exit.inputValue(),'80');
-  await exit.fill('100');await exit.dispatchEvent('input');assert.equal(await page.locator('#exit-scale-value').innerText(),'100%');
+  assert.equal(await page.getByRole('slider',{name:'缩小退出阈值',exact:true}).count(),0);
   await page.keyboard.press('Escape');
   await select(page,'PPO');
   await page.mouse.move(50,200);await page.mouse.wheel(0,-100);await page.waitForTimeout(200);
@@ -46,7 +47,7 @@ async function halo(page){return page.evaluate(()=>new Promise(resolve=>requestA
   await mkdir('.work/screenshots',{recursive:true});await page.screenshot({path:'.work/screenshots/refined-overview.png'});
   await page.locator('#settings-button').click();await page.locator('#glow').fill('65');await page.locator('#glow').dispatchEvent('input');await page.keyboard.press('Escape');await page.screenshot({path:'.work/screenshots/refined-glow.png'});
   await page.reload();await page.locator('#graph[data-ready="true"]').waitFor();await page.locator('#settings-button').click();
-  assert.equal(await exit.inputValue(),'80');assert.equal(await page.locator('#glow').inputValue(),'0');
+  assert.equal(await page.locator('#glow').inputValue(),'50');
   await page.keyboard.press('Escape');await select(page,'手内操作');
   for(const id of ['u2','u28']){
    await page.getByRole('button',{name:'阅读手内操作',exact:true}).click();await page.getByText('工程中的位置',{exact:true}).click();
@@ -58,8 +59,8 @@ async function halo(page){return page.evaluate(()=>new Promise(resolve=>requestA
   await page.locator('#settings-button').click();
   for(const width of [1440,390]){
    await page.setViewportSize({width,height:844});await page.evaluate(()=>document.documentElement.style.fontSize='32px');
-   await exit.scrollIntoViewIfNeeded();await exit.focus();await exit.press('ArrowRight');assert.equal(await page.locator('#exit-scale-value').innerText(),width===1440?'85%':'90%');
-   const box=await exit.boundingBox();assert.ok(box.x>=0&&box.x+box.width<=width&&box.y>=0&&box.y+box.height<=844,'new settings remain accessible at 200% text');
+   const glow=page.locator('#glow');await glow.scrollIntoViewIfNeeded();await glow.focus();await glow.press('ArrowRight');assert.equal(await page.locator('#glow-value').innerText(),width===1440?'51':'52');
+   const box=await glow.boundingBox();assert.ok(box.x>=0&&box.x+box.width<=width&&box.y>=0&&box.y+box.height<=844,'settings remain accessible at 200% text');
   }
   const touch=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true,reducedMotion:'reduce'});
   touch.on('pageerror',e=>errors.push(e.message));await touch.goto(base+'#term=proximal_policy_optimization');await touch.locator('#concept-layer').waitFor({state:'visible'});
@@ -72,6 +73,6 @@ async function halo(page){return page.evaluate(()=>new Promise(resolve=>requestA
   }
   assert.equal(new URL(touch.url()).hash,'','two-finger outward camera zoom also exits focus');
   assert.equal(await touch.locator('#concept-layer').isVisible(),false);assert.equal(await touch.locator('#graph').getAttribute('data-focused'),'');
-  assert.deepEqual(errors,[]);console.log('PASS: Bloom background/halo pixels, adjustable mouse/touch zoom exit, card closure, rotation/zoom-in retention, overview framing, usage evidence and 200% settings');
+  assert.deepEqual(errors,[]);console.log('PASS: default glow 50, Bloom background/halo pixels, fixed mouse/touch zoom exit, card closure, rotation/zoom-in retention, overview framing, usage evidence and 200% settings');
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exit(1);});

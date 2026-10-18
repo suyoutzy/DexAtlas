@@ -34,9 +34,9 @@ test('overview frames node bounds in portrait and landscape from the current vie
   }
 });
 
-test('zoom exit only occurs on a manual outward move past the configurable threshold',()=>{
+test('zoom exit only occurs on a manual outward move past the fixed 80 percent threshold',()=>{
   assert.equal(typeof view.shouldExitFocus,'function');
-  const state={manual:true,flight:false,focusedKind:'term',previous:399,current:401,overviewDistance:500,percent:80};
+  const state={manual:true,flight:false,focusedKind:'term',previous:399,current:401,overviewDistance:500};
   assert.equal(view.shouldExitFocus(state),true);
-  for(const patch of [{manual:false},{flight:true},{focusedKind:'stage'},{previous:402},{previous:401},{current:399},{percent:100}])assert.equal(view.shouldExitFocus({...state,...patch}),false,JSON.stringify(patch));
+  for(const patch of [{manual:false},{flight:true},{focusedKind:'stage'},{previous:402},{previous:401},{current:399},{overviewDistance:600}])assert.equal(view.shouldExitFocus({...state,...patch}),false,JSON.stringify(patch));
 });
