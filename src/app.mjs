@@ -155,7 +155,7 @@ function openSearch() {
 $('#search-button').addEventListener('click',()=>$('#search-panel').hidden?openSearch():closeSearch());
 $('#labels-button').addEventListener('click',()=>{
   showLabels=!showLabels;$('#labels-button').setAttribute('aria-pressed',String(showLabels));scene?.update({showLabels});
-  announce(showLabels?'已显示全部图谱文字':'仅显示聚焦或悬停的文字');
+  announce(showLabels?'已显示全部节点名称':'仅显示聚焦、悬停及悬停邻居的节点名称');
 });
 $('#overview-button').addEventListener('click',()=>{if(ready){navigate({kind:'overview',id:null});scene?.overview();}});
 $('#back-button').addEventListener('click',()=>{if(trail.length)history.back();});
@@ -229,7 +229,7 @@ async function load() {
       }catch(error){console.warn('3D scene unavailable; readable fallback retained.',error);}
     }
     $('#graph').dataset.ready=String(graphAvailable);
-    $('#color-legend').innerHTML=glossary.categories.map(c=>'<div class="legend-row"><span style="--swatch:'+CATEGORY_COLORS[c.id]+'"></span>'+esc(c.name)+'</div>').join('');
+    $('#color-legend').innerHTML='<div class="legend-row"><span style="--swatch:#E3BE7C"></span>工程环节与流程</div>'+glossary.categories.map(c=>'<div class="legend-row"><span style="--swatch:'+CATEGORY_COLORS[c.id]+'"></span>'+esc(c.name)+'</div>').join('');
     $('#about-sources').innerHTML=sourceLinks(framework.sources.map(s=>({source_id:s.id,locator:s.kind})));
     $('#fallback-panel').innerHTML='<h1>探索术语</h1><p>当前浏览器未能显示三维画布，仍可搜索、阅读和查看关系来源。</p><div class="fallback-list">'+glossary.terms.map(t=>'<button data-action="focus" data-kind="term" data-id="'+esc(t.id)+'">'+esc(t.name.zh)+'<small>'+esc(t.name.abbreviation||t.type)+'</small></button>').join('')+'</div>';
     $('#fallback-panel').hidden=graphAvailable;

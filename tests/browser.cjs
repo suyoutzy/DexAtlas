@@ -18,7 +18,7 @@ async function find(page,query) {
     await page.goto(url);
     await page.locator('#graph[data-ready="true"] canvas').waitFor();
     assert.equal(await page.locator('#concept-layer').isVisible(),false);
-    assert.equal(await page.getByRole('button',{name:'显示全部文字',exact:true}).getAttribute('aria-pressed'),'false');
+    assert.equal(await page.getByRole('button',{name:'显示节点名称',exact:true}).getAttribute('aria-pressed'),'false');
     await find(page,'PPO');
     await page.locator('[data-center-term="proximal_policy_optimization"]').waitFor();
     await page.getByRole('button',{name:'阅读软演员-评论家算法',exact:true}).click();
@@ -41,8 +41,8 @@ async function find(page,query) {
     await page.screenshot({path:'.work/screenshots/3d-concept.png'});
     await page.keyboard.press('Escape');
     assert.equal(await page.locator('#concept-layer').isVisible(),false);
-    await page.getByRole('button',{name:'显示全部文字',exact:true}).click();
-    assert.equal(await page.getByRole('button',{name:'显示全部文字',exact:true}).getAttribute('aria-pressed'),'true');
+    await page.getByRole('button',{name:'显示节点名称',exact:true}).click();
+    assert.equal(await page.getByRole('button',{name:'显示节点名称',exact:true}).getAttribute('aria-pressed'),'true');
     await page.getByRole('button',{name:'图谱设置',exact:true}).click();
     const glow=page.getByRole('slider',{name:'发光强度'});
     assert.equal(await glow.inputValue(),'0');
@@ -61,7 +61,7 @@ async function find(page,query) {
     await page.locator('[data-center-term="behavior_cloning"]').waitFor();
     await page.reload();
     await page.locator('[data-center-term="behavior_cloning"]').waitFor();
-    assert.equal(await page.getByRole('button',{name:'显示全部文字',exact:true}).getAttribute('aria-pressed'),'false');
+    assert.equal(await page.getByRole('button',{name:'显示节点名称',exact:true}).getAttribute('aria-pressed'),'false');
     for(const width of [390,320]) {
       await page.setViewportSize({width,height:844});
       await find(page,'IL');

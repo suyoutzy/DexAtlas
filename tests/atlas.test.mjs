@@ -42,16 +42,18 @@ test('framework flows and usages are typed, cited and never inferred from catego
   assert.equal(atlas.buildGraph(glossary,annotations,unmapped).links.filter(e=>e.kind==='usage'&&e.to==='force_closure').length,0);
 });
 
-test('labels show only selected or hovered endpoints, not highlighted neighbors', () => {
+test('node labels include hovered neighbors only when directly connected', () => {
   assert.equal(typeof atlas.nodeTextVisible,'function','shared label rules are required');
   const state = {showLabels:false,focused:'policy',hovered:'imitation_learning'};
   assert.equal(atlas.nodeTextVisible({id:'policy',kind:'term'},state),true);
   assert.equal(atlas.nodeTextVisible({id:'imitation_learning',kind:'term'},state),true);
   assert.equal(atlas.nodeTextVisible({id:'behavior_cloning',kind:'term'},state),false);
   assert.equal(atlas.nodeTextVisible({id:'stage:goal',kind:'stage'},state),true);
-  assert.equal(atlas.linkTextVisible({from:'policy',to:'markov_decision_process'},state),true);
-  assert.equal(atlas.linkTextVisible({from:'behavior_cloning',to:'dataset_aggregation'},state),false);
-  assert.equal(atlas.linkTextVisible({from:'x',to:'y'},{...state,showLabels:true}),true);
+  const links=[{from:'imitation_learning',to:'behavior_cloning'},{from:'imitation_learning',to:'policy'}];
+  assert.equal(atlas.nodeTextVisible({id:'behavior_cloning',kind:'term'},state,links),true);
+  assert.equal(atlas.nodeTextVisible({id:'dataset_aggregation',kind:'term'},state,links),false);
+  assert.equal(atlas.nodeTextVisible({id:'behavior_cloning',kind:'term'},{...state,hovered:null},links),false);
+  assert.equal(atlas.nodeTextVisible({id:'dataset_aggregation',kind:'term'},{...state,showLabels:true},links),true);
 });
 
 test('homepage is overview; legacy term links and stage links resolve without inventing a default focus', () => {

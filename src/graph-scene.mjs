@@ -1,8 +1,11 @@
 import ForceGraph3D from '3d-force-graph';
 import SpriteText from 'three-spritetext';
-import {Color,Vector3} from 'three';
+import {Color,Vector3,Group,Line,BufferGeometry,Float32BufferAttribute,LineBasicMaterial} from 'three';
 import {UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
-import {nodeTextVisible,linkTextVisible} from './atlas-model.mjs';
+import {nodeTextVisible} from './atlas-model.mjs';
+import {applyEngineeringLayout,restoreEngineeringPosition} from './layout.mjs';
+import {createEngineeringLabels} from './stage-labels.mjs';
+import {placeScreenLabel} from './label-layout.mjs';
 
 export function supportsWebGL() {
   try { return !!document.createElement('canvas').getContext('webgl2'); } catch { return false; }
@@ -10,20 +13,17 @@ export function supportsWebGL() {
 
 export function createGraphScene(container,data,{onSelect,onRelation,onHover,reducedMotion}) {
   let state={focused:null,hovered:null,hoveredLink:null,showLabels:false};
-  let animationFrame,flightFrame;
+  let animationFrame,flightFrame,navigationFrame;
   let pointerInside=false,pendingHoverExit=false,forwardingPointer=false,lastPointer;
-  const nodeLabels=new Map(),edgeLabels=new Map(),nodes=new Map(data.nodes.map(n=>[n.id,n]));
+  const nodeLabels=new Map(),nodes=new Map(data.nodes.map(n=>[n.id,n]));
   const highlightedNodes=new Set(),highlightedLinks=new Set();
-  // Deterministic initial seeds, without fixing positions or imposing a hierarchy.
-  data.nodes.forEach((node,index)=>{
-    const angle=index*2.3999632297, radius=48+Math.sqrt(index+1)*12;
-    node.x=Math.cos(angle)*radius; node.y=Math.sin(angle)*radius*.7; node.z=Math.sin(index*1.7)*70;
-  });
+  applyEngineeringLayout(data);
   const makeText=(text,color)=>{
     const sprite=new SpriteText(text,1,color);
-    sprite.fontFace='"Microsoft YaHei", "PingFang SC", sans-serif';
+    sprite.fontFace=getComputedStyle(container).getPropertyValue('--graph-font').trim();
     sprite.fontWeight='500';
-    sprite.material.depthWrite=false;
+    sprite.fontSize=128;sprite.strokeWidth=.35;sprite.strokeColor='#0A0B19';
+    sprite.material.depthWrite=false;sprite.material.depthTest=false;sprite.material.toneMapped=false;sprite.renderOrder=5;
     return {sprite,base:sprite.scale.clone()};
   };
   const graph=new ForceGraph3D(container,{controlType:'orbit'})
@@ -35,29 +35,33 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,red
     .nodeOpacity(.93).nodeResolution(16)
     .nodeThreeObjectExtend(true)
     .nodeThreeObject(node=>{
-      const text=makeText(node.label,node.kind==='stage'?'#c5e9ef':'#e8e7f8');
-      nodeLabels.set(node.id,{...text,node});
-      text.sprite.visible=nodeTextVisible(node,state);
-      return text.sprite;
+      if(node.kind==='stage')return null;
+      const text=makeText(node.label,'#e0e9fa');
+      const leader=new Line(new BufferGeometry().setAttribute('position',new Float32BufferAttribute([0,0,0,0,0,0],3)),new LineBasicMaterial({color:'#889abc',transparent:true,opacity:.45,depthTest:false,depthWrite:false}));
+      leader.visible=false;leader.frustumCulled=false;leader.renderOrder=4;leader.raycast=()=>{};
+      nodeLabels.set(node.id,{...text,node,leader});
+      text.sprite.visible=nodeTextVisible(node,state,data.links);
+      return new Group().add(leader,text.sprite);
     })
-    .linkColor(link=>highlightedLinks.has(link.id)?'#7de3e7':link.kind==='flow'?'rgba(111,190,204,.52)':link.kind==='usage'?'rgba(170,143,201,.28)':'rgba(118,132,180,.25)')
-    .linkOpacity(.65)
-    .linkWidth(link=>highlightedLinks.has(link.id)?1.1:link.kind==='flow'?.52:.12)
+    .linkColor(link=>highlightedLinks.has(link.id)?(link.kind==='flow'?'#ffe0a0':'#a2e1ed'):link.kind==='flow'?'rgba(227,190,124,.78)':link.kind==='usage'?'rgba(147,151,199,.2)':'rgba(118,132,180,.19)')
+    .linkOpacity(.8)
+    .linkWidth(link=>highlightedLinks.has(link.id)?1.1:link.kind==='flow'?.7:.12)
+    .linkCurvature(link=>link.feedback?.42:link.kind==='flow'&&link.from==='stage:goal'&&link.to==='stage:method'?.21:link.kind==='flow'&&link.from==='stage:system'&&link.to==='stage:deployment'?.25:0)
+    .linkCurveRotation(link=>link.feedback?Math.PI:0)
     .linkDirectionalArrowLength(0)
     .linkDirectionalParticles(link=>highlightedLinks.has(link.id)?3:0)
     .linkDirectionalParticleWidth(1.4).linkDirectionalParticleSpeed(.004)
-    .linkDirectionalParticleColor(()=>'#8bf1ee')
-    .linkThreeObjectExtend(true)
-    .linkThreeObject(link=>{
-      const text=makeText(link.label,'#c5d3e9');
-      edgeLabels.set(link.id,{...text,link});
-      text.sprite.visible=linkTextVisible(link,state);
-      return text.sprite;
-    })
-    .linkPositionUpdate((sprite,{start,end})=>{
-      sprite.position.set((start.x+end.x)/2,(start.y+end.y)/2,(start.z+end.z)/2);
-    })
+    .linkDirectionalParticleColor(link=>link.kind==='flow'?'#ffe1a2':'#8bf1ee')
     .onNodeClick(node=>onSelect(node))
+    .onNodeDrag(restoreEngineeringPosition)
+    .onNodeDragEnd(node=>{
+      restoreEngineeringPosition(node);
+      // 3d-force-graph 1.80 emits a synthetic touch release without a pointer ID.
+      // Let Orbit process the real release before navigation is enabled again.
+      graph.enableNavigationControls(false);
+      cancelAnimationFrame(navigationFrame);
+      navigationFrame=requestAnimationFrame(()=>graph.enableNavigationControls(true));
+    })
     .onLinkClick(link=>onRelation(link))
     .onNodeHover(node=>{
       state.hovered=node?.id||null;
@@ -68,15 +72,21 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,red
     .onLinkHover(link=>{state.hoveredLink=link?.id||null;refresh();if(!link)finishHoverExit();})
     .cooldownTime(8000).d3VelocityDecay(.36)
     .graphData(data);
-  graph.d3Force('charge').strength(-90);
-  graph.d3Force('link').distance(link=>link.kind==='flow'?95:62);
-  graph.cameraPosition({x:0,y:0,z:innerWidth<700?900:610},{x:0,y:0,z:0},0);
+  graph.d3Force('center',null);
+  graph.d3Force('charge').strength(node=>node.kind==='stage'?-25:-75);
+  graph.d3Force('link').distance(link=>link.kind==='usage'?90:68).strength(link=>link.kind==='usage'?.12:.06);
+  graph.d3Force('engineering-context',alpha=>{
+    for(const node of data.nodes)if(node.kind==='term')for(const axis of ['x','y','z'])node['v'+axis]+=(node.layoutTarget[axis]-node[axis])*.035*alpha;
+  });
+  const distance=1200/(2*Math.tan(graph.camera().fov*Math.PI/360)*(container.clientWidth/container.clientHeight)*.78);
+  graph.cameraPosition({x:85,y:0,z:distance},{x:85,y:0,z:0},0);
   graph.renderer().setPixelRatio(Math.min(devicePixelRatio,2));
   const controls=graph.controls();
   controls.enableDamping=true; controls.dampingFactor=.1;
   const bloom=new UnrealBloomPass();
   bloom.enabled=false; bloom.strength=0; bloom.radius=.35; bloom.threshold=.35;
   graph.postProcessingComposer().addPass(bloom);
+  const stageLabels=createEngineeringLabels(container,data.nodes,node=>graph.graph2ScreenCoords(node.x,node.y,node.z),()=>graph.camera());
 
   function refresh() {
     highlightedNodes.clear(); highlightedLinks.clear();
@@ -91,8 +101,7 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,red
       if(link) {highlightedLinks.add(link.id);highlightedNodes.add(link.from);highlightedNodes.add(link.to);}
     }
     graph.nodeColor(graph.nodeColor()).linkColor(graph.linkColor()).linkWidth(graph.linkWidth()).linkDirectionalParticles(graph.linkDirectionalParticles());
-    for(const {sprite,node} of nodeLabels.values()) sprite.visible=nodeTextVisible(node,state);
-    for(const {sprite,link} of edgeLabels.values()) sprite.visible=linkTextVisible(link,state);
+    for(const {sprite,node} of nodeLabels.values()) sprite.visible=nodeTextVisible(node,state,data.links);
     container.dataset.focused=state.focused||'';
   }
   // Let the library observe an empty intersection so both of its hover caches
@@ -125,17 +134,27 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,red
   container.addEventListener('pointermove',movePointer);
   // C2 text stays readable in screen pixels as the Orbit camera moves.
   function scaleText() {
-    const camera=graph.camera(),height=Math.max(container.clientHeight,1);
+    const camera=graph.camera(),height=Math.max(container.clientHeight,1),width=container.clientWidth;
     const factor=2*Math.tan(camera.fov*Math.PI/360)/height;
-    for(const {sprite,base,node} of nodeLabels.values()) if(sprite.visible) {
-      const distance=camera.position.distanceTo(new Vector3(node.x||0,node.y||0,node.z||0));
-      const size=distance*factor*(node.kind==='stage'?15:17);
+    const textPixels=18*parseFloat(getComputedStyle(container).fontSize)/16;
+    const occupied=stageLabels.update(state);
+    const priority=node=>node.id===state.hovered?0:node.id===state.focused?1:2;
+    for(const {sprite,base,node,leader} of [...nodeLabels.values()].sort((a,b)=>priority(a.node)-priority(b.node))) {
+      const position=new Vector3(node.x||0,node.y||0,node.z||0),projected=position.clone().project(camera);
+      const point=graph.graph2ScreenCoords(position.x,position.y,position.z);
+      sprite.visible=nodeTextVisible(node,state,data.links)&&projected.z>=-1&&projected.z<=1&&point.x>=0&&point.x<=width&&point.y>=0&&point.y<=height;
+      leader.visible=false;if(!sprite.visible)continue;
+      const depth=-position.clone().applyMatrix4(camera.matrixWorldInverse).z;
+      const size=depth*factor*textPixels;
       sprite.scale.copy(base).multiplyScalar(size);
-      sprite.position.y=(node.kind==='stage'?7:5)+size*.55;
-    }
-    for(const {sprite,base} of edgeLabels.values()) if(sprite.visible) {
-      const distance=camera.position.distanceTo(sprite.position);
-      sprite.scale.copy(base).multiplyScalar(distance*factor*14);
+      const box=placeScreenLabel(point,base.x*textPixels,base.y*textPixels,occupied,{width,height});
+      if(!box){sprite.visible=false;continue;}occupied.push(box);
+      const centerX=box.left+box.width/2,centerY=box.top+box.height/2;
+      sprite.position.copy(new Vector3(centerX/width*2-1,1-centerY/height*2,projected.z).unproject(camera).sub(position));
+      const endX=Math.max(box.left,Math.min(point.x,box.left+box.width)),endY=point.y<box.top?box.top:box.top+box.height;
+      const endpoint=new Vector3(endX/width*2-1,1-endY/height*2,projected.z).unproject(camera).sub(position);
+      leader.geometry.attributes.position.setXYZ(1,endpoint.x,endpoint.y,endpoint.z);leader.geometry.attributes.position.needsUpdate=true;
+      leader.visible=Math.abs(centerX-point.x)>8||Math.abs(box.top-(point.y-box.height-17))>8;
     }
     animationFrame=requestAnimationFrame(scaleText);
   }
@@ -168,6 +187,6 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,red
     focus,
     overview(){stopFlight();graph.zoomToFit(reducedMotion()?0:600,55);},
     setGlow(value){bloom.strength=value*.015;bloom.enabled=value>0;},
-    dispose(){stopFlight();cancelAnimationFrame(animationFrame);resize.disconnect();controls.removeEventListener('start',stopFlight);container.removeEventListener('pointerleave',leaveCanvas);container.removeEventListener('pointerenter',enterCanvas);container.removeEventListener('pointermove',movePointer);graph._destructor();}
+    dispose(){stopFlight();cancelAnimationFrame(animationFrame);cancelAnimationFrame(navigationFrame);resize.disconnect();stageLabels.dispose();controls.removeEventListener('start',stopFlight);container.removeEventListener('pointerleave',leaveCanvas);container.removeEventListener('pointerenter',enterCanvas);container.removeEventListener('pointermove',movePointer);graph._destructor();}
   };
 }

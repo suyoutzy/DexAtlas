@@ -1,6 +1,7 @@
 :root {
   color-scheme:dark; --bg:#0A0B19; --pink:#FF2FCF; --cyan:#1EF2FF; --ink:#f1f1fc; --muted:#b0b5ce;
   --line:rgba(172,155,219,.22); --surface:rgba(17,16,35,.84);
+  --graph-font:"HarmonyOS Sans SC","HarmonyOS_Sans_SC","Segoe UI Variable","Segoe UI","Microsoft YaHei UI","PingFang SC",system-ui,sans-serif;
   font:16px/1.6 "Segoe UI","Microsoft YaHei","PingFang SC",system-ui,sans-serif;
   color:var(--ink); background:var(--bg); font-synthesis:none; text-rendering:optimizeLegibility;
 }
@@ -18,6 +19,13 @@ button svg { width:23px; height:23px; fill:none; stroke:currentColor; stroke-wid
 #atlas,#graph { position:fixed; inset:0; }
 #graph { overflow:hidden; }
 #graph canvas { display:block; outline:none; }
+.engineering-label-layer { position:absolute; inset:0; overflow:hidden; pointer-events:none; font-family:var(--graph-font); }
+.engineering-label-layer>svg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+.engineering-label-layer line { stroke:#e3be7c; stroke-width:1; opacity:.35; }
+.engineering-label { position:absolute; left:0; top:0; display:flex; align-items:center; gap:8px; width:max-content; padding:5px 10px; border:1px solid #e3be7c40; border-radius:8px; background:linear-gradient(110deg,#352b1be8,#15151ee8); color:#f2dfbb; line-height:1.4; white-space:nowrap; box-shadow:0 3px 12px #0003; }
+.engineering-step { color:#cfab70; font-size:.75rem; font-weight:600; letter-spacing:.03em; }
+.engineering-label strong { font-size:1rem; font-weight:500; letter-spacing:.04em; }
+.engineering-label.is-active { border-color:#f1cf90; background:#352b20f2; color:#fff2d8; }
 .wordmark { position:fixed; top:27px; left:35px; z-index:12; display:flex; flex-direction:column; pointer-events:none; }
 .wordmark a { pointer-events:auto; font-size:1.55rem; font-weight:600; letter-spacing:-.06em; color:#e8e5f3; display:flex; align-items:center; }
 .wordmark a>span:last-child { color:#adadd0; }
@@ -25,6 +33,7 @@ button svg { width:23px; height:23px; fill:none; stroke:currentColor; stroke-wid
 .brand-caption { font-size:.875rem; letter-spacing:.15em; color:#9299bb; margin:3px 0 0 44px; }
 #scene-caption { position:fixed; bottom:31px; left:37px; display:flex; align-items:center; gap:13px; font-size:.875rem; letter-spacing:.13em; color:#8790b2; pointer-events:none; }
 .caption-line { width:36px; height:1px; background:linear-gradient(90deg,var(--cyan),var(--pink)); opacity:.6; }
+#atlas:has(#hover-caption:not([hidden])) #scene-caption { visibility:hidden; }
 .tool-rail { position:fixed; right:23px; top:50%; transform:translateY(-50%); z-index:35; display:flex; flex-direction:column; gap:7px; align-items:center; padding:13px 7px; border:1px solid rgba(155,150,195,.12); border-radius:20px; background:rgba(15,15,32,.58); backdrop-filter:blur(12px); }
 .tool { position:relative; display:grid; place-items:center; width:46px; height:46px; border-radius:13px; background:transparent; color:#c6cbe2; opacity:.58; transition:opacity .18s,background .18s; }
 .tool:hover,.tool:focus-visible,.tool[aria-expanded=true],.tool[aria-pressed=true] { opacity:1; color:#b8f6fa; background:rgba(83,100,139,.18); }
