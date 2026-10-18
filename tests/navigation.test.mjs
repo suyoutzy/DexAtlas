@@ -50,3 +50,31 @@ test('focused zoom retains the selected pivot; returning to global mode enables 
     const center=controls.target.clone().project(camera);assert.ok(Math.hypot(center.x,center.y)<1e-7);
   }finally{controls.dispose();}
 });
+
+test('middle-button drag pans camera and pivot together without rotating',()=>{
+  const {camera,canvas,controls}=setup();
+  try{
+    view.configureOrbitNavigation(controls,null);const before=camera.position.clone(),target=controls.target.clone(),rotation=camera.quaternion.clone();
+    canvas.dispatchEvent(event('pointerdown',{pointerId:1,pointerType:'mouse',button:1,clientX:600,clientY:400}));
+    canvas.ownerDocument.dispatchEvent(event('pointermove',{pointerId:1,pointerType:'mouse',button:1,clientX:700,clientY:445}));
+    canvas.ownerDocument.dispatchEvent(event('pointerup',{pointerId:1,pointerType:'mouse',button:1,clientX:700,clientY:445}));
+    assert.ok(camera.position.distanceTo(before)>10);
+    assert.ok(camera.position.clone().sub(before).distanceTo(controls.target.clone().sub(target))<1e-7,'panning translates camera and target by the same vector');
+    assert.ok(camera.quaternion.angleTo(rotation)<1e-7);
+  }finally{controls.dispose();}
+});
+
+test('clearing Orbit inertia preserves the pose and prevents drift after a front-view reset',()=>{
+  assert.equal(typeof view.clearOrbitInertia,'function');
+  const {camera,canvas,controls}=setup();
+  try{
+    controls.enableDamping=true;view.configureOrbitNavigation(controls,null);
+    canvas.dispatchEvent(event('pointerdown',{pointerId:1,pointerType:'mouse',button:0,clientX:600,clientY:400}));
+    canvas.ownerDocument.dispatchEvent(event('pointermove',{pointerId:1,pointerType:'mouse',button:0,clientX:690,clientY:430}));
+    canvas.ownerDocument.dispatchEvent(event('pointerup',{pointerId:1,pointerType:'mouse',button:0,clientX:690,clientY:430}));
+    const position=camera.position.clone(),target=controls.target.clone(),rotation=camera.quaternion.clone();
+    view.clearOrbitInertia(controls);
+    for(let i=0;i<10;i++)controls.update();
+    assert.ok(camera.position.distanceTo(position)<1e-7);assert.ok(controls.target.distanceTo(target)<1e-7);assert.ok(camera.quaternion.angleTo(rotation)<1e-7);
+  }finally{controls.dispose();}
+});

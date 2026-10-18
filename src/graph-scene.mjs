@@ -4,7 +4,8 @@ import {Color,Vector3,Group,Line,BufferGeometry,Float32BufferAttribute,LineBasic
 import {UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from 'three/examples/jsm/postprocessing/OutputPass.js';
 import {nodeTextVisible,deriveHighlights} from './atlas-model.mjs';
-import {overviewFrame,shouldExitFocus,configureOrbitNavigation} from './graph-view.mjs';
+import {overviewFrame,shouldExitFocus,configureOrbitNavigation,clearOrbitInertia} from './graph-view.mjs';
+import {createBackgroundGesture} from './background-gesture.mjs';
 import {applyEngineeringLayout,createEngineeringMotion} from './layout.mjs';
 import {createEngineeringLabels} from './stage-labels.mjs';
 import {placeScreenLabel} from './label-layout.mjs';
@@ -13,10 +14,12 @@ export function supportsWebGL() {
   try { return !!document.createElement('canvas').getContext('webgl2'); } catch { return false; }
 }
 
-export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZoomExit,reducedMotion}) {
+export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZoomExit,onDismissCards,reducedMotion}) {
   let state={focused:null,hovered:null,hoveredLink:null,showLabels:false};
   let animationFrame,flightFrame,navigationFrame;
   let manual=false,flight=false,previousDistance=0;
+  let overviewReady=false;
+  const backgroundGesture=createBackgroundGesture();
   let pointerInside=false,pendingHoverExit=false,forwardingPointer=false,lastPointer;
   const nodeLabels=new Map(),nodes=new Map(data.nodes.map(n=>[n.id,n]));
   let highlightedNodes=new Set(),highlightedLinks=new Set();
@@ -55,8 +58,8 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZ
     .linkDirectionalParticles(link=>highlightedLinks.has(link.id)?3:0)
     .linkDirectionalParticleWidth(1.4).linkDirectionalParticleSpeed(.004)
     .linkDirectionalParticleColor(link=>link.kind==='flow'?'#ffe1a2':'#8bf1ee')
-    .onNodeClick(node=>onSelect(node))
-    .onNodeDrag(node=>engineeringMotion.drag(node))
+    .onNodeClick(node=>{backgroundGesture.reset();onSelect(node);})
+    .onNodeDrag(node=>{overviewReady=false;backgroundGesture.reset();engineeringMotion.drag(node);})
     .onNodeDragEnd(node=>{
       engineeringMotion.release(node,performance.now(),reducedMotion());
       // 3d-force-graph 1.80 emits a synthetic touch release without a pointer ID.
@@ -65,7 +68,8 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZ
       cancelAnimationFrame(navigationFrame);
       navigationFrame=requestAnimationFrame(()=>graph.enableNavigationControls(true));
     })
-    .onLinkClick(link=>onRelation(link))
+    .onLinkClick(link=>{backgroundGesture.reset();onRelation(link);})
+    .onBackgroundClick(event=>{if(backgroundGesture.click(event))onDismissCards();})
     .onNodeHover(node=>{
       state.hovered=node?.id||null;
       onHover(node);
@@ -88,6 +92,23 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZ
   // Renderer-only clearColor is otherwise reused from the previous screen pass.
   graph.scene().background=new Color('#0A0B19');
   const controls=graph.controls();
+  const canvas=graph.renderer().domElement;
+  // Orbit is connected first. Consume its middle press before the graph's
+  // later node-drag listeners, so a pan can also start directly over a node.
+  function middlePan(event){
+    if(event.button!==1)return;
+    event.preventDefault();event.stopImmediatePropagation();
+    // Keep the render wrapper's down/move/up tracker consistent while skipping
+    // canvas-only node dragging. Otherwise its stale drag flag eats the next click.
+    canvas.parentElement.dispatchEvent(new PointerEvent('pointerdown',event));
+  }
+  function preventMiddleAux(event){if(event.button===1)event.preventDefault();}
+  // The graph also emits this incomplete release after an unmoved node click.
+  // Orbit must receive the actual pointer release instead of a touch with no ID.
+  function ignoreIncompleteRelease(event){if(!event.isTrusted&&event.pointerType==='touch'&&event.pointerId===0)event.stopImmediatePropagation();}
+  canvas.addEventListener('pointerdown',middlePan);
+  canvas.addEventListener('auxclick',preventMiddleAux);
+  canvas.ownerDocument.addEventListener('pointerup',ignoreIncompleteRelease,true);
   controls.enableDamping=true; controls.dampingFactor=.1;
   configureOrbitNavigation(controls,state.focused);
   const initial=framing();
@@ -126,10 +147,12 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZ
   }
   function movePointer(event) {
     if(forwardingPointer)return;
+    if(event.buttons)backgroundGesture.reset();
     lastPointer={x:event.clientX,y:event.clientY};
     if(pendingHoverExit)forwardPointer(-10000,-10000);
   }
   function leaveCanvas() {
+    backgroundGesture.reset();
     pointerInside=false;
     pendingHoverExit=!!(state.hovered||state.hoveredLink);
     state.hovered=null;state.hoveredLink=null;
@@ -167,13 +190,13 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZ
     animationFrame=requestAnimationFrame(scaleText);
   }
   animationFrame=requestAnimationFrame(scaleText);
-  function framing() {
+  function framing(frontView=false) {
     const camera=graph.camera();
-    return overviewFrame(data.nodes,{position:camera.position,target:controls.target,up:camera.up,fov:camera.fov,aspect:camera.aspect});
+    return overviewFrame(data.nodes,{position:camera.position,target:controls.target,up:camera.up,fov:camera.fov,aspect:camera.aspect,frontView});
   }
   function stopFlight() {cancelAnimationFrame(flightFrame);flight=false;}
   function focus(id) {
-    stopFlight();
+    stopFlight();manual=false;overviewReady=false;clearOrbitInertia(controls);
     const node=nodes.get(id);
     if(!node)return;
     const camera=graph.camera(),target=controls.target.clone(),start=camera.position.clone();
@@ -195,14 +218,15 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZ
   function startNavigation(){stopFlight();manual=true;previousDistance=graph.camera().position.distanceTo(controls.target);}
   function endNavigation(){manual=false;}
   function cameraChanged(){
+    if(manual&&!flight)overviewReady=false;
     const current=graph.camera().position.distanceTo(controls.target);
     const exit=shouldExitFocus({manual,flight,focusedKind:nodes.get(state.focused)?.kind,previous:previousDistance,current,overviewDistance:framing().distance});
     previousDistance=current;
     if(exit){manual=false;onZoomExit();}
   }
   function overview(){
-    stopFlight();
-    const frame=framing(),target=controls.target.clone(),start=graph.camera().position.clone();
+    stopFlight();manual=false;clearOrbitInertia(controls);
+    const frame=framing(overviewReady),target=controls.target.clone(),start=graph.camera().position.clone();overviewReady=true;
     const endTarget=new Vector3(frame.center.x,frame.center.y,frame.center.z),end=new Vector3(frame.position.x,frame.position.y,frame.position.z);
     const started=performance.now(),duration=reducedMotion()?0:600;flight=true;
     function step(now){
@@ -215,13 +239,13 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZ
   controls.addEventListener('start',startNavigation);
   controls.addEventListener('end',endNavigation);
   controls.addEventListener('change',cameraChanged);
-  const resize=new ResizeObserver(()=>graph.width(container.clientWidth).height(container.clientHeight));
+  const resize=new ResizeObserver(()=>{overviewReady=false;graph.width(container.clientWidth).height(container.clientHeight);});
   resize.observe(container);
   function setGlow(value){bloom.strength=1.2*Math.pow(value/100,1.8);bloom.enabled=value>0;}
   return {
-    update(next){state={...state,...next};refresh();},
+    update(next){if('focused' in next&&next.focused!==state.focused)overviewReady=false;state={...state,...next};refresh();},
     focus,
     overview,setGlow,
-    dispose(){stopFlight();cancelAnimationFrame(animationFrame);cancelAnimationFrame(navigationFrame);resize.disconnect();stageLabels.dispose();controls.removeEventListener('start',startNavigation);controls.removeEventListener('end',endNavigation);controls.removeEventListener('change',cameraChanged);container.removeEventListener('pointerleave',leaveCanvas);container.removeEventListener('pointerenter',enterCanvas);container.removeEventListener('pointermove',movePointer);bloom.dispose();output.dispose();graph._destructor();}
+    dispose(){stopFlight();cancelAnimationFrame(animationFrame);cancelAnimationFrame(navigationFrame);resize.disconnect();stageLabels.dispose();controls.removeEventListener('start',startNavigation);controls.removeEventListener('end',endNavigation);controls.removeEventListener('change',cameraChanged);container.removeEventListener('pointerleave',leaveCanvas);container.removeEventListener('pointerenter',enterCanvas);container.removeEventListener('pointermove',movePointer);canvas.removeEventListener('pointerdown',middlePan);canvas.removeEventListener('auxclick',preventMiddleAux);canvas.ownerDocument.removeEventListener('pointerup',ignoreIncompleteRelease,true);bloom.dispose();output.dispose();graph._destructor();}
   };
 }

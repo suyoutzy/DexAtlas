@@ -74,15 +74,15 @@ details p,details li { font-size:1.125rem; line-height:1.8; }
 .center-reader h1 { font-size:1.5rem; font-weight:550; line-height:1.5; margin:8px 0 16px; overflow-wrap:anywhere; }
 .center-reader p { font-size:1.125rem; line-height:1.85; color:#d7d6e7; margin:0; }
 .read-more { display:flex; justify-content:space-between; align-items:center; font-size:.875rem; color:#94dce7; margin-top:22px; }
-.relation-group { pointer-events:auto; position:relative; z-index:2; width:100%; max-height:100%; overflow:auto; scrollbar-width:thin; scrollbar-color:#5f58736b transparent; padding:2px 4px 5px; animation:card-enter .26s both; animation-delay:var(--delay); }
-.relation-group h2 { display:flex; justify-content:space-between; align-items:center; font-size:.875rem; color:#b3b8d5; font-weight:400; margin:0 5px 10px; letter-spacing:.04em; }
+.relation-group { pointer-events:auto; position:relative; z-index:2; width:100%; max-height:100%; overflow:auto; scrollbar-width:thin; scrollbar-gutter:stable; scrollbar-color:#71658e80 transparent; padding:0 4px 5px; animation:card-enter .26s both; animation-delay:var(--delay); }
+.relation-group h2 { position:sticky; top:0; z-index:3; display:flex; justify-content:space-between; align-items:center; gap:12px; font-size:1rem; color:#e3e5f4; font-weight:500; margin:0 0 10px; padding:10px 14px; border:1px solid #bba0df36; border-radius:12px; background:rgba(17,16,35,.96); backdrop-filter:blur(14px); box-shadow:0 5px 18px #05061170; letter-spacing:.04em; }
 .relation-group h2 span { color:#9098b7; }
 .group-hierarchy { grid-column:1; grid-row:1; align-self:end; }
 .group-usage { grid-column:1; grid-row:2; align-self:start; }
 .group-purpose { grid-column:3; grid-row:1; align-self:end; }
 .group-contrast { grid-column:3; grid-row:2; align-self:start; }
-.group-cards { display:grid; gap:12px; }
-.term-card { overflow:hidden; border-radius:15px; }
+.group-cards { display:grid; gap:12px; min-width:0; }
+.term-card { width:100%; min-width:0; overflow:hidden; border-radius:15px; }
 .card-trigger { display:block; width:100%; text-align:left; background:transparent; padding:16px 19px 12px; }
 .card-trigger:hover { background:#b38ce008; }
 .card-type { display:block; color:#aeb5cc; font-size:.875rem; margin-bottom:7px; }

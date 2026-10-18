@@ -34,9 +34,17 @@ test('overview frames node bounds in portrait and landscape from the current vie
   }
 });
 
-test('zoom exit only occurs on a manual outward move past the fixed 80 percent threshold',()=>{
+test('terms and engineering stages exit only on manual outward zoom past 60 percent',()=>{
   assert.equal(typeof view.shouldExitFocus,'function');
-  const state={manual:true,flight:false,focusedKind:'term',previous:399,current:401,overviewDistance:500};
+  const state={manual:true,flight:false,focusedKind:'term',previous:299,current:301,overviewDistance:500};
   assert.equal(view.shouldExitFocus(state),true);
-  for(const patch of [{manual:false},{flight:true},{focusedKind:'stage'},{previous:402},{previous:401},{current:399},{overviewDistance:600}])assert.equal(view.shouldExitFocus({...state,...patch}),false,JSON.stringify(patch));
+  assert.equal(view.shouldExitFocus({...state,focusedKind:'stage'}),true);
+  for(const patch of [{manual:false},{flight:true},{focusedKind:undefined},{previous:302},{previous:301},{current:299},{overviewDistance:600}])assert.equal(view.shouldExitFocus({...state,...patch}),false,JSON.stringify(patch));
+});
+
+test('front overview ignores the prior camera angle and frames the canonical front direction',()=>{
+  const nodes=[{x:-310,y:0,z:0},{x:445,y:0,z:0},{x:75,y:150,z:15}];
+  const frame=view.overviewFrame(nodes,{position:{x:600,y:200,z:200},target:{x:0,y:0,z:0},up:{x:0,y:1,z:0},fov:50,aspect:1.5,frontView:true});
+  assert.deepEqual(frame.front,{x:0,y:0,z:1});
+  assert.equal(frame.position.x,frame.center.x);assert.equal(frame.position.y,frame.center.y);
 });

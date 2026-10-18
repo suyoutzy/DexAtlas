@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#0A0B19">
-  <meta name="application-version" content="0.2.2">
+  <meta name="application-version" content="0.2.3">
   <meta name="description" content="在三维图谱中探索灵巧操作与策略学习，理解技术的工程位置与概念关系。">
   <title>DexAtlas · 灵巧操作术语图谱</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
@@ -22,7 +22,7 @@
       <span class="rail-separator" id="back-separator" hidden></span>
       <button id="search-button" class="tool" type="button" aria-label="搜索术语与工程环节" data-tip="搜索 · /" aria-expanded="false"></button>
       <button id="labels-button" class="tool" type="button" aria-label="显示节点名称" data-tip="显示节点名称" aria-pressed="false"></button>
-      <button id="overview-button" class="tool" type="button" aria-label="查看全图" data-tip="查看全图"></button>
+      <button id="overview-button" class="tool" type="button" aria-label="查看全图" data-tip="查看全图 · 再次点击正视图"></button>
       <span class="rail-separator"></span>
       <button id="settings-button" class="tool" type="button" aria-label="图谱设置" data-tip="设置" aria-expanded="false"></button>
     </nav>
@@ -33,7 +33,7 @@
     </section>
     <section id="settings-panel" class="glass settings-panel" aria-label="图谱设置" hidden>
       <div class="panel-header"><h2>图谱设置</h2><button class="close-button" data-action="close-settings" aria-label="关闭设置">×</button></div>
-      <p class="quiet">探索灵巧操作术语与工程关系。<br>点击节点阅读 · 滚轮缩放 · 拖动画布旋转。</p>
+      <p class="quiet">点击节点阅读 · 滚轮缩放<br>拖动旋转 · 中键平移 · 双击空白收起</p>
       <label class="range-label" for="glow">发光强度 <output id="glow-value" for="glow">50</output></label>
       <input id="glow" type="range" min="0" max="100" value="50" step="1" aria-label="发光强度">
       <details><summary>节点配色</summary><div id="color-legend"></div></details>

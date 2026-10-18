@@ -53,6 +53,9 @@ function closeSearch() {
 function closeSettings() {
   $('#settings-panel').hidden=true;$('#settings-button').setAttribute('aria-expanded','false');
 }
+function dismissCards() {
+  closeReader();closeConcept();$('#stage-panel').hidden=true;
+}
 function navigate(next,{push=true,fly=true}={}) {
   clearTimeout(focusTimer);const version=++focusVersion;
   closeSearch();closeSettings();closeReader();
@@ -221,7 +224,7 @@ async function load() {
     scene?.dispose();scene=null;graphAvailable=false;$('#graph').replaceChildren();
     if(supportsWebGL()) {
       try {
-        scene=createGraphScene($('#graph'),graphData,{reducedMotion:()=>motion.matches,onZoomExit:()=>{navigate({kind:'overview',id:null},{fly:false});announce('已退出聚焦，保留当前画面中心');},onSelect:node=>navigate({kind:node.kind,id:node.kind==='stage'?node.stageId:node.id}),onRelation:link=>readRelation(link.id),onHover:node=>{
+        scene=createGraphScene($('#graph'),graphData,{reducedMotion:()=>motion.matches,onDismissCards:dismissCards,onZoomExit:()=>{navigate({kind:'overview',id:null},{fly:false});announce('已退出聚焦，保留当前画面中心');},onSelect:node=>navigate({kind:node.kind,id:node.kind==='stage'?node.stageId:node.id}),onRelation:link=>readRelation(link.id),onHover:node=>{
           $('#hover-caption').hidden=!node;
           $('#hover-caption').textContent=node?node.title:'';
           if(node)$('#hover-caption').style.setProperty('--node-color',node.color);
