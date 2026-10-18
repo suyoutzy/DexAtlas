@@ -1,0 +1,1043 @@
+{
+  "reviewed_on": "2026-10-15",
+  "note": "关系说明为所引资料的中文归纳；分类和布局不代表唯一学术体系。工程流程仅对应所列论文的视觉重定向配置。",
+  "sources": [
+    {
+      "id": "shadow_paper",
+      "title": "Learning Dexterous In-Hand Manipulation",
+      "url": "https://arxiv.org/html/1808.00177v5",
+      "kind": "原论文全文（2018，v5 修订于 2019）"
+    }
+  ],
+  "relations": [
+    {
+      "id": "ppo-rl",
+      "to": "reinforcement_learning",
+      "group": "hierarchy",
+      "label": "属于",
+      "explanation": "PPO 是强化学习中的策略优化算法族，不是一种策略网络结构。",
+      "evidence": [
+        {
+          "source_id": "ppo_paper",
+          "locator": "摘要；算法定义"
+        },
+        {
+          "source_id": "ppo_docs",
+          "locator": "Background / Quick Facts"
+        }
+      ],
+      "from": "proximal_policy_optimization"
+    },
+    {
+      "id": "sac-rl",
+      "to": "reinforcement_learning",
+      "group": "hierarchy",
+      "label": "属于",
+      "explanation": "SAC 是最大熵强化学习算法，可复用异策略经验。",
+      "evidence": [
+        {
+          "source_id": "sac_paper",
+          "locator": "摘要"
+        },
+        {
+          "source_id": "sac_docs",
+          "locator": "Background"
+        }
+      ],
+      "from": "soft_actor_critic"
+    },
+    {
+      "id": "bc-il",
+      "to": "imitation_learning",
+      "group": "hierarchy",
+      "label": "属于",
+      "explanation": "BC 直接监督拟合示范动作，是模仿学习的一种方法。",
+      "evidence": [
+        {
+          "source_id": "robomimic_algorithms",
+          "locator": "Imitation Learning / BC"
+        }
+      ],
+      "from": "behavior_cloning"
+    },
+    {
+      "id": "dagger-il",
+      "to": "imitation_learning",
+      "group": "hierarchy",
+      "label": "属于",
+      "explanation": "DAgger 通过迭代专家标注训练模仿策略。",
+      "evidence": [
+        {
+          "source_id": "dagger_paper",
+          "locator": "第 3 节 Dataset Aggregation"
+        }
+      ],
+      "from": "dataset_aggregation"
+    },
+    {
+      "id": "offline-rl",
+      "to": "reinforcement_learning",
+      "group": "hierarchy",
+      "label": "一种数据设置",
+      "explanation": "离线强化学习限制训练期间追加环境交互，不规定唯一算法或网络。",
+      "evidence": [
+        {
+          "source_id": "offline_rl_review",
+          "locator": "摘要；问题设置"
+        }
+      ],
+      "from": "offline_reinforcement_learning"
+    },
+    {
+      "id": "mdp-rl",
+      "to": "reinforcement_learning",
+      "group": "usage",
+      "label": "提供数学框架",
+      "explanation": "MDP 是描述状态、动作、奖励和转移的常用决策框架。",
+      "evidence": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "Formalism"
+        }
+      ],
+      "from": "markov_decision_process"
+    },
+    {
+      "id": "rl-policy",
+      "to": "policy",
+      "group": "purpose",
+      "label": "学习 / 改进",
+      "explanation": "强化学习通过奖励目标改进动作选择规则；有些算法先学习价值再得到策略。",
+      "evidence": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "The RL Problem / Policies"
+        }
+      ],
+      "from": "reinforcement_learning"
+    },
+    {
+      "id": "bc-policy",
+      "to": "policy",
+      "group": "purpose",
+      "label": "学习得到",
+      "explanation": "BC 从示范观测与动作的对应关系学习策略。",
+      "evidence": [
+        {
+          "source_id": "robomimic_algorithms",
+          "locator": "BC"
+        }
+      ],
+      "from": "behavior_cloning"
+    },
+    {
+      "id": "dagger-policy",
+      "to": "policy",
+      "group": "purpose",
+      "label": "学习得到",
+      "explanation": "专家在学习策略访问的状态上标注动作，聚合后的数据用于重新训练策略。",
+      "evidence": [
+        {
+          "source_id": "dagger_paper",
+          "locator": "第 3 节及算法 3.1"
+        }
+      ],
+      "from": "dataset_aggregation"
+    },
+    {
+      "id": "ppo-policy",
+      "to": "policy",
+      "group": "purpose",
+      "label": "优化",
+      "explanation": "PPO 优化参数化策略；PPO 本身只在训练更新中使用，不是部署时逐次计算动作的网络。",
+      "evidence": [
+        {
+          "source_id": "ppo_docs",
+          "locator": "Pseudocode"
+        },
+        {
+          "source_id": "shadow_paper",
+          "locator": "第 4.1 节：策略与价值网络"
+        }
+      ],
+      "from": "proximal_policy_optimization"
+    },
+    {
+      "id": "sac-policy",
+      "to": "policy",
+      "group": "purpose",
+      "label": "优化",
+      "explanation": "SAC 联合优化随机策略与价值函数，目标包含回报和策略熵。",
+      "evidence": [
+        {
+          "source_id": "sac_docs",
+          "locator": "Background / Key Equations"
+        }
+      ],
+      "from": "soft_actor_critic"
+    },
+    {
+      "id": "dagger-bc",
+      "to": "behavior_cloning",
+      "group": "contrast",
+      "label": "对比：数据收集",
+      "explanation": "两者都可进行监督拟合；DAgger 额外在学习策略访问的状态上查询专家，处理分布偏移。",
+      "evidence": [
+        {
+          "source_id": "dagger_paper",
+          "locator": "第 1、3 节"
+        }
+      ],
+      "from": "dataset_aggregation"
+    },
+    {
+      "id": "ppo-sac",
+      "to": "soft_actor_critic",
+      "group": "contrast",
+      "label": "对比：经验使用",
+      "explanation": "PPO 通常使用同策略数据；SAC 可以通过经验回放复用异策略数据。不是保持整个训练流程不变的直接替换。",
+      "evidence": [
+        {
+          "source_id": "ppo_docs",
+          "locator": "Quick Facts"
+        },
+        {
+          "source_id": "sac_docs",
+          "locator": "Quick Facts"
+        }
+      ],
+      "from": "proximal_policy_optimization"
+    },
+    {
+      "id": "offline-bc",
+      "to": "behavior_cloning",
+      "group": "contrast",
+      "label": "对比：学习目标",
+      "explanation": "二者都可使用预先收集的数据；BC 拟合示范动作，离线 RL 优化奖励目标。",
+      "evidence": [
+        {
+          "source_id": "offline_rl_review",
+          "locator": "问题设置与行为克隆讨论"
+        },
+        {
+          "source_id": "robomimic_algorithms",
+          "locator": "BC / Offline Reinforcement Learning"
+        }
+      ],
+      "from": "offline_reinforcement_learning"
+    },
+    {
+      "id": "offline-sac",
+      "to": "soft_actor_critic",
+      "group": "contrast",
+      "label": "区分：离线与异策略",
+      "explanation": "异策略允许复用历史经验；离线设置不追加新交互。标准 SAC 不能因此被视为已解决离线分布偏移。",
+      "evidence": [
+        {
+          "source_id": "offline_rl_review",
+          "locator": "分布偏移与价值估计"
+        },
+        {
+          "source_id": "sac_docs",
+          "locator": "Background"
+        }
+      ],
+      "from": "offline_reinforcement_learning"
+    },
+    {
+      "id": "il-rl",
+      "to": "reinforcement_learning",
+      "group": "contrast",
+      "label": "对比：学习信号",
+      "explanation": "模仿学习以示范行为为主要依据，强化学习以奖励目标为依据；已有工作也会结合两者。",
+      "evidence": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "II-B / I"
+        },
+        {
+          "source_id": "rl_concepts",
+          "locator": "The RL Problem"
+        }
+      ],
+      "from": "imitation_learning"
+    },
+    {
+      "id": "act-il",
+      "to": "imitation_learning",
+      "group": "hierarchy",
+      "label": "属于",
+      "explanation": "ACT 原方法从真实示范学习动作序列。",
+      "evidence": [
+        {
+          "source_id": "act_paper",
+          "locator": "摘要；第 IV 节"
+        }
+      ],
+      "from": "action_chunking_with_transformers"
+    },
+    {
+      "id": "diffusion-il",
+      "to": "imitation_learning",
+      "group": "hierarchy",
+      "label": "原方法采用",
+      "explanation": "原始 Diffusion Policy 从操作示范学习条件动作分布；此关系不限定所有后续扩展。",
+      "evidence": [
+        {
+          "source_id": "diffusion_policy_project",
+          "locator": "Paper / Code and Data"
+        },
+        {
+          "source_id": "robomimic_diffusion",
+          "locator": "Training Diffusion Policy"
+        }
+      ],
+      "from": "diffusion_policy"
+    },
+    {
+      "id": "act-transformer",
+      "to": "transformer",
+      "group": "usage",
+      "label": "使用架构",
+      "explanation": "Transformer 是 ACT 的组成部分；原方法还结合动作分块和 CVAE。",
+      "evidence": [
+        {
+          "source_id": "act_paper",
+          "locator": "IV-B / IV-C"
+        }
+      ],
+      "from": "action_chunking_with_transformers"
+    },
+    {
+      "id": "bc-transformer",
+      "to": "transformer",
+      "group": "usage",
+      "label": "可采用架构",
+      "explanation": "robomimic 提供基于 Transformer 的 BC 策略。架构与训练方法是不同维度。",
+      "evidence": [
+        {
+          "source_id": "robomimic_transformers",
+          "locator": "Training Transformers"
+        }
+      ],
+      "from": "behavior_cloning"
+    },
+    {
+      "id": "diffusion-transformer",
+      "to": "transformer",
+      "group": "usage",
+      "label": "可采用架构",
+      "explanation": "原工作包含时序 Diffusion Transformer 等去噪网络设计，不要求所有扩散策略都采用该结构。",
+      "evidence": [
+        {
+          "source_id": "diffusion_policy_project",
+          "locator": "方法概述"
+        }
+      ],
+      "from": "diffusion_policy"
+    },
+    {
+      "id": "act-diffusion",
+      "to": "diffusion_policy",
+      "group": "contrast",
+      "label": "对比：生成方式",
+      "explanation": "两者都可学习动作序列；ACT 原模型采用 CVAE，Diffusion Policy 采用去噪扩散。",
+      "evidence": [
+        {
+          "source_id": "act_paper",
+          "locator": "IV-B"
+        },
+        {
+          "source_id": "diffusion_policy_project",
+          "locator": "方法概述"
+        }
+      ],
+      "from": "action_chunking_with_transformers"
+    },
+    {
+      "id": "vla-policy",
+      "to": "policy",
+      "group": "purpose",
+      "label": "用于动作生成",
+      "explanation": "VLA 以视觉和语言等信息为条件生成机器人动作，可构成策略。",
+      "evidence": [
+        {
+          "source_id": "rt2_paper",
+          "locator": "摘要"
+        },
+        {
+          "source_id": "openvla_project",
+          "locator": "The OpenVLA Model"
+        }
+      ],
+      "from": "vision_language_action_model"
+    },
+    {
+      "id": "vla-transformer",
+      "to": "transformer",
+      "group": "usage",
+      "label": "代表模型采用",
+      "explanation": "OpenVLA 使用语言模型骨干处理动作 token；此处是代表实现关系，不定义全部 VLA 的唯一架构。",
+      "evidence": [
+        {
+          "source_id": "openvla_project",
+          "locator": "The OpenVLA Model"
+        }
+      ],
+      "from": "vision_language_action_model"
+    },
+    {
+      "id": "vla-diffusion",
+      "to": "diffusion_policy",
+      "group": "contrast",
+      "label": "区分：概念维度",
+      "explanation": "VLA 描述模型的输入输出类别，Diffusion Policy 是具体策略生成方法；比较实例不能推出两者互斥。",
+      "evidence": [
+        {
+          "source_id": "openvla_project",
+          "locator": "Experiments"
+        },
+        {
+          "source_id": "diffusion_policy_project",
+          "locator": "方法概述"
+        }
+      ],
+      "from": "vision_language_action_model"
+    },
+    {
+      "id": "inhand-dexterous",
+      "to": "dexterous_manipulation",
+      "group": "hierarchy",
+      "label": "一类操作问题",
+      "explanation": "手内操作关注物体相对于手的运动，是灵巧操作中的一类问题。",
+      "evidence": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "II-A"
+        },
+        {
+          "source_id": "in_hand_rl",
+          "locator": "第 2 节"
+        }
+      ],
+      "from": "in_hand_manipulation"
+    },
+    {
+      "id": "tactile-inhand",
+      "to": "in_hand_manipulation",
+      "group": "purpose",
+      "label": "提供接触信息",
+      "explanation": "触觉可为手内操作提供局部接触反馈，但不是每项手内操作实现的必选输入。",
+      "evidence": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "IV-D"
+        }
+      ],
+      "from": "tactile_sensing"
+    },
+    {
+      "id": "dr-transfer",
+      "to": "sim_to_real_transfer",
+      "group": "purpose",
+      "label": "支持迁移",
+      "explanation": "域随机化是处理现实差距的一种方法，不能保证所有任务都成功迁移。",
+      "evidence": [
+        {
+          "source_id": "domain_randomization_paper",
+          "locator": "摘要"
+        },
+        {
+          "source_id": "shadow_paper",
+          "locator": "第 3 节"
+        }
+      ],
+      "from": "domain_randomization"
+    },
+    {
+      "id": "inhand-transfer",
+      "to": "sim_to_real_transfer",
+      "group": "related",
+      "label": "已有迁移实例",
+      "explanation": "所列论文报告了手内重定向从仿真到实机的研究实例；不代表所有手内操作都依赖仿真。",
+      "evidence": [
+        {
+          "source_id": "shadow_paper",
+          "locator": "第 2、6 节"
+        }
+      ],
+      "from": "in_hand_manipulation"
+    },
+    {
+      "id": "retarget-ik",
+      "to": "inverse_kinematics",
+      "group": "related",
+      "label": "相关求解问题",
+      "explanation": "重定向处理不同身体或机构的运动映射；逆运动学处理满足目标的关节配置。两者不应作为同义词。",
+      "evidence": [
+        {
+          "source_id": "dex_retargeting",
+          "locator": "项目介绍 / Examples"
+        },
+        {
+          "source_id": "ik_textbook",
+          "locator": "定义与数值求解"
+        }
+      ],
+      "from": "motion_retargeting"
+    },
+    {
+      "id": "impedance-policy",
+      "to": "policy",
+      "group": "related",
+      "label": "不同控制层次",
+      "explanation": "策略是动作选择规则；阻抗控制规定接触运动与交互力的动态关系。是否组合使用取决于具体系统接口。",
+      "evidence": [
+        {
+          "source_id": "impedance_notes",
+          "locator": "Impedance Control"
+        },
+        {
+          "source_id": "rl_concepts",
+          "locator": "Policies"
+        }
+      ],
+      "from": "impedance_control"
+    },
+    {
+      "id": "closure-inhand",
+      "to": "in_hand_manipulation",
+      "group": "related",
+      "label": "接触判据与动态任务",
+      "explanation": "力闭合是给定接触模型下的抓取性质；该判据本身不能保证动态手内操作成功。",
+      "evidence": [
+        {
+          "source_id": "force_closure_textbook",
+          "locator": "Transcript：执行器约束与力闭合定义"
+        },
+        {
+          "source_id": "in_hand_rl",
+          "locator": "任务定义"
+        }
+      ],
+      "from": "force_closure"
+    }
+  ],
+  "history": {
+    "proximal_policy_optimization": {
+      "label": "经典仍用",
+      "year": 2017,
+      "basis": "2017 年代表论文，官方教学文档仍提供算法与实现。年份指所列代表来源，不是按年龄自动评级。",
+      "evidence": [
+        {
+          "source_id": "ppo_paper",
+          "locator": "原论文"
+        },
+        {
+          "source_id": "ppo_docs",
+          "locator": "算法实现"
+        }
+      ]
+    },
+    "soft_actor_critic": {
+      "label": "经典仍用",
+      "year": 2018,
+      "basis": "2018 年原论文，官方文档保留连续控制算法实现。",
+      "evidence": [
+        {
+          "source_id": "sac_paper",
+          "locator": "原论文"
+        },
+        {
+          "source_id": "sac_docs",
+          "locator": "算法实现"
+        }
+      ]
+    },
+    "behavior_cloning": {
+      "label": "经典仍用",
+      "year": null,
+      "basis": "综述与 robomimic 持续收录的基础模仿学习方法。",
+      "evidence": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "III-A"
+        },
+        {
+          "source_id": "robomimic_algorithms",
+          "locator": "BC"
+        }
+      ]
+    },
+    "dataset_aggregation": {
+      "label": "经典方法",
+      "year": 2011,
+      "basis": "2011 年原论文提出的交互式模仿学习算法。此标签说明技术沿革，不据单篇早期论文推断当前使用普及度。",
+      "evidence": [
+        {
+          "source_id": "dagger_paper",
+          "locator": "第 3 节"
+        }
+      ]
+    },
+    "force_closure": {
+      "label": "经典仍用",
+      "year": null,
+      "basis": "机器人学教材中的接触分析基础概念。",
+      "evidence": [
+        {
+          "source_id": "force_closure_textbook",
+          "locator": "12.2.3"
+        }
+      ]
+    },
+    "inverse_kinematics": {
+      "label": "经典仍用",
+      "year": null,
+      "basis": "机器人学教材中的基础求解问题。",
+      "evidence": [
+        {
+          "source_id": "ik_textbook",
+          "locator": "6.2"
+        }
+      ]
+    },
+    "impedance_control": {
+      "label": "经典仍用",
+      "year": 1985,
+      "basis": "课程教材引用 Hogan 1985 年系列论文，并讨论实际控制接口。",
+      "evidence": [
+        {
+          "source_id": "impedance_notes",
+          "locator": "Impedance Control / References"
+        }
+      ]
+    },
+    "diffusion_policy": {
+      "label": "新兴活跃",
+      "year": 2023,
+      "basis": "2023 年代表工作，后续期刊版本与 robomimic 训练实现支持。",
+      "evidence": [
+        {
+          "source_id": "diffusion_policy_project",
+          "locator": "Paper"
+        },
+        {
+          "source_id": "robomimic_diffusion",
+          "locator": "训练文档"
+        }
+      ]
+    },
+    "action_chunking_with_transformers": {
+      "label": "新兴方法",
+      "year": 2023,
+      "basis": "2023 年原论文及官方实现。标签仅概括沿革，不评价适用性高低。",
+      "evidence": [
+        {
+          "source_id": "act_paper",
+          "locator": "原论文"
+        },
+        {
+          "source_id": "act_code",
+          "locator": "官方实现"
+        }
+      ]
+    },
+    "vision_language_action_model": {
+      "label": "新兴活跃",
+      "year": 2023,
+      "basis": "RT-2 与 OpenVLA 等不同代表工作及开源实现支撑该类别。",
+      "evidence": [
+        {
+          "source_id": "rt2_paper",
+          "locator": "原论文"
+        },
+        {
+          "source_id": "openvla_project",
+          "locator": "模型与实现"
+        }
+      ]
+    }
+  },
+  "route": {
+    "id": "shadow-2018-vision",
+    "title": "让物体在手内转到目标姿态",
+    "subtitle": "Shadow Hand · 仿真训练 → 视觉重定向实机验证",
+    "paper_title": "Learning Dexterous In-Hand Manipulation",
+    "paper_url": "https://arxiv.org/html/1808.00177v5",
+    "year": "2018 / v5 2019",
+    "scope": "原论文的视觉重定向配置。仅呈现该研究的已报告模块，不代表其他灵巧手的通用流程。",
+    "notes": "不使用手部触觉作为策略输入；关节传感用于底层控制。视觉估计与控制策略分别训练。",
+    "nodes": [
+      {
+        "id": "goal",
+        "phase": "goal",
+        "title": "定义重定向目标",
+        "subtitle": "物体相对手的目标姿态",
+        "term_ids": [
+          "in_hand_manipulation",
+          "dexterous_manipulation"
+        ],
+        "inputs": [
+          "初始物体姿态",
+          "目标姿态"
+        ],
+        "outputs": [
+          "重定向目标与成功判定"
+        ],
+        "detail": "目标是手内调整物体姿态；掉落或超时终止试验。",
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "第 2、6.2 节"
+          }
+        ],
+        "kind": "step"
+      },
+      {
+        "id": "simulation",
+        "phase": "training",
+        "title": "构造随机化仿真",
+        "subtitle": "MuJoCo / 参数与外观随机化",
+        "term_ids": [
+          "domain_randomization",
+          "sim_to_real_transfer"
+        ],
+        "inputs": [
+          "手与物体模型",
+          "目标与物理参数"
+        ],
+        "outputs": [
+          "仿真观测、动作与奖励"
+        ],
+        "detail": "使用经校准的仿真并随机化系统参数；图仅概括原实现。",
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "第 2.2、3 节"
+          }
+        ],
+        "kind": "step"
+      },
+      {
+        "id": "policy-training",
+        "phase": "training",
+        "title": "训练控制策略",
+        "subtitle": "PPO · 循环策略网络",
+        "term_ids": [
+          "proximal_policy_optimization",
+          "reinforcement_learning",
+          "policy"
+        ],
+        "inputs": [
+          "仿真交互经验",
+          "奖励"
+        ],
+        "outputs": [
+          "控制策略参数"
+        ],
+        "detail": "策略网络与价值网络分别训练；价值网络仅用于训练。",
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "第 4 节"
+          }
+        ],
+        "kind": "step"
+      },
+      {
+        "id": "vision-training",
+        "phase": "training",
+        "title": "训练视觉估计器",
+        "subtitle": "随机化图像 → 物体位姿",
+        "term_ids": [
+          "domain_randomization"
+        ],
+        "inputs": [
+          "策略采集的仿真状态",
+          "随机化渲染图像与位姿标签"
+        ],
+        "outputs": [
+          "视觉模型参数"
+        ],
+        "detail": "在训练策略采集的状态上渲染图像，监督学习物体位姿。",
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "第 5 节"
+          }
+        ],
+        "kind": "step"
+      },
+      {
+        "id": "models",
+        "phase": "artifacts",
+        "title": "保留两项训练产物",
+        "subtitle": "控制策略 / 视觉位姿估计器",
+        "term_ids": [
+          "policy",
+          "sim_to_real_transfer"
+        ],
+        "inputs": [
+          "控制策略参数",
+          "视觉模型参数"
+        ],
+        "outputs": [
+          "实机使用的两项模型"
+        ],
+        "detail": "此卡片汇总训练产物，不额外增加算法或训练步骤。",
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "图 2；第 4、5 节"
+          }
+        ],
+        "kind": "artifact"
+      },
+      {
+        "id": "perception",
+        "phase": "runtime",
+        "title": "获得实机观测",
+        "subtitle": "三路 RGB + 指尖运动捕捉",
+        "term_ids": [],
+        "inputs": [
+          "相机图像",
+          "PhaseSpace 指尖位置",
+          "视觉模型"
+        ],
+        "outputs": [
+          "物体位姿估计",
+          "指尖位置"
+        ],
+        "detail": "视觉配置估计物体位姿；指尖位置来自运动捕捉。",
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "第 2.1、3.1、5.1 节"
+          }
+        ],
+        "kind": "step"
+      },
+      {
+        "id": "inference",
+        "phase": "runtime",
+        "title": "策略推理",
+        "subtitle": "观测与目标 → 相对关节动作",
+        "term_ids": [
+          "policy",
+          "in_hand_manipulation"
+        ],
+        "inputs": [
+          "物体位置、指尖位置",
+          "相对目标姿态",
+          "控制策略与循环状态"
+        ],
+        "outputs": [
+          "相对关节目标"
+        ],
+        "detail": "部署时执行训练后的策略；不在每步重新运行 PPO 训练。",
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "第 4.1、4.2 节"
+          }
+        ],
+        "kind": "step"
+      },
+      {
+        "id": "control",
+        "phase": "runtime",
+        "title": "执行与反馈",
+        "subtitle": "底层相对位置控制",
+        "term_ids": [
+          "in_hand_manipulation"
+        ],
+        "inputs": [
+          "相对关节目标",
+          "关节传感反馈"
+        ],
+        "outputs": [
+          "机器人运动",
+          "后续图像与指尖状态"
+        ],
+        "detail": "底层控制器使用关节传感，将运动结果反馈到观测环节。",
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "第 2.1 节；附录 B.4"
+          }
+        ],
+        "kind": "step"
+      },
+      {
+        "id": "evaluation",
+        "phase": "evaluation",
+        "title": "验证真实操作表现",
+        "subtitle": "连续成功重定向次数",
+        "term_ids": [
+          "in_hand_manipulation",
+          "sim_to_real_transfer"
+        ],
+        "inputs": [
+          "实机运行记录"
+        ],
+        "outputs": [
+          "成功次数、掉落与超时记录"
+        ],
+        "detail": "论文按连续完成的重定向次数报告结果；保留平台与试验条件。",
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "第 6.2 节"
+          }
+        ],
+        "kind": "step"
+      }
+    ],
+    "edges": [
+      {
+        "id": "r1",
+        "to": "simulation",
+        "label": "目标与任务设置",
+        "feedback": false,
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "第 2 节"
+          }
+        ],
+        "from": "goal"
+      },
+      {
+        "id": "r2",
+        "to": "policy-training",
+        "label": "交互经验 + 奖励",
+        "feedback": false,
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "第 4 节"
+          }
+        ],
+        "from": "simulation"
+      },
+      {
+        "id": "r3",
+        "to": "vision-training",
+        "label": "策略采集的状态",
+        "feedback": false,
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "第 5.2 节"
+          }
+        ],
+        "from": "policy-training"
+      },
+      {
+        "id": "r4",
+        "to": "models",
+        "label": "策略参数",
+        "feedback": false,
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "图 2"
+          }
+        ],
+        "from": "policy-training"
+      },
+      {
+        "id": "r5",
+        "to": "models",
+        "label": "视觉模型参数",
+        "feedback": false,
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "图 2"
+          }
+        ],
+        "from": "vision-training"
+      },
+      {
+        "id": "r6",
+        "to": "perception",
+        "label": "视觉模型",
+        "feedback": false,
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "图 2；第 5.1 节"
+          }
+        ],
+        "from": "models"
+      },
+      {
+        "id": "r7",
+        "to": "inference",
+        "label": "控制策略参数",
+        "feedback": false,
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "图 2"
+          }
+        ],
+        "from": "models"
+      },
+      {
+        "id": "r8",
+        "to": "inference",
+        "label": "位姿估计 + 指尖位置",
+        "feedback": false,
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "第 3.1、4.1 节"
+          }
+        ],
+        "from": "perception"
+      },
+      {
+        "id": "r9",
+        "to": "control",
+        "label": "相对关节目标",
+        "feedback": false,
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "第 4.2 节"
+          }
+        ],
+        "from": "inference"
+      },
+      {
+        "id": "r10",
+        "to": "perception",
+        "label": "后续观测",
+        "feedback": true,
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "图 2；第 2.1 节"
+          }
+        ],
+        "from": "control"
+      },
+      {
+        "id": "r11",
+        "to": "evaluation",
+        "label": "操作记录",
+        "feedback": false,
+        "evidence": [
+          {
+            "source_id": "shadow_paper",
+            "locator": "第 6.2 节"
+          }
+        ],
+        "from": "control"
+      }
+    ]
+  }
+}

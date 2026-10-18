@@ -1,0 +1,80 @@
+const assert = require('node:assert/strict');
+const {mkdir} = require('node:fs/promises');
+const {chromium} = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const url=process.env.PREVIEW_URL||'http://127.0.0.1:4173/';
+async function find(page,query) {
+  await page.getByRole('button',{name:'搜索术语与工程环节',exact:true}).click();
+  const input=page.getByRole('combobox');
+  await input.fill(query);
+  await input.press('Enter');
+}
+(async()=>{
+  const browser=await chromium.launch({headless:true,channel:process.env.PLAYWRIGHT_CHANNEL||'chrome'});
+  const page=await browser.newPage({viewport:{width:1440,height:1000}});
+  const errors=[],external=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  page.on('request',r=>{if(!r.url().startsWith(new URL(url).origin)&&!r.url().startsWith('data:')) external.push(r.url());});
+  try {
+    await page.goto(url);
+    await page.locator('#graph[data-ready="true"] canvas').waitFor();
+    assert.equal(await page.locator('#concept-layer').isVisible(),false);
+    assert.equal(await page.getByRole('button',{name:'显示全部文字',exact:true}).getAttribute('aria-pressed'),'false');
+    await find(page,'PPO');
+    await page.locator('[data-center-term="proximal_policy_optimization"]').waitFor();
+    await page.getByRole('button',{name:'阅读软演员-评论家算法',exact:true}).click();
+    await page.locator('#reader-panel').waitFor({state:'visible'});
+    assert.equal(await page.locator('[data-center-term="proximal_policy_optimization"]').count(),1);
+    await page.getByRole('button',{name:'查看关系依据',exact:true}).click();
+    await page.keyboard.press('Escape');
+    assert.equal(await page.getByRole('button',{name:'阅读软演员-评论家算法',exact:true}).evaluate(e=>document.activeElement===e),true,'closing nested relationship reading restores the original card focus');
+    await page.getByRole('button',{name:'阅读软演员-评论家算法',exact:true}).click();
+    await page.getByRole('button',{name:'以此词为中心',exact:true}).click();
+    await page.locator('[data-center-term="soft_actor_critic"]').waitFor();
+    await page.getByRole('button',{name:'返回上一位置',exact:true}).click();
+    await page.locator('[data-center-term="proximal_policy_optimization"]').waitFor();
+    await page.locator('#concept-layer [data-action="relation"]').first().click();
+    assert.match(await page.locator('#reader-content').innerText(),/关系依据/);
+    assert.ok(await page.locator('#reader-content a[href^="https://"]').count());
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('#reader-panel').isVisible(),false);
+    await mkdir('.work/screenshots',{recursive:true});
+    await page.screenshot({path:'.work/screenshots/3d-concept.png'});
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('#concept-layer').isVisible(),false);
+    await page.getByRole('button',{name:'显示全部文字',exact:true}).click();
+    assert.equal(await page.getByRole('button',{name:'显示全部文字',exact:true}).getAttribute('aria-pressed'),'true');
+    await page.getByRole('button',{name:'图谱设置',exact:true}).click();
+    const glow=page.getByRole('slider',{name:'发光强度'});
+    assert.equal(await glow.inputValue(),'0');
+    await glow.fill('40');
+    await glow.dispatchEvent('input');
+    assert.equal(await page.locator('#glow-value').innerText(),'40');
+    await page.keyboard.press('Escape');
+    await page.getByRole('button',{name:'查看全图',exact:true}).click();
+    assert.equal(await page.locator('#concept-layer').isVisible(),false);
+    assert.equal(await page.locator('#graph').getAttribute('data-focused'),'');
+    await page.screenshot({path:'.work/screenshots/3d-overview.png'});
+    await find(page,'从示范');
+    assert.match(await page.locator('#stage-panel').innerText(),/输入/);
+    assert.match(await page.locator('#stage-panel').innerText(),/输出/);
+    await find(page,'Behavioural Cloning');
+    await page.locator('[data-center-term="behavior_cloning"]').waitFor();
+    await page.reload();
+    await page.locator('[data-center-term="behavior_cloning"]').waitFor();
+    assert.equal(await page.getByRole('button',{name:'显示全部文字',exact:true}).getAttribute('aria-pressed'),'false');
+    for(const width of [390,320]) {
+      await page.setViewportSize({width,height:844});
+      await find(page,'IL');
+      await page.locator('[data-center-term="imitation_learning"]').waitFor();
+      assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no mobile horizontal overflow');
+      await page.getByRole('button',{name:'阅读模仿学习',exact:true}).click();
+      const bounds=await page.locator('#reader-panel').boundingBox();
+      assert.ok(bounds.x>=0 && bounds.x+bounds.width<=width+1);
+      await page.screenshot({path:'.work/screenshots/3d-mobile-'+width+'.png'});
+      await page.keyboard.press('Escape');
+    }
+    assert.deepEqual(errors,[]);
+    assert.deepEqual(external,[],'all runtime assets and data must be local');
+    console.log('PASS: real WebGL scene, search, local relations, preview/recenter/back, evidence, label/glow controls, overview, stage I/O, deep links and mobile reading; no external requests');
+  } finally {await browser.close();}
+})().catch(e=>{console.error(e);process.exit(1);});

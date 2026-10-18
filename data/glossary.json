@@ -1,0 +1,736 @@
+{
+  "metadata": {
+    "title": "灵巧操作与策略学习技术术语库（讨论用样例）",
+    "version": "0.1.0",
+    "language": "zh-CN",
+    "reviewed_on": "2026-10-15",
+    "purpose": "提供少量有来源的代表性词条，供后续前端设计讨论和数据展示测试；正式内容范围与结构可在讨论后调整。",
+    "scope": "机器人灵巧操作、机器人学基础与策略学习；不绑定特定机器人、算法或平台。",
+    "classification_note": "分类参考所列教材、综述和官方框架中常见的任务、机器人学、学习范式、算法与模型划分，是本样例的导航分组，不宣称存在统一的学界目录。category_id 不表示上下位关系，真实技术关系由 related_terms 单独记录。",
+    "editorial_note": "定义采用简短中文转述；当前价值、适用条件与局限是结合所列来源作出的编辑性归纳，不是统一成熟度评级或最新性能排名。应用是典型使用场景，不表示所有平台都已验证。",
+    "conventions": [
+      "通用概念、具体算法、模型类别与具名方法分别标明；论文和项目本身只作为来源或实例。",
+      "name.abbreviation 为 null 表示本样例不采用固定缩写，不表示文献中绝无缩写；同义名称保留在 aliases 中。",
+      "references.source_id 对应 sources 中的直接链接；discovery_sources 仅记录已查阅的候选资源，不单独作为定义或学术共识的依据。",
+      "related_terms 的关系从当前词条指向 term_id；related_to 只表示相关，不暗示同义、从属或必选组件。",
+      "review_queue 不属于已收录词条；待复核表示本轮证据检查未完成，不据此判断整个方向不成熟。"
+    ]
+  },
+  "discovery_sources": [
+    {
+      "title": "Awesome Dexterous Manipulation",
+      "url": "https://github.com/chang-xinhai/Awesome-Dexterous-Manipulation",
+      "checked": true,
+      "use": "发现灵巧操作任务、触觉、IL/RL、仿真迁移和综述的候选术语。"
+    },
+    {
+      "title": "Awesome Learning for Manipulation",
+      "url": "https://github.com/Noietch/Awesome-Learning-for-Manipulation",
+      "checked": true,
+      "use": "发现视觉运动策略、VLA 和代表性方法；不把目录中的每个模型名收录成技术领域。"
+    },
+    {
+      "title": "Awesome Robotics Manipulation",
+      "url": "https://github.com/BaiShuanghao/Awesome-Robotics-Manipulation",
+      "checked": true,
+      "use": "对照操作任务、学习策略、输入建模和策略生成之间的分类边界。"
+    },
+    {
+      "title": "Embodied AI Starter Map — Knowledge Map",
+      "url": "https://ppsdk.github.io/Embodied-AI-Start/knowledge-map/",
+      "checked": true,
+      "use": "辅助辨别模型、学习目标和数据设置；其中新兴缩写仍需原始研究验证。"
+    },
+    {
+      "title": "Embodied AI Glossary — Robot Embodiment",
+      "url": "https://robotembodiment.com/glossary.html",
+      "checked": true,
+      "use": "发现英文词形与别名；简短网站释义不足以单独证明术语标准化。"
+    },
+    {
+      "title": "robomimic Documentation",
+      "url": "https://robomimic.github.io/docs/",
+      "checked": true,
+      "use": "核对 BC、Transformer 策略和 Diffusion Policy 的官方实现文档。"
+    }
+  ],
+  "categories": [
+    {
+      "id": "manipulation_tasks",
+      "name": "操作任务与能力",
+      "scope": "描述机器人要完成的操作，不限定求解算法。",
+      "source_ids": ["dexterous_il_survey", "in_hand_rl"]
+    },
+    {
+      "id": "robotics_foundations",
+      "name": "机器人学与控制基础",
+      "scope": "接触性质、运动学问题和底层控制方法；具体类型见各词条。",
+      "source_ids": ["force_closure_textbook", "ik_textbook", "impedance_notes"]
+    },
+    {
+      "id": "sensing_and_mapping",
+      "name": "感知与动作映射",
+      "scope": "获得接触信息或转换示教动作，不等同于策略学习算法。",
+      "source_ids": ["dexterous_il_survey", "dex_retargeting"]
+    },
+    {
+      "id": "learning_foundations",
+      "name": "策略学习基础概念",
+      "scope": "描述决策问题和策略的数学对象。",
+      "source_ids": ["rl_concepts"]
+    },
+    {
+      "id": "learning_paradigms",
+      "name": "学习范式",
+      "scope": "按示范、奖励等学习信号区分；IL 与 RL 可以结合。",
+      "source_ids": ["dexterous_il_survey", "rl_concepts"]
+    },
+    {
+      "id": "learning_settings",
+      "name": "学习数据设置",
+      "scope": "描述数据获取与训练约束，不把 offline 或 online 当成独立网络结构。",
+      "source_ids": ["offline_rl_review"]
+    },
+    {
+      "id": "learning_algorithms",
+      "name": "具体学习算法与方法",
+      "scope": "BC、DAgger 是模仿学习方法；PPO、SAC 是强化学习算法。",
+      "source_ids": ["robomimic_algorithms", "dagger_paper", "ppo_docs", "sac_docs"]
+    },
+    {
+      "id": "policy_models",
+      "name": "模型结构与类别",
+      "scope": "区分网络架构与按输入输出定义的模型类别；它们不构成互斥的学习范式。",
+      "source_ids": ["transformer_paper", "robomimic_transformers", "rt2_paper", "openvla_project"]
+    },
+    {
+      "id": "named_policy_methods",
+      "name": "代表性具名策略方法",
+      "scope": "保留有后续使用或开源实现支持的代表性方法，不上升为独立研究领域。",
+      "source_ids": ["diffusion_policy_project", "robomimic_diffusion", "act_paper", "act_code"]
+    },
+    {
+      "id": "simulation_transfer",
+      "name": "仿真迁移问题与方法",
+      "scope": "Sim-to-Real 是迁移问题，域随机化是可用方法之一；两者不是同义词。",
+      "source_ids": ["domain_randomization_paper", "in_hand_rl"]
+    }
+  ],
+  "relation_types": {
+    "subproblem_of": "是目标词条描述的问题或能力的子问题",
+    "instance_of_paradigm": "属于目标学习范式的具体算法或方法",
+    "setting_of": "是目标学习范式的一种数据或训练设置",
+    "formalizes": "为目标对象提供数学建模框架",
+    "learns": "学习目标对象",
+    "uses_architecture": "使用目标网络架构",
+    "addresses": "用于处理目标问题，但不保证单独解决",
+    "related_to": "相关，但不主张同义、从属或必选依赖",
+    "distinguish_from": "需要区分的概念或方法"
+  },
+  "sources": [
+    {
+      "id": "dexterous_il_survey",
+      "title": "Dexterous Manipulation through Imitation Learning: A Survey",
+      "kind": "综述论文",
+      "url": "https://arxiv.org/html/2504.03515v5"
+    },
+    {
+      "id": "in_hand_rl",
+      "title": "Learning Dexterous In-Hand Manipulation",
+      "kind": "代表性论文",
+      "url": "https://arxiv.org/abs/1808.00177"
+    },
+    {
+      "id": "force_closure_textbook",
+      "title": "Modern Robotics, 12.2.3 — Force Closure",
+      "kind": "教材配套资源",
+      "url": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/12-2-3-force-closure/"
+    },
+    {
+      "id": "ik_textbook",
+      "title": "Modern Robotics, 6.2 — Numerical Inverse Kinematics",
+      "kind": "教材配套资源",
+      "url": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/6-2-numerical-inverse-kinematics-part-1-of-2/"
+    },
+    {
+      "id": "impedance_notes",
+      "title": "MIT Robotic Manipulation — Manipulator Control",
+      "kind": "课程教材",
+      "url": "https://manipulation.mit.edu/force.html"
+    },
+    {
+      "id": "dex_retargeting",
+      "title": "Dex Retargeting — official repository",
+      "kind": "官方实现",
+      "url": "https://github.com/dexsuite/dex-retargeting"
+    },
+    {
+      "id": "rl_concepts",
+      "title": "Spinning Up — Key Concepts in RL",
+      "kind": "官方算法教学文档",
+      "url": "https://spinningup.openai.com/en/latest/spinningup/rl_intro.html"
+    },
+    {
+      "id": "offline_rl_review",
+      "title": "Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems",
+      "kind": "教程与综述论文",
+      "url": "https://arxiv.org/abs/2005.01643"
+    },
+    {
+      "id": "robomimic_algorithms",
+      "title": "robomimic — Implemented Algorithms",
+      "kind": "官方框架文档",
+      "url": "https://robomimic.github.io/docs/introduction/implemented_algorithms.html"
+    },
+    {
+      "id": "dagger_paper",
+      "title": "A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning",
+      "kind": "原始论文",
+      "url": "https://proceedings.mlr.press/v15/ross11a/ross11a.pdf"
+    },
+    {
+      "id": "ppo_paper",
+      "title": "Proximal Policy Optimization Algorithms",
+      "kind": "原始论文",
+      "url": "https://arxiv.org/abs/1707.06347"
+    },
+    {
+      "id": "ppo_docs",
+      "title": "Spinning Up — Proximal Policy Optimization",
+      "kind": "官方算法文档",
+      "url": "https://spinningup.openai.com/en/latest/algorithms/ppo.html"
+    },
+    {
+      "id": "sac_paper",
+      "title": "Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor",
+      "kind": "原始论文",
+      "url": "https://arxiv.org/abs/1801.01290"
+    },
+    {
+      "id": "sac_docs",
+      "title": "Spinning Up — Soft Actor-Critic",
+      "kind": "官方算法文档",
+      "url": "https://spinningup.openai.com/en/latest/algorithms/sac.html"
+    },
+    {
+      "id": "transformer_paper",
+      "title": "Attention Is All You Need",
+      "kind": "原始论文",
+      "url": "https://arxiv.org/abs/1706.03762"
+    },
+    {
+      "id": "robomimic_transformers",
+      "title": "robomimic — Training Transformers",
+      "kind": "官方框架文档",
+      "url": "https://robomimic.github.io/docs/tutorials/training_transformers.html"
+    },
+    {
+      "id": "diffusion_policy_project",
+      "title": "Diffusion Policy: Visuomotor Policy Learning via Action Diffusion",
+      "kind": "作者项目页（含论文与代码链接）",
+      "url": "https://diffusion-policy.cs.columbia.edu/"
+    },
+    {
+      "id": "robomimic_diffusion",
+      "title": "robomimic — Training Diffusion Policy",
+      "kind": "官方框架文档",
+      "url": "https://robomimic.github.io/docs/tutorials/training_diffusion_policy.html"
+    },
+    {
+      "id": "act_paper",
+      "title": "Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware",
+      "kind": "原始论文",
+      "url": "https://arxiv.org/abs/2304.13705"
+    },
+    {
+      "id": "act_code",
+      "title": "ACT: Action Chunking with Transformers — official repository",
+      "kind": "官方实现",
+      "url": "https://github.com/tonyzhaozh/act"
+    },
+    {
+      "id": "rt2_paper",
+      "title": "RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control",
+      "kind": "代表性论文",
+      "url": "https://arxiv.org/abs/2307.15818"
+    },
+    {
+      "id": "openvla_project",
+      "title": "OpenVLA: An Open-Source Vision-Language-Action Model",
+      "kind": "作者项目页（含论文与官方实现链接）",
+      "url": "https://openvla.github.io/"
+    },
+    {
+      "id": "domain_randomization_paper",
+      "title": "Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World",
+      "kind": "代表性论文",
+      "url": "https://arxiv.org/abs/1703.06907"
+    }
+  ],
+  "terms": [
+    {
+      "id": "dexterous_manipulation",
+      "name": {"en": "Dexterous Manipulation", "zh": "灵巧操作", "abbreviation": null, "aliases": []},
+      "definition": "通过协调末端执行器的运动与接触，完成精细、灵活的物体操作；常涉及多指协调，但不限于拟人五指手。",
+      "type": "研究问题与操作能力",
+      "category_id": "manipulation_tasks",
+      "role": "规定系统需要实现的操作能力，并牵引机构、感知、规划和控制设计。",
+      "applications": ["物体精细调整", "工具操作与装配"],
+      "current_value": {
+        "status": "持续研究的核心问题",
+        "conditions": "任务需要精细运动或复杂接触协调。",
+        "limitations": "接触变化、感知误差和高维控制使通用可靠操作仍有困难。"
+      },
+      "related_terms": [
+        {"term_id": "in_hand_manipulation", "relation": "related_to", "note": "手内操作是其中一类问题，两者不等同。"},
+        {"term_id": "imitation_learning", "relation": "related_to", "note": "可用模仿学习求解，也可采用其他方法。"}
+      ],
+      "references": [{"source_id": "dexterous_il_survey", "use": "II-A：任务范围；I：应用背景。"}]
+    },
+    {
+      "id": "in_hand_manipulation",
+      "name": {"en": "In-Hand Manipulation", "zh": "手内操作", "abbreviation": null, "aliases": ["掌内操作"]},
+      "definition": "通过手指、手掌与物体的接触运动，改变物体相对于手的位姿；可包含滚动、滑动和接触切换。",
+      "type": "操作任务与研究问题",
+      "category_id": "manipulation_tasks",
+      "role": "在抓取后调整物体位姿，为后续使用、放置或装配做准备。",
+      "applications": ["多指手内物体重定向", "抓持中的精细位姿调整"],
+      "current_value": {
+        "status": "经典且持续研究",
+        "conditions": "手部运动和接触能产生所需物体运动。",
+        "limitations": "遮挡和接触切换难处理；仅在特定物体上成功不代表通用操作能力。"
+      },
+      "related_terms": [
+        {"term_id": "dexterous_manipulation", "relation": "subproblem_of", "note": "物体相对于手的运动是其关键边界。"},
+        {"term_id": "tactile_sensing", "relation": "related_to", "note": "触觉可提供局部接触反馈。"}
+      ],
+      "references": [{"source_id": "in_hand_rl", "use": "真实 Shadow Hand 上的物体重定向实例。"}]
+    },
+    {
+      "id": "force_closure",
+      "name": {"en": "Force Closure", "zh": "力闭合", "abbreviation": null, "aliases": ["力封闭"]},
+      "definition": "在给定接触和摩擦模型下，接触可产生的合力与合力矩覆盖整个力旋量空间，从而在理论上抵抗任意方向的外部力旋量。",
+      "type": "接触力学性质与抓取判据",
+      "category_id": "robotics_foundations",
+      "role": "判断接触布局是否具备抵抗任意方向扰动的基本能力。",
+      "applications": ["多指抓取接触点筛选", "抓取可行性分析"],
+      "current_value": {
+        "status": "经典仍适用",
+        "conditions": "接触位置、法向和摩擦模型可用。",
+        "limitations": "理想判据通常不包含执行器力矩上限，不能单独保证真实抓取稳定；也需与形闭合区分。"
+      },
+      "related_terms": [
+        {"term_id": "in_hand_manipulation", "relation": "related_to", "note": "提供接触分析基础，不能代替动态操作控制。"}
+      ],
+      "references": [{"source_id": "force_closure_textbook", "use": "定义、摩擦锥和执行器能力限制。"}]
+    },
+    {
+      "id": "inverse_kinematics",
+      "name": {"en": "Inverse Kinematics", "zh": "逆运动学", "abbreviation": "IK", "aliases": []},
+      "definition": "给定末端或指尖的目标位置、姿态等运动学约束，求满足约束的关节配置。",
+      "type": "运动学求解问题",
+      "category_id": "robotics_foundations",
+      "role": "把任务空间目标转换成关节层可执行的运动目标。",
+      "applications": ["机械臂末端位姿控制", "灵巧手指尖目标求解"],
+      "current_value": {
+        "status": "经典仍适用",
+        "conditions": "机构运动学模型和目标约束已知。",
+        "limitations": "可能多解或无解；数值法受初值、奇异位形和约束处理影响，单独使用不保证无碰撞。"
+      },
+      "related_terms": [
+        {"term_id": "motion_retargeting", "relation": "related_to", "note": "重定向可使用 IK，但通常还需处理形态和任务差异。"}
+      ],
+      "references": [{"source_id": "ik_textbook", "use": "逆运动学定义、迭代求解与收敛限制。"}]
+    },
+    {
+      "id": "impedance_control",
+      "name": {"en": "Impedance Control", "zh": "阻抗控制", "abbreviation": null, "aliases": []},
+      "definition": "通过设计运动偏差与交互力之间的动态关系，使机器人表现出期望的机械阻抗，例如惯性、阻尼和刚度特性。",
+      "type": "控制方法",
+      "category_id": "robotics_foundations",
+      "role": "调节机器人接触环境时的柔顺响应，可作为策略下层的执行控制器。",
+      "applications": ["接触装配", "指尖或机械臂末端柔顺接触"],
+      "current_value": {
+        "status": "经典仍适用",
+        "conditions": "控制接口和带宽足以实现所需阻抗。",
+        "limitations": "效果受模型误差、时延和硬件接口影响；只调位置增益不一定实现完整阻抗。"
+      },
+      "related_terms": [
+        {"term_id": "policy", "relation": "related_to", "note": "策略可输出其目标或参数；策略也可使用其他控制接口。"},
+        {"term_id": "tactile_sensing", "relation": "related_to", "note": "触觉反馈可辅助接触调节，但并非所有阻抗实现都要求触觉传感器。"}
+      ],
+      "references": [{"source_id": "impedance_notes", "use": "刚度、阻尼、惯性与底层实现的区别。"}]
+    },
+    {
+      "id": "tactile_sensing",
+      "name": {"en": "Tactile Sensing", "zh": "触觉感知", "abbreviation": null, "aliases": ["触觉传感"]},
+      "definition": "通过接触传感器及信号处理获取接触状态、力或压力分布等信息；具体可观测量取决于传感器。",
+      "type": "感知技术",
+      "category_id": "sensing_and_mapping",
+      "role": "为接触状态估计和闭环操作提供局部信息，补充视觉与关节状态。",
+      "applications": ["滑移检测", "遮挡条件下的接触调整"],
+      "current_value": {
+        "status": "持续应用与研究",
+        "conditions": "传感器覆盖相关接触位置，数据能与控制或学习流程对齐。",
+        "limitations": "标定、漂移、耐久性和数据同步会影响效果；局部接触观测不等于完整物体状态。"
+      },
+      "related_terms": [
+        {"term_id": "in_hand_manipulation", "relation": "related_to", "note": "可提供手内操作的接触反馈。"},
+        {"term_id": "policy", "relation": "related_to", "note": "触觉可以成为策略输入，而不是一种学习范式。"}
+      ],
+      "references": [{"source_id": "dexterous_il_survey", "use": "IV-D：传感信息、应用和局限。"}]
+    },
+    {
+      "id": "motion_retargeting",
+      "name": {"en": "Motion Retargeting", "zh": "动作重定向", "abbreviation": null, "aliases": ["运动重定向", "Retargeting"]},
+      "definition": "把源身体或机构的运动转换为目标机器人的运动，尽量保持指定的几何、接触或任务关系。",
+      "type": "动作映射方法",
+      "category_id": "sensing_and_mapping",
+      "role": "在示教者与机器人形态不同的情况下，生成机器人可执行的目标动作。",
+      "applications": ["人手到灵巧手的遥操作映射", "人手动作数据转换为机器人示范"],
+      "current_value": {
+        "status": "持续应用与研究",
+        "conditions": "明确源与目标的对应关系、约束和需要保留的任务特征。",
+        "limitations": "形态和自由度差异会造成误差；几何姿态匹配不能保证接触或任务成功。"
+      },
+      "related_terms": [
+        {"term_id": "inverse_kinematics", "relation": "related_to", "note": "IK 可作为求解工具；重定向不限于 IK。"},
+        {"term_id": "imitation_learning", "relation": "related_to", "note": "可为模仿学习准备动作数据，本身不必包含学习过程。"}
+      ],
+      "references": [{"source_id": "dex_retargeting", "use": "人手运动到机器人手的映射及两类使用实例。"}]
+    },
+    {
+      "id": "markov_decision_process",
+      "name": {"en": "Markov Decision Process", "zh": "马尔可夫决策过程", "abbreviation": "MDP", "aliases": []},
+      "definition": "以状态、动作、状态转移和奖励等要素描述序列决策的数学模型；下一状态的分布只依赖当前状态和动作。",
+      "type": "数学模型",
+      "category_id": "learning_foundations",
+      "role": "形式化操作任务中的决策与奖励优化问题。",
+      "applications": ["定义机器人强化学习环境", "组织状态、动作和奖励接口"],
+      "current_value": {
+        "status": "基础概念持续使用",
+        "conditions": "所选状态能够满足马尔可夫假设。",
+        "limitations": "相机或触觉的单次观测通常不等于完整状态；部分可观测情形需要扩展建模。"
+      },
+      "related_terms": [
+        {"term_id": "reinforcement_learning", "relation": "formalizes", "note": "是强化学习常用的决策问题建模框架。"},
+        {"term_id": "policy", "relation": "related_to", "note": "策略在模型描述的状态或可用信息上选择动作。"}
+      ],
+      "references": [{"source_id": "rl_concepts", "use": "Formalism：MDP 要素与马尔可夫性质。"}]
+    },
+    {
+      "id": "policy",
+      "name": {"en": "Policy", "zh": "策略", "abbreviation": null, "aliases": []},
+      "definition": "根据可用状态、观测或历史信息选择动作的规则，可以是确定性映射或条件概率分布。",
+      "type": "决策规则与基础概念",
+      "category_id": "learning_foundations",
+      "role": "把机器人接收到的信息转化为动作决策。",
+      "applications": ["从图像生成动作目标", "从关节状态选择控制动作"],
+      "current_value": {
+        "status": "基础概念持续使用",
+        "conditions": "明确输入信息、动作表示和执行接口。",
+        "limitations": "策略是决策规则，单凭名称无法确定其训练方法、网络结构或控制层级。"
+      },
+      "related_terms": [
+        {"term_id": "imitation_learning", "relation": "related_to", "note": "可从示范学习策略。"},
+        {"term_id": "reinforcement_learning", "relation": "related_to", "note": "可根据奖励优化策略。"}
+      ],
+      "references": [{"source_id": "rl_concepts", "use": "Policies：确定性策略与随机策略。"}]
+    },
+    {
+      "id": "imitation_learning",
+      "name": {"en": "Imitation Learning", "zh": "模仿学习", "abbreviation": "IL", "aliases": []},
+      "definition": "从示范者的行为数据中学习行为或决策规律的一类学习范式。",
+      "type": "学习范式",
+      "category_id": "learning_paradigms",
+      "role": "利用示范指导机器人获得操作行为，减少从零探索的需求。",
+      "applications": ["遥操作示范学习", "灵巧手操作技能学习"],
+      "current_value": {
+        "status": "持续应用与研究",
+        "conditions": "能获得与任务相关的示范及适当的观测、动作对应。",
+        "limitations": "受数据质量和覆盖范围限制；在偏离示范的状态上可能失败。"
+      },
+      "related_terms": [
+        {"term_id": "behavior_cloning", "relation": "related_to", "note": "BC 是模仿学习的一种方法，不代表全部 IL。"},
+        {"term_id": "reinforcement_learning", "relation": "distinguish_from", "note": "学习信号不同，但两者可以组合。"}
+      ],
+      "references": [{"source_id": "dexterous_il_survey", "use": "II-B：范式定义与主要方法。"}]
+    },
+    {
+      "id": "reinforcement_learning",
+      "name": {"en": "Reinforcement Learning", "zh": "强化学习", "abbreviation": "RL", "aliases": []},
+      "definition": "利用环境交互数据和奖励信号，学习使期望累计回报更高的决策行为。",
+      "type": "学习范式",
+      "category_id": "learning_paradigms",
+      "role": "把任务目标写成奖励，通过经验改进策略或价值估计。",
+      "applications": ["仿真中的手内物体重定向", "连续动作控制策略优化"],
+      "current_value": {
+        "status": "持续应用与研究",
+        "conditions": "存在可用的奖励和训练数据获取方式，交互可来自仿真或真实系统。",
+        "limitations": "探索、奖励设计和样本需求是主要困难；也可使用已有数据进行离线学习。"
+      },
+      "related_terms": [
+        {"term_id": "policy", "relation": "learns", "note": "可直接或间接改进动作选择规则。"},
+        {"term_id": "imitation_learning", "relation": "distinguish_from", "note": "不应把所有使用机器人数据的学习都称为 RL。"}
+      ],
+      "references": [
+        {"source_id": "rl_concepts", "use": "回报最大化目标与策略学习。"},
+        {"source_id": "in_hand_rl", "use": "灵巧手内重定向实例。"}
+      ]
+    },
+    {
+      "id": "offline_reinforcement_learning",
+      "name": {"en": "Offline Reinforcement Learning", "zh": "离线强化学习", "abbreviation": "Offline RL", "aliases": ["Batch Reinforcement Learning", "Batch RL"]},
+      "definition": "仅使用预先收集的数据进行强化学习，在该离线训练阶段不通过策略与环境的新交互追加数据。",
+      "type": "强化学习的数据设置与研究问题",
+      "category_id": "learning_settings",
+      "role": "从已有操作轨迹中优化决策，减少训练期间对新交互的依赖。",
+      "applications": ["从历史机器人操作数据学习", "利用带奖励的操作数据集优化策略"],
+      "current_value": {
+        "status": "持续研究并有框架实现",
+        "conditions": "数据包含足以建立奖励目标的经验信息，并覆盖相关行为。",
+        "limitations": "分布外动作的价值估计可能失真；现有数据缺乏关键经验时，改进空间受限。"
+      },
+      "related_terms": [
+        {"term_id": "reinforcement_learning", "relation": "setting_of", "note": "描述训练数据来源限制，而非固定算法。"},
+        {"term_id": "behavior_cloning", "relation": "distinguish_from", "note": "都能用固定数据；BC 直接拟合示范动作，Offline RL 优化奖励目标。"},
+        {"term_id": "soft_actor_critic", "relation": "distinguish_from", "note": "Off-policy 不等于 offline；标准 SAC 不直接解决离线分布偏移。"}
+      ],
+      "references": [
+        {"source_id": "offline_rl_review", "use": "问题定义、分布偏移和数据覆盖限制。"},
+        {"source_id": "robomimic_algorithms", "use": "离线强化学习方法的框架实现。"}
+      ]
+    },
+    {
+      "id": "behavior_cloning",
+      "name": {"en": "Behavioral Cloning", "zh": "行为克隆", "abbreviation": "BC", "aliases": ["Behavior Cloning", "Behavioural Cloning"]},
+      "definition": "用监督学习直接拟合示范中的观测或状态到动作的映射或条件分布。",
+      "type": "模仿学习方法",
+      "category_id": "learning_algorithms",
+      "role": "把示范数据转化为可执行策略，也是策略学习的基础对照方法。",
+      "applications": ["从遥操作轨迹学习抓放", "初始化后续优化的操作策略"],
+      "current_value": {
+        "status": "经典且有持续实现支持",
+        "conditions": "示范覆盖目标任务，观测与动作同步、表示一致。",
+        "limitations": "部署时的状态分布偏移会造成误差累积；简单单峰输出也可能难以表达多种有效动作。"
+      },
+      "related_terms": [
+        {"term_id": "imitation_learning", "relation": "instance_of_paradigm", "note": "属于直接拟合示范的模仿学习方法。"},
+        {"term_id": "dataset_aggregation", "relation": "distinguish_from", "note": "DAgger 会在学习策略访问的状态上追加专家标注。"},
+        {"term_id": "transformer", "relation": "related_to", "note": "BC 可以使用 Transformer，也可使用其他网络。"}
+      ],
+      "references": [
+        {"source_id": "robomimic_algorithms", "use": "BC 定义及 BC、BC-RNN 等实现。"},
+        {"source_id": "dexterous_il_survey", "use": "III-A：分布偏移与误差累积。"}
+      ]
+    },
+    {
+      "id": "dataset_aggregation",
+      "name": {"en": "Dataset Aggregation", "zh": "数据集聚合", "abbreviation": "DAgger", "aliases": ["DAGGER"]},
+      "definition": "迭代运行当前学习策略，在其访问的状态上查询专家动作，将新标注聚合进数据集后重新训练策略。",
+      "type": "交互式模仿学习算法",
+      "category_id": "learning_algorithms",
+      "role": "缓解单次行为克隆中训练状态与策略实际访问状态的分布不一致。",
+      "applications": ["可查询专家的仿真示教", "能追加纠正标注的操作学习流程"],
+      "current_value": {
+        "status": "经典且仍有方法论价值",
+        "conditions": "能在学习策略访问的状态上获得可靠专家动作。",
+        "limitations": "专家查询成本和早期策略执行风险可能较高；不自动解决部分可观测问题。"
+      },
+      "related_terms": [
+        {"term_id": "imitation_learning", "relation": "instance_of_paradigm", "note": "训练依赖专家动作标注。"},
+        {"term_id": "behavior_cloning", "relation": "related_to", "note": "内部可使用监督拟合，关键区别是迭代收集状态和专家标签。"}
+      ],
+      "references": [{"source_id": "dagger_paper", "use": "第 3 节：Dataset Aggregation 的全称、流程与假设。"}]
+    },
+    {
+      "id": "proximal_policy_optimization",
+      "name": {"en": "Proximal Policy Optimization", "zh": "近端策略优化", "abbreviation": "PPO", "aliases": []},
+      "definition": "一类同策略强化学习算法，使用裁剪或惩罚等代理目标，抑制过大的策略更新。",
+      "type": "强化学习算法族",
+      "category_id": "learning_algorithms",
+      "role": "根据当前策略采集的经验优化策略，常用于可批量仿真的控制训练。",
+      "applications": ["仿真机器人连续控制", "多环境并行策略训练"],
+      "current_value": {
+        "status": "经典且有持续使用价值",
+        "conditions": "能不断采集接近当前策略分布的新数据。",
+        "limitations": "交互需求可能较大；裁剪目标不保证每次更新都稳定，结果依赖奖励与训练设置。"
+      },
+      "related_terms": [
+        {"term_id": "reinforcement_learning", "relation": "instance_of_paradigm", "note": "算法，不是网络架构。"},
+        {"term_id": "soft_actor_critic", "relation": "distinguish_from", "note": "PPO 通常采用 on-policy 数据；SAC 通常复用回放数据。"}
+      ],
+      "references": [
+        {"source_id": "ppo_paper", "use": "算法原始定义。"},
+        {"source_id": "ppo_docs", "use": "PPO-Clip、PPO-Penalty 与实现限制。"}
+      ]
+    },
+    {
+      "id": "soft_actor_critic",
+      "name": {"en": "Soft Actor-Critic", "zh": "软演员-评论家算法", "abbreviation": "SAC", "aliases": ["Soft Actor Critic"]},
+      "definition": "基于最大熵目标的异策略演员-评论家算法，在提高期望回报的同时保留策略熵，并可复用经验回放数据。",
+      "type": "强化学习算法",
+      "category_id": "learning_algorithms",
+      "role": "在连续控制中结合价值估计和随机策略优化，提高数据复用能力。",
+      "applications": ["机器人连续动作控制", "允许交互和经验回放的策略训练"],
+      "current_value": {
+        "status": "经典且有持续使用价值",
+        "conditions": "有合适的奖励、数据与函数近似设置；原始版本主要针对连续动作。",
+        "limitations": "受价值估计和数据分布影响；标准 SAC 直接用于固定离线数据可能产生分布外估计问题。"
+      },
+      "related_terms": [
+        {"term_id": "reinforcement_learning", "relation": "instance_of_paradigm", "note": "使用奖励与熵正则目标优化策略。"},
+        {"term_id": "offline_reinforcement_learning", "relation": "distinguish_from", "note": "异策略是数据复用属性，不等于离线训练设置。"}
+      ],
+      "references": [
+        {"source_id": "sac_paper", "use": "最大熵、异策略和随机演员的定义。"},
+        {"source_id": "sac_docs", "use": "现代 SAC 实现与经验回放。"},
+        {"source_id": "offline_rl_review", "use": "离线使用中的分布外价值估计问题。"}
+      ]
+    },
+    {
+      "id": "transformer",
+      "name": {"en": "Transformer", "zh": "Transformer 架构", "abbreviation": null, "aliases": []},
+      "definition": "以注意力机制为核心处理序列关系的神经网络架构，机器人策略可用它建模观测历史或动作序列。",
+      "type": "神经网络架构",
+      "category_id": "policy_models",
+      "role": "作为策略或表征网络组件，处理跨时间或跨模态的信息关联。",
+      "applications": ["基于历史观测的行为克隆", "动作序列生成"],
+      "current_value": {
+        "status": "成熟架构且有机器人框架支持",
+        "conditions": "序列或多模态建模需求与数据、计算资源相匹配。",
+        "limitations": "计算开销随具体注意力实现和序列长度变化；使用该架构本身不保证泛化或闭环稳定性。"
+      },
+      "related_terms": [
+        {"term_id": "behavior_cloning", "relation": "related_to", "note": "可用 BC 训练 Transformer 策略，架构与训练方法是不同维度。"},
+        {"term_id": "action_chunking_with_transformers", "relation": "related_to", "note": "ACT 是采用该架构的具体方法。"}
+      ],
+      "references": [
+        {"source_id": "transformer_paper", "use": "原始架构。"},
+        {"source_id": "robomimic_transformers", "use": "机器人 Transformer 策略网络训练实现。"}
+      ]
+    },
+    {
+      "id": "diffusion_policy",
+      "name": {"en": "Diffusion Policy", "zh": "扩散策略", "abbreviation": null, "aliases": []},
+      "definition": "以观测为条件，通过去噪扩散生成机器人动作序列的代表性策略学习方法；本词条以 Chi 等人的同名方法为锚点。",
+      "type": "具名策略学习方法",
+      "category_id": "named_policy_methods",
+      "role": "表达多模态、高维动作分布，并结合滚动执行生成操作动作。",
+      "applications": ["Push-T 推动任务", "视觉反馈下的杯子翻转"],
+      "current_value": {
+        "status": "有代表性研究和框架实现支持",
+        "conditions": "有可用示范和观测条件，推理速度满足控制流程需求。",
+        "limitations": "迭代去噪会带来推理开销，效果依赖数据覆盖；不同采样器和后续变体的时延不相同。"
+      },
+      "related_terms": [
+        {"term_id": "imitation_learning", "relation": "instance_of_paradigm", "note": "原始方法从示范学习；不据此排除后续与 RL 结合的变体。"},
+        {"term_id": "action_chunking_with_transformers", "relation": "distinguish_from", "note": "两者都可预测动作序列，但生成模型和训练目标不同。"},
+        {"term_id": "transformer", "relation": "related_to", "note": "原工作含 Transformer 与卷积去噪网络设计，扩散策略不必只用 Transformer。"}
+      ],
+      "references": [
+        {"source_id": "diffusion_policy_project", "use": "原始方法、任务示例与论文代码入口。"},
+        {"source_id": "robomimic_diffusion", "use": "独立框架中的训练支持。"}
+      ]
+    },
+    {
+      "id": "action_chunking_with_transformers",
+      "name": {"en": "Action Chunking with Transformers", "zh": "基于 Transformer 的动作分块方法", "abbreviation": "ACT", "aliases": []},
+      "definition": "从示范学习动作序列生成模型的具体方法，结合动作分块、Transformer 和条件变分自编码器建模。",
+      "type": "具名模仿学习方法",
+      "category_id": "named_policy_methods",
+      "role": "一次预测多个时刻的动作，学习精细操作中的时序协调。",
+      "applications": ["ALOHA 双臂精细操作", "双臂插接或物体交接"],
+      "current_value": {
+        "status": "有代表性实机结果与官方实现支持",
+        "conditions": "有任务示范和匹配的观测、关节动作接口。",
+        "limitations": "依赖示范覆盖与动作时序设置；不是所有动作分块方法的总称，也不能直接推定其在多指手上表现相同。"
+      },
+      "related_terms": [
+        {"term_id": "imitation_learning", "relation": "instance_of_paradigm", "note": "从示范学习动作序列。"},
+        {"term_id": "transformer", "relation": "uses_architecture", "note": "Transformer 是方法组件之一。"},
+        {"term_id": "diffusion_policy", "relation": "distinguish_from", "note": "ACT 原始模型使用 CVAE，不是去噪扩散策略。"}
+      ],
+      "references": [
+        {"source_id": "act_paper", "use": "ACT 全称、动作分块和精细操作问题。"},
+        {"source_id": "act_code", "use": "官方算法实现与仿真任务。"}
+      ]
+    },
+    {
+      "id": "vision_language_action_model",
+      "name": {"en": "Vision-Language-Action Model", "zh": "视觉-语言-动作模型", "abbreviation": "VLA", "aliases": ["Vision-Language-Action Models"]},
+      "definition": "把视觉观测和语言条件与机器人动作输出联系起来的模型类别；具体模型还可以使用机器人状态等输入。",
+      "type": "策略模型类别",
+      "category_id": "policy_models",
+      "role": "将视觉场景、语言任务与动作生成结合，支持语言条件的机器人操作。",
+      "applications": ["按语言指令抓放物体", "多任务操作策略适配"],
+      "current_value": {
+        "status": "新兴且有多项代表研究和开源支持",
+        "conditions": "具备合适的预训练数据、动作表示及目标机器人适配方式。",
+        "limitations": "跨任务和跨机构泛化仍受数据、动作空间及计算条件限制；不能直接从机械臂结果推断灵巧手能力。"
+      },
+      "related_terms": [
+        {"term_id": "policy", "relation": "related_to", "note": "VLA 可用于构成机器人策略。"},
+        {"term_id": "transformer", "relation": "related_to", "note": "代表模型常使用 Transformer，但两者不是同义词。"},
+        {"term_id": "imitation_learning", "relation": "related_to", "note": "代表模型可用机器人示范训练；VLA 名称本身不规定唯一训练范式。"}
+      ],
+      "references": [
+        {"source_id": "rt2_paper", "use": "VLA 类别的代表性研究。"},
+        {"source_id": "openvla_project", "use": "不同研究中的开源模型、适配和实验边界。"}
+      ]
+    },
+    {
+      "id": "sim_to_real_transfer",
+      "name": {"en": "Sim-to-Real Transfer", "zh": "仿真到现实迁移", "abbreviation": null, "aliases": ["Sim-to-Real", "Sim2Real", "仿真到真实迁移"]},
+      "definition": "将仿真中获得的模型、策略或技能用于真实系统，并处理仿真与现实之间的差异。",
+      "type": "迁移研究问题",
+      "category_id": "simulation_transfer",
+      "role": "利用仿真的数据和试错便利，支持真实机器人上的部署。",
+      "applications": ["仿真训练的手内重定向策略部署", "仿真图像训练的物体定位迁移"],
+      "current_value": {
+        "status": "经典且持续研究",
+        "conditions": "仿真中的任务、控制接口和观测与真实系统具有足够对应关系。",
+        "limitations": "接触、摩擦、传动、时延和感知差异可能导致失败；成功依赖具体任务和验证条件。"
+      },
+      "related_terms": [
+        {"term_id": "domain_randomization", "relation": "related_to", "note": "域随机化是可用方法之一，不能代表全部迁移技术。"},
+        {"term_id": "in_hand_manipulation", "relation": "related_to", "note": "是有代表性仿真迁移研究的操作任务。"}
+      ],
+      "references": [
+        {"source_id": "in_hand_rl", "use": "灵巧手策略从仿真迁移到实机。"},
+        {"source_id": "domain_randomization_paper", "use": "视觉模型的现实差距与迁移。"}
+      ]
+    },
+    {
+      "id": "domain_randomization",
+      "name": {"en": "Domain Randomization", "zh": "域随机化", "abbreviation": null, "aliases": []},
+      "definition": "训练时随机改变环境或系统参数，使模型接触多种条件；可随机化视觉外观，也可随机化质量、摩擦等动力学参数。",
+      "type": "训练与迁移方法",
+      "category_id": "simulation_transfer",
+      "role": "减少模型对某个仿真条件的依赖，提高对实际变化的适应能力。",
+      "applications": ["随机纹理与光照的视觉训练", "随机摩擦和物体属性的灵巧手训练"],
+      "current_value": {
+        "status": "经典且持续使用",
+        "conditions": "随机化变量与真实变化相关，范围和分布适合任务。",
+        "limitations": "真实条件超出覆盖范围时仍会失败；过宽的随机化可能增加学习难度，不能弥补所有建模缺失。"
+      },
+      "related_terms": [
+        {"term_id": "sim_to_real_transfer", "relation": "addresses", "note": "用于缩小现实差距，但不保证迁移成功。"},
+        {"term_id": "reinforcement_learning", "relation": "related_to", "note": "可与 RL 结合，也可用于视觉等其他训练过程。"}
+      ],
+      "references": [
+        {"source_id": "domain_randomization_paper", "use": "视觉域随机化的代表研究。"},
+        {"source_id": "in_hand_rl", "use": "物理与外观随机化的灵巧操作实例。"}
+      ]
+    }
+  ],
+  "review_queue": [
+    {
+      "candidate_name": "World Action Model (WAM)",
+      "status": "待复核，未纳入主词条",
+      "reason": "候选知识地图使用了该名称；本轮未完成跨原始论文的定义范围、缩写一致性及后续研究核验，暂不作为统一的成熟分类。",
+      "discovery_url": "https://ppsdk.github.io/Embodied-AI-Start/knowledge-map/",
+      "next_check": "逐篇核对原文如何定义世界预测与动作生成的关系，再决定拆分、收录或保留为具名模型实例。"
+    }
+  ]
+}

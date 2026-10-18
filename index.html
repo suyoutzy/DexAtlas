@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0A0B19">
+  <meta name="description" content="在三维图谱中探索灵巧操作与策略学习，理解技术的工程位置与概念关系。">
+  <title>DexAtlas · 灵巧操作术语图谱</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./assets/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#search-panel">跳转到术语搜索</a>
+  <main id="atlas" aria-label="DexAtlas 术语图谱">
+    <div id="graph" role="img" aria-label="三维工程与术语图谱，可通过搜索访问全部节点" data-ready="false" data-focused=""></div>
+    <header class="wordmark"><a href="./" aria-label="DexAtlas 首页"><span class="atlas-emblem" aria-hidden="true">⌘</span>Dex<span>Atlas</span></a><span class="brand-caption">DEXTEROUS MANIPULATION</span></header>
+    <div id="scene-caption" aria-hidden="true"><span class="caption-line"></span><span>EXPLORE THE CONNECTIONS</span></div>
+    <nav class="tool-rail" aria-label="图谱工具">
+      <button id="back-button" class="tool" type="button" aria-label="返回上一位置" data-tip="返回上一位置" hidden></button>
+      <span class="rail-separator" id="back-separator" hidden></span>
+      <button id="search-button" class="tool" type="button" aria-label="搜索术语与工程环节" data-tip="搜索 · /" aria-expanded="false"></button>
+      <button id="labels-button" class="tool" type="button" aria-label="显示全部文字" data-tip="显示全部文字" aria-pressed="false"></button>
+      <button id="overview-button" class="tool" type="button" aria-label="查看全图" data-tip="查看全图"></button>
+      <span class="rail-separator"></span>
+      <button id="settings-button" class="tool" type="button" aria-label="图谱设置" data-tip="设置" aria-expanded="false"></button>
+    </nav>
+    <section id="search-panel" class="glass search-panel" aria-label="搜索与全部节点" hidden>
+      <div class="panel-header"><label for="term-search">探索图谱</label><button class="close-button" data-action="close-search" aria-label="关闭搜索">×</button></div>
+      <input id="term-search" type="search" role="combobox" aria-label="搜索术语" aria-autocomplete="list" aria-controls="search-results" aria-expanded="true" autocomplete="off" placeholder="中文、英文、缩写…">
+      <div id="search-results" role="listbox" aria-label="搜索结果"></div>
+    </section>
+    <section id="settings-panel" class="glass settings-panel" aria-label="图谱设置" hidden>
+      <div class="panel-header"><h2>图谱设置</h2><button class="close-button" data-action="close-settings" aria-label="关闭设置">×</button></div>
+      <label class="range-label" for="glow">发光强度 <output id="glow-value" for="glow">0</output></label>
+      <input id="glow" type="range" min="0" max="100" value="0" step="1" aria-label="发光强度">
+      <p class="quiet">0 为关闭，只在需要时点亮图谱。</p>
+      <details><summary>节点配色</summary><div id="color-legend"></div></details>
+      <details><summary>关于与来源</summary><p>22 个研究样例。工程导航是教材与官方框架的编辑性归纳，连线均可查看说明与出处。</p><div id="about-sources"></div></details>
+    </section>
+    <section id="concept-layer" aria-label="局部概念关系" hidden></section>
+    <section id="stage-panel" class="glass stage-panel" aria-label="工程环节" hidden></section>
+    <aside id="reader-panel" class="glass reader-panel" aria-label="词条与关系阅读" tabindex="-1" hidden>
+      <div class="reader-toolbar"><span id="reader-kind">词条说明</span><button class="close-button" data-action="close-reader" aria-label="关闭阅读卡">×</button></div>
+      <div id="reader-content"></div>
+    </aside>
+    <section id="load-state" class="load-state glass" role="status"><span class="loading-ring"></span><p>正在连接图谱</p><button id="retry-button" class="accent-button" hidden>重新加载</button></section>
+    <section id="fallback-panel" class="glass fallback-panel" aria-label="词条列表" hidden></section>
+    <div id="hover-caption" class="hover-caption" hidden></div>
+    <p id="announcement" role="status" aria-live="polite" class="sr-only"></p>
+  </main>
+  <noscript><div class="noscript">DexAtlas 需要启用 JavaScript 才能浏览交互图谱。原始词条可从 <a href="./data/glossary.json">JSON 文件</a>读取。</div></noscript>
+</body>
+</html>

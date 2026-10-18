@@ -1,0 +1,765 @@
+{
+  "metadata": {
+    "title": "机器人操作的通用工程导航",
+    "version": "0.1.0",
+    "reviewed_on": "2026-10-17",
+    "scope": "供界面验证的通用工程框架；不对应特定论文，不宣称统一标准流程。",
+    "note": "工程输入输出、工程用途与概念关系分别维护；分支可组合，仿真与训练不作为所有路径的必经节点。"
+  },
+  "sources": [
+    {
+      "id": "pipeline_mit",
+      "title": "MIT Robotic Manipulation — Perception, Planning, and Control",
+      "url": "https://manipulation.mit.edu/",
+      "kind": "教材与课程"
+    },
+    {
+      "id": "pipeline_lerobot",
+      "title": "LeRobot — Imitation Learning on Real-World Robots",
+      "url": "https://huggingface.co/docs/lerobot/il_robots",
+      "kind": "官方实现文档"
+    },
+    {
+      "id": "pipeline_isaac",
+      "title": "Isaac Lab — Task Design Workflows",
+      "url": "https://isaac-sim.github.io/IsaacLab/main/source/overview/core-concepts/task_workflows.html",
+      "kind": "官方实现文档"
+    }
+  ],
+  "stages": [
+    {
+      "id": "goal",
+      "short": "目标",
+      "title": "定义目标与验收条件",
+      "summary": "把希望机器人完成的操作，转成可描述、可检查的任务。",
+      "inputs": [
+        "任务需求、对象与场景"
+      ],
+      "outputs": [
+        "目标、约束与验收标准"
+      ],
+      "branch": false,
+      "evidence": [
+        {
+          "source_id": "pipeline_mit",
+          "locator": "Introduction: tasks; perception, planning and control"
+        }
+      ]
+    },
+    {
+      "id": "system",
+      "short": "系统",
+      "title": "建立系统与接口",
+      "summary": "明确机器人、环境、传感与动作接口，为方法构建和运行提供基础。仿真是可选工具。",
+      "inputs": [
+        "任务规格、平台与资源"
+      ],
+      "outputs": [
+        "可用的观测与动作接口、系统约束"
+      ],
+      "branch": false,
+      "evidence": [
+        {
+          "source_id": "pipeline_mit",
+          "locator": "Chapter 2: robots, hands, sensors and HardwareStation"
+        }
+      ]
+    },
+    {
+      "id": "method",
+      "short": "方法",
+      "title": "构建操作方法",
+      "summary": "选择并组合模型、规划、控制或学习方法，形成可运行的操作方案。下面的入口可以组合。",
+      "inputs": [
+        "任务约束、系统接口、可用模型或数据"
+      ],
+      "outputs": [
+        "方法设计与所需的数据、模型或交互条件"
+      ],
+      "branch": false,
+      "evidence": [
+        {
+          "source_id": "pipeline_mit",
+          "locator": "Motion Planning; Manipulator Control; Reinforcement Learning"
+        }
+      ]
+    },
+    {
+      "id": "design",
+      "short": "设计 / 优化",
+      "title": "设计与优化",
+      "summary": "利用几何、运动学、动力学或接触约束，设计规划与控制方法；也可与学习方法结合。",
+      "inputs": [
+        "模型、约束、目标"
+      ],
+      "outputs": [
+        "规划结果或控制方法"
+      ],
+      "branch": true,
+      "evidence": [
+        {
+          "source_id": "pipeline_mit",
+          "locator": "Chapters 3, 5, 6 and 8: kinematics, grasping, planning and control"
+        }
+      ]
+    },
+    {
+      "id": "demonstration",
+      "short": "从示范构建",
+      "title": "从示范构建",
+      "summary": "使用示范中的观测与动作等数据构建策略，具体算法与数据要求依方法而定。",
+      "inputs": [
+        "示范数据、观测与动作表示"
+      ],
+      "outputs": [
+        "可执行策略及运行所需的处理过程"
+      ],
+      "branch": true,
+      "evidence": [
+        {
+          "source_id": "pipeline_lerobot",
+          "locator": "Record a dataset; train a policy; evaluate"
+        }
+      ]
+    },
+    {
+      "id": "interaction",
+      "short": "从交互构建",
+      "title": "从交互构建",
+      "summary": "通过环境交互与反馈构建策略。训练可以在仿真或真实系统中开展，取决于方法与条件。",
+      "inputs": [
+        "交互环境、任务反馈与算法配置"
+      ],
+      "outputs": [
+        "控制策略与相关参数"
+      ],
+      "branch": true,
+      "evidence": [
+        {
+          "source_id": "pipeline_isaac",
+          "locator": "Task interfaces; observations, actions, rewards; RL environments"
+        }
+      ]
+    },
+    {
+      "id": "deployment",
+      "short": "运行",
+      "title": "部署与闭环运行",
+      "summary": "将可用方法接入系统：根据观测产生动作，接收执行后的新观测。",
+      "inputs": [
+        "可执行方法、观测与动作接口"
+      ],
+      "outputs": [
+        "动作指令、反馈和运行记录"
+      ],
+      "branch": false,
+      "evidence": [
+        {
+          "source_id": "pipeline_mit",
+          "locator": "Putting it all together; Manipulator Control"
+        }
+      ]
+    },
+    {
+      "id": "evaluation",
+      "short": "评估",
+      "title": "评估与迭代",
+      "summary": "对照验收标准检查表现、适用条件与失败情况，再修订方法或系统。",
+      "inputs": [
+        "运行记录、测试条件与验收标准"
+      ],
+      "outputs": [
+        "评估结论与改进需求"
+      ],
+      "branch": false,
+      "evidence": [
+        {
+          "source_id": "pipeline_lerobot",
+          "locator": "Evaluate your policy and visualize the results"
+        }
+      ]
+    },
+    {
+      "id": "complete",
+      "short": "目标达成",
+      "title": "达成验收条件",
+      "summary": "在明确的任务与测试边界内满足验收条件，并保留验证依据；不是对任意环境的成功保证。",
+      "inputs": [
+        "验收标准与评估结论"
+      ],
+      "outputs": [
+        "已验证的任务结果与适用边界"
+      ],
+      "branch": false,
+      "evidence": [
+        {
+          "source_id": "pipeline_lerobot",
+          "locator": "Evaluate: task outcomes and recorded episodes"
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "id": "f1",
+      "from": "goal",
+      "to": "system",
+      "label": "任务规格与约束",
+      "feedback": false,
+      "explanation": "工程导航中的输入输出：由「定义目标与验收条件」向「建立系统与接口」提供任务规格与约束。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "evidence": [
+        {
+          "source_id": "pipeline_mit",
+          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "from": "goal",
+      "to": "method",
+      "label": "目标与验收标准",
+      "feedback": false,
+      "explanation": "工程导航中的输入输出：由「定义目标与验收条件」向「构建操作方法」提供目标与验收标准。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "evidence": [
+        {
+          "source_id": "pipeline_mit",
+          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "from": "system",
+      "to": "method",
+      "label": "观测、动作接口与系统约束",
+      "feedback": false,
+      "explanation": "工程导航中的输入输出：由「建立系统与接口」向「构建操作方法」提供观测、动作接口与系统约束。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "evidence": [
+        {
+          "source_id": "pipeline_mit",
+          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "from": "method",
+      "to": "design",
+      "label": "模型、目标与约束",
+      "feedback": false,
+      "explanation": "工程导航中的输入输出：由「构建操作方法」向「设计与优化」提供模型、目标与约束。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "evidence": [
+        {
+          "source_id": "pipeline_mit",
+          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "from": "method",
+      "to": "demonstration",
+      "label": "可用示范与数据要求",
+      "feedback": false,
+      "explanation": "工程导航中的输入输出：由「构建操作方法」向「从示范构建」提供可用示范与数据要求。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "evidence": [
+        {
+          "source_id": "pipeline_mit",
+          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "from": "method",
+      "to": "interaction",
+      "label": "交互条件与任务反馈",
+      "feedback": false,
+      "explanation": "工程导航中的输入输出：由「构建操作方法」向「从交互构建」提供交互条件与任务反馈。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "evidence": [
+        {
+          "source_id": "pipeline_mit",
+          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "from": "design",
+      "to": "deployment",
+      "label": "规划结果或控制方法",
+      "feedback": false,
+      "explanation": "工程导航中的输入输出：由「设计与优化」向「部署与闭环运行」提供规划结果或控制方法。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "evidence": [
+        {
+          "source_id": "pipeline_mit",
+          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        }
+      ]
+    },
+    {
+      "id": "f8",
+      "from": "demonstration",
+      "to": "deployment",
+      "label": "策略与输入输出约定",
+      "feedback": false,
+      "explanation": "工程导航中的输入输出：由「从示范构建」向「部署与闭环运行」提供策略与输入输出约定。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "evidence": [
+        {
+          "source_id": "pipeline_lerobot",
+          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        }
+      ]
+    },
+    {
+      "id": "f9",
+      "from": "interaction",
+      "to": "deployment",
+      "label": "策略参数与输入输出约定",
+      "feedback": false,
+      "explanation": "工程导航中的输入输出：由「从交互构建」向「部署与闭环运行」提供策略参数与输入输出约定。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "evidence": [
+        {
+          "source_id": "pipeline_mit",
+          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        }
+      ]
+    },
+    {
+      "id": "f10",
+      "from": "system",
+      "to": "deployment",
+      "label": "机器人与运行接口",
+      "feedback": false,
+      "explanation": "工程导航中的输入输出：由「建立系统与接口」向「部署与闭环运行」提供机器人与运行接口。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "evidence": [
+        {
+          "source_id": "pipeline_mit",
+          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        }
+      ]
+    },
+    {
+      "id": "f11",
+      "from": "deployment",
+      "to": "evaluation",
+      "label": "运行记录与测试结果",
+      "feedback": false,
+      "explanation": "工程导航中的输入输出：由「部署与闭环运行」向「评估与迭代」提供运行记录与测试结果。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "evidence": [
+        {
+          "source_id": "pipeline_mit",
+          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        }
+      ]
+    },
+    {
+      "id": "f12",
+      "from": "evaluation",
+      "to": "complete",
+      "label": "满足验收条件的评估结论",
+      "feedback": false,
+      "explanation": "工程导航中的输入输出：由「评估与迭代」向「达成验收条件」提供满足验收条件的评估结论。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "evidence": [
+        {
+          "source_id": "pipeline_lerobot",
+          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        }
+      ]
+    },
+    {
+      "id": "f13",
+      "from": "evaluation",
+      "to": "method",
+      "label": "改进需求与评估反馈",
+      "feedback": true,
+      "explanation": "工程导航中的迭代反馈：由「评估与迭代」向「构建操作方法」提供改进需求与评估反馈。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "evidence": [
+        {
+          "source_id": "pipeline_lerobot",
+          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        }
+      ]
+    }
+  ],
+  "usages": [
+    {
+      "id": "u1",
+      "stage_id": "goal",
+      "term_id": "dexterous_manipulation",
+      "label": "界定操作能力",
+      "explanation": "「定义目标与验收条件」中界定操作能力。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u2",
+      "stage_id": "goal",
+      "term_id": "in_hand_manipulation",
+      "label": "界定任务",
+      "explanation": "「定义目标与验收条件」中界定任务。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u3",
+      "stage_id": "system",
+      "term_id": "tactile_sensing",
+      "label": "提供接触观测",
+      "explanation": "「建立系统与接口」中提供接触观测。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u4",
+      "stage_id": "system",
+      "term_id": "inverse_kinematics",
+      "label": "连接任务空间与关节空间",
+      "explanation": "「建立系统与接口」中连接任务空间与关节空间。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "ik_textbook",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u5",
+      "stage_id": "method",
+      "term_id": "policy",
+      "label": "组织决策映射",
+      "explanation": "「构建操作方法」中组织决策映射。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u6",
+      "stage_id": "method",
+      "term_id": "transformer",
+      "label": "可选模型架构",
+      "explanation": "「构建操作方法」中可选模型架构。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "robomimic_transformers",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u7",
+      "stage_id": "method",
+      "term_id": "vision_language_action_model",
+      "label": "可选策略模型类别",
+      "explanation": "「构建操作方法」中可选策略模型类别。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "openvla_project",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u8",
+      "stage_id": "method",
+      "term_id": "offline_reinforcement_learning",
+      "label": "按离线数据条件构建策略",
+      "explanation": "「构建操作方法」中按离线数据条件构建策略。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "offline_rl_review",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u9",
+      "stage_id": "design",
+      "term_id": "force_closure",
+      "label": "分析抓取约束",
+      "explanation": "「设计与优化」中分析抓取约束。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "force_closure_textbook",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u10",
+      "stage_id": "design",
+      "term_id": "inverse_kinematics",
+      "label": "求解运动学问题",
+      "explanation": "「设计与优化」中求解运动学问题。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "ik_textbook",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u11",
+      "stage_id": "design",
+      "term_id": "impedance_control",
+      "label": "设计柔顺控制",
+      "explanation": "「设计与优化」中设计柔顺控制。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "impedance_notes",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u12",
+      "stage_id": "demonstration",
+      "term_id": "motion_retargeting",
+      "label": "可用于处理示教动作",
+      "explanation": "「从示范构建」中可用于处理示教动作。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "dex_retargeting",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u13",
+      "stage_id": "demonstration",
+      "term_id": "imitation_learning",
+      "label": "从示范学习策略",
+      "explanation": "「从示范构建」中从示范学习策略。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u14",
+      "stage_id": "demonstration",
+      "term_id": "behavior_cloning",
+      "label": "可选示范学习方法",
+      "explanation": "「从示范构建」中可选示范学习方法。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "robomimic_algorithms",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u15",
+      "stage_id": "demonstration",
+      "term_id": "dataset_aggregation",
+      "label": "可选交互式示范学习方法",
+      "explanation": "「从示范构建」中可选交互式示范学习方法。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "dagger_paper",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u16",
+      "stage_id": "demonstration",
+      "term_id": "diffusion_policy",
+      "label": "可选策略方法",
+      "explanation": "「从示范构建」中可选策略方法。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "diffusion_policy_project",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u17",
+      "stage_id": "demonstration",
+      "term_id": "action_chunking_with_transformers",
+      "label": "可选策略方法",
+      "explanation": "「从示范构建」中可选策略方法。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "act_paper",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u18",
+      "stage_id": "interaction",
+      "term_id": "markov_decision_process",
+      "label": "建模决策过程",
+      "explanation": "「从交互构建」中建模决策过程。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u19",
+      "stage_id": "interaction",
+      "term_id": "reinforcement_learning",
+      "label": "利用交互反馈学习",
+      "explanation": "「从交互构建」中利用交互反馈学习。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u20",
+      "stage_id": "interaction",
+      "term_id": "proximal_policy_optimization",
+      "label": "可选策略优化算法",
+      "explanation": "「从交互构建」中可选策略优化算法。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "ppo_docs",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u21",
+      "stage_id": "interaction",
+      "term_id": "soft_actor_critic",
+      "label": "可选强化学习算法",
+      "explanation": "「从交互构建」中可选强化学习算法。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "sac_docs",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u22",
+      "stage_id": "interaction",
+      "term_id": "domain_randomization",
+      "label": "可用于仿真训练条件变化",
+      "explanation": "「从交互构建」中可用于仿真训练条件变化。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "domain_randomization_paper",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u23",
+      "stage_id": "interaction",
+      "term_id": "policy",
+      "label": "构建决策策略",
+      "explanation": "「从交互构建」中构建决策策略。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u24",
+      "stage_id": "deployment",
+      "term_id": "policy",
+      "label": "根据观测产生动作",
+      "explanation": "「部署与闭环运行」中根据观测产生动作。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u25",
+      "stage_id": "deployment",
+      "term_id": "impedance_control",
+      "label": "可用于执行层柔顺控制",
+      "explanation": "「部署与闭环运行」中可用于执行层柔顺控制。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "impedance_notes",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u26",
+      "stage_id": "deployment",
+      "term_id": "tactile_sensing",
+      "label": "可用于闭环接触反馈",
+      "explanation": "「部署与闭环运行」中可用于闭环接触反馈。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u27",
+      "stage_id": "deployment",
+      "term_id": "sim_to_real_transfer",
+      "label": "处理仿真与实机之间的差异",
+      "explanation": "「部署与闭环运行」中处理仿真与实机之间的差异。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u28",
+      "stage_id": "evaluation",
+      "term_id": "in_hand_manipulation",
+      "label": "检查任务表现",
+      "explanation": "「评估与迭代」中检查任务表现。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    },
+    {
+      "id": "u29",
+      "stage_id": "evaluation",
+      "term_id": "sim_to_real_transfer",
+      "label": "检查迁移后的任务表现",
+      "explanation": "「评估与迭代」中检查迁移后的任务表现。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+        }
+      ]
+    }
+  ]
+}
