@@ -1,14 +1,14 @@
 // View coordinates express engineering reading order, never academic taxonomy.
 const stages={
-  goal:{x:-450,y:0,z:0,step:'01'},
-  system:{x:-285,y:0,z:0,step:'02'},
-  method:{x:-120,y:0,z:0,step:'03'},
-  design:{x:85,y:120,z:0,step:'03.A'},
-  demonstration:{x:85,y:0,z:0,step:'03.B'},
-  interaction:{x:85,y:-120,z:0,step:'03.C'},
-  deployment:{x:290,y:0,z:0,step:'04'},
-  evaluation:{x:455,y:0,z:0,step:'05'},
-  complete:{x:620,y:0,z:0,step:'06'}
+  goal:{x:-300,y:100,z:0,step:'01'},
+  system:{x:-190,y:-10,z:0,step:'02'},
+  method:{x:-70,y:90,z:0,step:'03'},
+  design:{x:80,y:170,z:0,step:'03.A'},
+  demonstration:{x:80,y:40,z:0,step:'03.B'},
+  interaction:{x:80,y:-100,z:0,step:'03.C'},
+  deployment:{x:230,y:-15,z:0,step:'04'},
+  evaluation:{x:335,y:-130,z:0,step:'05'},
+  complete:{x:445,y:-35,z:0,step:'06'}
 };
 
 export function restoreEngineeringPosition(node) {

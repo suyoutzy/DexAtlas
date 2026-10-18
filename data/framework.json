@@ -1,9 +1,9 @@
 {
   "metadata": {
     "title": "机器人操作的通用工程导航",
-    "version": "0.1.0",
-    "reviewed_on": "2026-10-17",
-    "scope": "供界面验证的通用工程框架；不对应特定论文，不宣称统一标准流程。",
+    "version": "0.2.1",
+    "reviewed_on": "2026-10-18",
+    "scope": "供界面验证的编辑性工程导航；论文支持具体任务和实现环节，不对应某篇论文规定的统一六阶段流程。",
     "note": "工程输入输出、工程用途与概念关系分别维护；分支可组合，仿真与训练不作为所有路径的必经节点。"
   },
   "sources": [
@@ -24,6 +24,24 @@
       "title": "Isaac Lab — Task Design Workflows",
       "url": "https://isaac-sim.github.io/IsaacLab/main/source/overview/core-concepts/task_workflows.html",
       "kind": "官方实现文档"
+    },
+    {
+      "id": "review_jmlr",
+      "title": "Kroemer et al. — A Review of Robot Learning for Manipulation (JMLR 22(30), 2021)",
+      "url": "https://jmlr.org/papers/v22/19-804.html",
+      "kind": "正式期刊综述；支持问题与方法组织，不规定本图阶段顺序"
+    },
+    {
+      "id": "in_hand_ijrr",
+      "title": "Andrychowicz et al. — Learning dexterous in-hand manipulation (IJRR 39(1), 2020)",
+      "url": "https://journals.sagepub.com/doi/10.1177/0278364919887447",
+      "kind": "正式机器人学期刊论文；Shadow Hand 实机案例"
+    },
+    {
+      "id": "aloha_rss",
+      "title": "Zhao et al. — Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware (RSS 2023)",
+      "url": "https://www.roboticsproceedings.org/rss19/p016.html",
+      "kind": "正式会议论文；双臂夹爪的示范学习案例，不是灵巧手案例"
     }
   ],
   "stages": [
@@ -43,6 +61,14 @@
         {
           "source_id": "pipeline_mit",
           "locator": "Introduction: tasks; perception, planning and control"
+        },
+        {
+          "source_id": "review_jmlr",
+          "locator": "Section 3: formalizing manipulation learning problems；支撑任务规格，不规定工程先后"
+        },
+        {
+          "source_id": "in_hand_rl",
+          "locator": "arXiv v5, Section 2: Task and System Overview；手内重定向目标"
         }
       ]
     },
@@ -62,6 +88,10 @@
         {
           "source_id": "pipeline_mit",
           "locator": "Chapter 2: robots, hands, sensors and HardwareStation"
+        },
+        {
+          "source_id": "in_hand_rl",
+          "locator": "arXiv v5, Section 2.1: Hardware；手、传感与低层控制接口"
         }
       ]
     },
@@ -81,6 +111,10 @@
         {
           "source_id": "pipeline_mit",
           "locator": "Motion Planning; Manipulator Control; Reinforcement Learning"
+        },
+        {
+          "source_id": "review_jmlr",
+          "locator": "Section 6: Learning Motor Control Policies；学习控制方法的组织"
         }
       ]
     },
@@ -119,6 +153,10 @@
         {
           "source_id": "pipeline_lerobot",
           "locator": "Record a dataset; train a policy; evaluate"
+        },
+        {
+          "source_id": "aloha_rss",
+          "locator": "Abstract: teleoperation interface → real demonstrations → ACT → real task results；支撑具体示范分支"
         }
       ]
     },
@@ -138,6 +176,10 @@
         {
           "source_id": "pipeline_isaac",
           "locator": "Task interfaces; observations, actions, rewards; RL environments"
+        },
+        {
+          "source_id": "in_hand_rl",
+          "locator": "arXiv v5, Sections 3–4: randomized simulations and control-policy learning"
         }
       ]
     },
@@ -157,6 +199,10 @@
         {
           "source_id": "pipeline_mit",
           "locator": "Putting it all together; Manipulator Control"
+        },
+        {
+          "source_id": "in_hand_rl",
+          "locator": "arXiv v5, Figure 2(d): real camera pose and fingertip observations → policy → robot action"
         }
       ]
     },
@@ -176,6 +222,10 @@
         {
           "source_id": "pipeline_lerobot",
           "locator": "Evaluate your policy and visualize the results"
+        },
+        {
+          "source_id": "in_hand_rl",
+          "locator": "arXiv v5, Section 6.2: Quantitative Results；在实机上统计任务表现"
         }
       ]
     },
@@ -239,6 +289,10 @@
         {
           "source_id": "pipeline_mit",
           "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        },
+        {
+          "source_id": "in_hand_rl",
+          "locator": "arXiv v5, Figure 2(b–d), Sections 2.1 and 3.1；该案例的观测与动作接口约定"
         }
       ]
     },
@@ -281,6 +335,10 @@
         {
           "source_id": "pipeline_mit",
           "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        },
+        {
+          "source_id": "in_hand_rl",
+          "locator": "arXiv v5, Section 4.2: Actions and Rewards；交互训练中的任务反馈"
         }
       ]
     },
@@ -309,6 +367,10 @@
         {
           "source_id": "pipeline_lerobot",
           "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        },
+        {
+          "source_id": "aloha_rss",
+          "locator": "Abstract: ACT learned from real demonstrations and evaluated in real manipulation；只验证该案例的学习策略部署"
         }
       ]
     },
@@ -323,6 +385,10 @@
         {
           "source_id": "pipeline_mit",
           "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        },
+        {
+          "source_id": "in_hand_rl",
+          "locator": "arXiv v5, Figure 2(b,d): trained policy transferred to physical robot"
         }
       ]
     },
@@ -351,6 +417,10 @@
         {
           "source_id": "pipeline_mit",
           "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+        },
+        {
+          "source_id": "in_hand_rl",
+          "locator": "arXiv v5, Section 6.2: Quantitative Results；实机运行后的任务统计"
         }
       ]
     },
@@ -401,12 +471,16 @@
       "id": "u2",
       "stage_id": "goal",
       "term_id": "in_hand_manipulation",
-      "label": "界定任务",
-      "explanation": "「定义目标与验收条件」中界定任务。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "label": "定义手内操作任务",
+      "explanation": "在目标阶段，手内操作用于界定要完成的任务，而不是指定训练算法。该论文把任务具体化为：让手中的物体达到给定目标姿态。此连接表示任务定义中的引用；不表示手内操作只发生在目标阶段，也不表示所有手内操作都必须采用这篇论文的方法。",
       "evidence": [
         {
           "source_id": "in_hand_rl",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "arXiv v5, Section 2: Task and System Overview；object reorientation and target configuration"
+        },
+        {
+          "source_id": "in_hand_ijrr",
+          "locator": "Task and system overview；同一研究的正式期刊版本，章节编号与预印本不同"
         }
       ]
     },
@@ -739,12 +813,16 @@
       "id": "u28",
       "stage_id": "evaluation",
       "term_id": "in_hand_manipulation",
-      "label": "检查任务表现",
-      "explanation": "「评估与迭代」中检查任务表现。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "label": "评估手内操作表现",
+      "explanation": "在评估阶段，仍以同一个手内操作任务作为检查对象。该论文统计连续完成的重定向目标数量，并以物体掉落、单个目标超时或达到试验上限作为终止条件。此连接表示对任务表现的评估引用，不是把手内操作归类为评估算法；全图复用同一个术语节点。",
       "evidence": [
         {
           "source_id": "in_hand_rl",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "arXiv v5, Section 6.2: Quantitative Results；consecutive successful rotations and drop/timeout/trial-limit termination"
+        },
+        {
+          "source_id": "in_hand_ijrr",
+          "locator": "Results；同一研究的正式期刊版本，章节编号与预印本不同"
         }
       ]
     },

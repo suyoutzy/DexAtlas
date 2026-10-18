@@ -163,6 +163,7 @@ $('#settings-button').addEventListener('click',()=>{
   const opening=$('#settings-panel').hidden;closeSearch();$('#settings-panel').hidden=!opening;$('#settings-button').setAttribute('aria-expanded',String(opening));
 });
 $('#glow').addEventListener('input',event=>{$('#glow-value').textContent=event.target.value;scene?.setGlow(Number(event.target.value));});
+$('#exit-scale').addEventListener('input',event=>{$('#exit-scale-value').textContent=event.target.value+'%';scene?.setExitScale(Number(event.target.value));});
 $('#term-search').addEventListener('input',()=>{searchIndex=0;renderSearch();});
 document.addEventListener('click',event=>{
   const button=event.target.closest('[data-action]');if(!button||!ready)return;
@@ -221,7 +222,7 @@ async function load() {
     scene?.dispose();scene=null;graphAvailable=false;$('#graph').replaceChildren();
     if(supportsWebGL()) {
       try {
-        scene=createGraphScene($('#graph'),graphData,{reducedMotion:()=>motion.matches,onSelect:node=>navigate({kind:node.kind,id:node.kind==='stage'?node.stageId:node.id}),onRelation:link=>readRelation(link.id),onHover:node=>{
+        scene=createGraphScene($('#graph'),graphData,{reducedMotion:()=>motion.matches,onZoomExit:()=>{navigate({kind:'overview',id:null},{fly:false});scene.recenterOverview();announce('已返回全图，旋转中心移至整体中心');},onSelect:node=>navigate({kind:node.kind,id:node.kind==='stage'?node.stageId:node.id}),onRelation:link=>readRelation(link.id),onHover:node=>{
           $('#hover-caption').hidden=!node;
           $('#hover-caption').textContent=node?node.title:'';
         }});

@@ -14,7 +14,9 @@ test('engineering stages keep a left-to-right backbone with parallel method bran
   const get=id=>graph.nodes.find(n=>n.id==='stage:'+id);
   const main=['goal','system','method','deployment','evaluation','complete'].map(get);
   for(let i=1;i<main.length;i++)assert.ok(main[i].x>main[i-1].x,'engineering order is independent of the force simulation');
-  assert.ok(main.every(n=>n.y===main[0].y&&n.z===main[0].z));
+  assert.ok(Math.max(...main.map(n=>n.x))-Math.min(...main.map(n=>n.x))<800,'the backbone is compact rather than spanning the old 1070-unit line');
+  assert.ok(new Set(main.map(n=>n.y)).size>=3,'the main route folds through several heights');
+  assert.ok(main.every(n=>n.z===0));
   for(const id of ['design','demonstration','interaction']) {
     const node=get(id);
     assert.ok(node.x>get('method').x&&node.x<get('deployment').x);

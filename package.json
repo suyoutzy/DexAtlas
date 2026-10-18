@@ -1,9 +1,9 @@
 {
   "name": "dexatlas",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "type": "module",
-  "scripts": {"test": "node --test tests/*.test.mjs", "test:browser": "node tests/browser.cjs && node tests/regressions.cjs && node tests/v02-browser.cjs", "build": "node scripts/build.mjs", "start": "python -m http.server 4173 --bind 127.0.0.1"},
+  "scripts": {"test": "node --test tests/*.test.mjs", "test:browser": "node tests/browser.cjs && node tests/regressions.cjs && node tests/v02-browser.cjs && node tests/interaction-refinements.cjs", "build": "node scripts/build.mjs", "start": "python -m http.server 4173 --bind 127.0.0.1"},
   "dependencies": {"3d-force-graph":"1.80.1","three":"0.186.1","three-spritetext":"1.10.0"},
   "devDependencies": {"esbuild":"0.28.2"},
   "description": "A source-backed 3D atlas of dexterous manipulation and policy learning."

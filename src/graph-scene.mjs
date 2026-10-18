@@ -2,7 +2,9 @@ import ForceGraph3D from '3d-force-graph';
 import SpriteText from 'three-spritetext';
 import {Color,Vector3,Group,Line,BufferGeometry,Float32BufferAttribute,LineBasicMaterial} from 'three';
 import {UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
-import {nodeTextVisible} from './atlas-model.mjs';
+import {OutputPass} from 'three/examples/jsm/postprocessing/OutputPass.js';
+import {nodeTextVisible,deriveHighlights} from './atlas-model.mjs';
+import {overviewFrame,shouldExitFocus} from './graph-view.mjs';
 import {applyEngineeringLayout,restoreEngineeringPosition} from './layout.mjs';
 import {createEngineeringLabels} from './stage-labels.mjs';
 import {placeScreenLabel} from './label-layout.mjs';
@@ -11,12 +13,13 @@ export function supportsWebGL() {
   try { return !!document.createElement('canvas').getContext('webgl2'); } catch { return false; }
 }
 
-export function createGraphScene(container,data,{onSelect,onRelation,onHover,reducedMotion}) {
+export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZoomExit,reducedMotion}) {
   let state={focused:null,hovered:null,hoveredLink:null,showLabels:false};
   let animationFrame,flightFrame,navigationFrame;
+  let manual=false,flight=false,exitScale=80,previousDistance=0;
   let pointerInside=false,pendingHoverExit=false,forwardingPointer=false,lastPointer;
   const nodeLabels=new Map(),nodes=new Map(data.nodes.map(n=>[n.id,n]));
-  const highlightedNodes=new Set(),highlightedLinks=new Set();
+  let highlightedNodes=new Set(),highlightedLinks=new Set();
   applyEngineeringLayout(data);
   const makeText=(text,color)=>{
     const sprite=new SpriteText(text,1,color);
@@ -78,28 +81,28 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,red
   graph.d3Force('engineering-context',alpha=>{
     for(const node of data.nodes)if(node.kind==='term')for(const axis of ['x','y','z'])node['v'+axis]+=(node.layoutTarget[axis]-node[axis])*.035*alpha;
   });
-  const distance=1200/(2*Math.tan(graph.camera().fov*Math.PI/360)*(container.clientWidth/container.clientHeight)*.78);
-  graph.cameraPosition({x:85,y:0,z:distance},{x:85,y:0,z:0},0);
   graph.renderer().setPixelRatio(Math.min(devicePixelRatio,2));
+  // A scene background forces a clear in the render target's color space.
+  // Renderer-only clearColor is otherwise reused from the previous screen pass.
+  graph.scene().background=new Color('#0A0B19');
   const controls=graph.controls();
   controls.enableDamping=true; controls.dampingFactor=.1;
+  const initial=framing();
+  graph.cameraPosition(initial.position,initial.center,0);
+  previousDistance=graph.camera().position.distanceTo(controls.target);
   const bloom=new UnrealBloomPass();
-  bloom.enabled=false; bloom.strength=0; bloom.radius=.35; bloom.threshold=.35;
-  graph.postProcessingComposer().addPass(bloom);
+  bloom.enabled=false; bloom.strength=0; bloom.radius=.18; bloom.threshold=.18;
+  // Convert linear output exactly once whether Bloom is enabled or disabled.
+  const output=new OutputPass();
+  const composer=graph.postProcessingComposer();
+  for(const target of [composer.renderTarget1,composer.renderTarget2])target.samples=Math.min(4,graph.renderer().capabilities.maxSamples);
+  composer.addPass(bloom);
+  composer.addPass(output);
   const stageLabels=createEngineeringLabels(container,data.nodes,node=>graph.graph2ScreenCoords(node.x,node.y,node.z),()=>graph.camera());
 
   function refresh() {
-    highlightedNodes.clear(); highlightedLinks.clear();
-    if(state.hovered) {
-      highlightedNodes.add(state.hovered);
-      for(const link of data.links) if(link.from===state.hovered||link.to===state.hovered) {
-        highlightedLinks.add(link.id); highlightedNodes.add(link.from);highlightedNodes.add(link.to);
-      }
-    }
-    if(state.hoveredLink) {
-      const link=data.links.find(l=>l.id===state.hoveredLink);
-      if(link) {highlightedLinks.add(link.id);highlightedNodes.add(link.from);highlightedNodes.add(link.to);}
-    }
+    const highlights=deriveHighlights(data.links,state);
+    highlightedNodes=highlights.nodes;highlightedLinks=highlights.links;
     graph.nodeColor(graph.nodeColor()).linkColor(graph.linkColor()).linkWidth(graph.linkWidth()).linkDirectionalParticles(graph.linkDirectionalParticles());
     for(const {sprite,node} of nodeLabels.values()) sprite.visible=nodeTextVisible(node,state,data.links);
     container.dataset.focused=state.focused||'';
@@ -159,7 +162,11 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,red
     animationFrame=requestAnimationFrame(scaleText);
   }
   animationFrame=requestAnimationFrame(scaleText);
-  function stopFlight() {cancelAnimationFrame(flightFrame);}
+  function framing() {
+    const camera=graph.camera();
+    return overviewFrame(data.nodes,{position:camera.position,target:controls.target,up:camera.up,fov:camera.fov,aspect:camera.aspect});
+  }
+  function stopFlight() {cancelAnimationFrame(flightFrame);flight=false;}
   function focus(id) {
     stopFlight();
     const node=nodes.get(id);
@@ -169,24 +176,54 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,red
     const direction=start.clone().sub(endTarget).normalize();
     if(!direction.length())direction.set(0,0,1);
     const started=performance.now(),duration=reducedMotion()?0:600;
+    flight=true;
     function step(now) {
       const t=duration?Math.min(1,(now-started)/duration):1;
       const ease=1-Math.pow(1-t,3);
       endTarget.set(node.x||0,node.y||0,node.z||0);
       const end=endTarget.clone().addScaledVector(direction,innerWidth<700?210:150);
       graph.cameraPosition(start.clone().lerp(end,ease),target.clone().lerp(endTarget,ease),0);
-      if(t<1)flightFrame=requestAnimationFrame(step);
+      if(t<1)flightFrame=requestAnimationFrame(step);else flight=false;
     }
     step(started);
   }
-  controls.addEventListener('start',stopFlight);
+  function startNavigation(){stopFlight();manual=true;previousDistance=graph.camera().position.distanceTo(controls.target);}
+  function endNavigation(){manual=false;}
+  function cameraChanged(){
+    const current=graph.camera().position.distanceTo(controls.target);
+    const exit=shouldExitFocus({manual,flight,focusedKind:nodes.get(state.focused)?.kind,previous:previousDistance,current,overviewDistance:framing().distance,percent:exitScale});
+    previousDistance=current;
+    if(exit){manual=false;onZoomExit();}
+  }
+  function recenterOverview(){
+    stopFlight();
+    const c=framing().center,center=new Vector3(c.x,c.y,c.z);
+    const position=graph.camera().position.clone().add(center.clone().sub(controls.target));
+    graph.cameraPosition(position,center,0);
+  }
+  function overview(){
+    stopFlight();
+    const frame=framing(),target=controls.target.clone(),start=graph.camera().position.clone();
+    const endTarget=new Vector3(frame.center.x,frame.center.y,frame.center.z),end=new Vector3(frame.position.x,frame.position.y,frame.position.z);
+    const started=performance.now(),duration=reducedMotion()?0:600;flight=true;
+    function step(now){
+      const t=duration?Math.min(1,(now-started)/duration):1,ease=1-Math.pow(1-t,3);
+      graph.cameraPosition(start.clone().lerp(end,ease),target.clone().lerp(endTarget,ease),0);
+      if(t<1)flightFrame=requestAnimationFrame(step);else flight=false;
+    }
+    step(started);
+  }
+  controls.addEventListener('start',startNavigation);
+  controls.addEventListener('end',endNavigation);
+  controls.addEventListener('change',cameraChanged);
   const resize=new ResizeObserver(()=>graph.width(container.clientWidth).height(container.clientHeight));
   resize.observe(container);
   return {
     update(next){state={...state,...next};refresh();},
     focus,
-    overview(){stopFlight();graph.zoomToFit(reducedMotion()?0:600,55);},
-    setGlow(value){bloom.strength=value*.015;bloom.enabled=value>0;},
-    dispose(){stopFlight();cancelAnimationFrame(animationFrame);cancelAnimationFrame(navigationFrame);resize.disconnect();stageLabels.dispose();controls.removeEventListener('start',stopFlight);container.removeEventListener('pointerleave',leaveCanvas);container.removeEventListener('pointerenter',enterCanvas);container.removeEventListener('pointermove',movePointer);graph._destructor();}
+    overview,recenterOverview,
+    setExitScale(value){exitScale=value;},
+    setGlow(value){bloom.strength=1.2*Math.pow(value/100,1.8);bloom.enabled=value>0;},
+    dispose(){stopFlight();cancelAnimationFrame(animationFrame);cancelAnimationFrame(navigationFrame);resize.disconnect();stageLabels.dispose();controls.removeEventListener('start',startNavigation);controls.removeEventListener('end',endNavigation);controls.removeEventListener('change',cameraChanged);container.removeEventListener('pointerleave',leaveCanvas);container.removeEventListener('pointerenter',enterCanvas);container.removeEventListener('pointermove',movePointer);bloom.dispose();output.dispose();graph._destructor();}
   };
 }

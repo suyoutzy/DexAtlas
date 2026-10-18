@@ -19,7 +19,14 @@ export function buildGraph(glossary,annotations,framework) {
 }
 
 export function nodeTextVisible(node,state,links=[]) {
-  return node.kind==='stage'||state.showLabels||node.id===state.focused||node.id===state.hovered||!!(state.hovered&&links.some(link=>link.from===state.hovered&&link.to===node.id||link.to===state.hovered&&link.from===node.id));
+  return node.kind==='stage'||state.showLabels||node.id===state.focused||node.id===state.hovered||[state.focused,state.hovered].some(root=>root&&links.some(link=>link.from===root&&link.to===node.id||link.to===root&&link.from===node.id));
+}
+export function deriveHighlights(links,state) {
+  const nodes=new Set([state.focused,state.hovered].filter(Boolean)),highlighted=new Set();
+  for(const link of links)if(link.from===state.focused||link.to===state.focused||link.from===state.hovered||link.to===state.hovered||link.id===state.hoveredLink){
+    highlighted.add(link.id);nodes.add(link.from);nodes.add(link.to);
+  }
+  return {nodes,links:highlighted};
 }
 export function parseSceneHash(hash,terms,stages) {
   const query=new URLSearchParams(hash.replace(/^#/,''));

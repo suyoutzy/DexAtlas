@@ -59,8 +59,8 @@ button svg { width:23px; height:23px; fill:none; stroke:currentColor; stroke-wid
 .empty-search,.quiet { color:var(--muted); font-size:.875rem; }
 .settings-panel { top:50%; transform:translateY(-50%); width:min(360px,calc(100vw - 135px)); }
 .range-label { display:flex; justify-content:space-between; font-size:1.125rem; }
-#glow { width:100%; margin:20px 0 5px; accent-color:#c89fe2; }
-#glow-value { color:#a2e8eb; font-variant-numeric:tabular-nums; }
+#settings-panel input[type="range"] { width:100%; margin:20px 0 5px; accent-color:#c89fe2; }
+#settings-panel output { color:#a2e8eb; font-variant-numeric:tabular-nums; }
 details { border-top:1px solid var(--line); margin-top:21px; padding-top:17px; }
 summary { cursor:pointer; font-size:1rem; color:#e1dfee; padding:4px 0; }
 details p,details li { font-size:1.125rem; line-height:1.8; }
