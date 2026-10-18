@@ -16,11 +16,17 @@ test('engineering stages keep a left-to-right backbone with parallel method bran
   for(let i=1;i<main.length;i++)assert.ok(main[i].x>main[i-1].x,'engineering order is independent of the force simulation');
   assert.ok(Math.max(...main.map(n=>n.x))-Math.min(...main.map(n=>n.x))<800,'the backbone is compact rather than spanning the old 1070-unit line');
   assert.ok(new Set(main.map(n=>n.y)).size>=3,'the main route folds through several heights');
-  assert.ok(main.every(n=>n.z===0));
+  assert.equal(get('goal').y,get('complete').y,'start and completion have the same height');
+  assert.equal(get('goal').z,get('complete').z,'matching depth preserves their height in the default projection');
+  assert.ok(new Set(main.map(n=>n.z)).size>=3,'the engineering route has depth rather than staying on one plane');
+  const a=get('goal'),b=get('system'),c=get('method'),d=get('deployment');
+  const v=[b.x-a.x,b.y-a.y,b.z-a.z],w=[c.x-a.x,c.y-a.y,c.z-a.z],u=[d.x-a.x,d.y-a.y,d.z-a.z];
+  assert.ok(Math.abs((v[1]*w[2]-v[2]*w[1])*u[0]+(v[2]*w[0]-v[0]*w[2])*u[1]+(v[0]*w[1]-v[1]*w[0])*u[2])>1,'engineering anchors must actually be non-coplanar');
   for(const id of ['design','demonstration','interaction']) {
     const node=get(id);
     assert.ok(node.x>get('method').x&&node.x<get('deployment').x);
     assert.equal(node.x,get('design').x,'composable method entrances occupy the same column');
+    assert.equal(node.z,get('design').z,'parallel entrances share their depth');
   }
   assert.equal(new Set(['design','demonstration','interaction'].map(id=>get(id).y)).size,3);
   for(const n of graph.nodes.filter(n=>n.kind==='stage'))assert.deepEqual([n.fx,n.fy,n.fz],[n.x,n.y,n.z]);
@@ -29,7 +35,7 @@ test('engineering stages keep a left-to-right backbone with parallel method bran
   assert.equal(framework.stages.some(s=>'x' in s||'fx' in s),false,'coordinates stay outside academic content');
 });
 
-test('attempting to drag a stage cannot change its anchor; dragging a term is not clamped',()=>{
+test('restoring a stage returns it to its anchor while ordinary terms are not clamped',()=>{
   assert.equal(typeof layout.restoreEngineeringPosition,'function','stage drag must restore its constrained position');
   const graph=buildGraph(glossary,annotations,framework);
   layout.applyEngineeringLayout(graph);

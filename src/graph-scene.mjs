@@ -5,7 +5,7 @@ import {UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass
 import {OutputPass} from 'three/examples/jsm/postprocessing/OutputPass.js';
 import {nodeTextVisible,deriveHighlights} from './atlas-model.mjs';
 import {overviewFrame,shouldExitFocus} from './graph-view.mjs';
-import {applyEngineeringLayout,restoreEngineeringPosition} from './layout.mjs';
+import {applyEngineeringLayout,createEngineeringMotion} from './layout.mjs';
 import {createEngineeringLabels} from './stage-labels.mjs';
 import {placeScreenLabel} from './label-layout.mjs';
 
@@ -21,6 +21,7 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZ
   const nodeLabels=new Map(),nodes=new Map(data.nodes.map(n=>[n.id,n]));
   let highlightedNodes=new Set(),highlightedLinks=new Set();
   applyEngineeringLayout(data);
+  const engineeringMotion=createEngineeringMotion();
   const makeText=(text,color)=>{
     const sprite=new SpriteText(text,1,color);
     sprite.fontFace=getComputedStyle(container).getPropertyValue('--graph-font').trim();
@@ -49,16 +50,15 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZ
     .linkColor(link=>highlightedLinks.has(link.id)?(link.kind==='flow'?'#ffe0a0':'#a2e1ed'):link.kind==='flow'?'rgba(227,190,124,.78)':link.kind==='usage'?'rgba(147,151,199,.2)':'rgba(118,132,180,.19)')
     .linkOpacity(.8)
     .linkWidth(link=>highlightedLinks.has(link.id)?1.1:link.kind==='flow'?.7:.12)
-    .linkCurvature(link=>link.feedback?.42:link.kind==='flow'&&link.from==='stage:goal'&&link.to==='stage:method'?.21:link.kind==='flow'&&link.from==='stage:system'&&link.to==='stage:deployment'?.25:0)
-    .linkCurveRotation(link=>link.feedback?Math.PI:0)
+    .linkCurvature(0)
     .linkDirectionalArrowLength(0)
     .linkDirectionalParticles(link=>highlightedLinks.has(link.id)?3:0)
     .linkDirectionalParticleWidth(1.4).linkDirectionalParticleSpeed(.004)
     .linkDirectionalParticleColor(link=>link.kind==='flow'?'#ffe1a2':'#8bf1ee')
     .onNodeClick(node=>onSelect(node))
-    .onNodeDrag(restoreEngineeringPosition)
+    .onNodeDrag(node=>engineeringMotion.drag(node))
     .onNodeDragEnd(node=>{
-      restoreEngineeringPosition(node);
+      engineeringMotion.release(node,performance.now(),reducedMotion());
       // 3d-force-graph 1.80 emits a synthetic touch release without a pointer ID.
       // Let Orbit process the real release before navigation is enabled again.
       graph.enableNavigationControls(false);
@@ -73,6 +73,8 @@ export function createGraphScene(container,data,{onSelect,onRelation,onHover,onZ
       if(!node)finishHoverExit();
     })
     .onLinkHover(link=>{state.hoveredLink=link?.id||null;refresh();if(!link)finishHoverExit();})
+    .onEngineTick(()=>engineeringMotion.tick(performance.now(),reducedMotion()))
+    .onEngineStop(()=>engineeringMotion.tick(performance.now(),true))
     .cooldownTime(8000).d3VelocityDecay(.36)
     .graphData(data);
   graph.d3Force('center',null);

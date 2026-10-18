@@ -31,7 +31,7 @@ async function checkLabels(page){
   await page.mouse.move(method.x,method.y);await page.mouse.down();await page.mouse.move(method.x+95,method.y-65,{steps:10});await page.mouse.up();
   await page.waitForTimeout(150);
   const dragged=await anchor(page,'method');
-  assert.ok(Math.hypot(dragged.x-method.x,dragged.y-method.y)<1,'dragging an engineering node cannot rearrange it');
+  assert.ok(Math.hypot(dragged.x-method.x,dragged.y-method.y)<1,'a released engineering node returns immediately in reduced motion');
   await page.mouse.move(method.x,method.y);await page.locator('#hover-caption').waitFor({state:'visible'});
   await page.waitForTimeout(500);
   await mkdir('.work/screenshots',{recursive:true});
@@ -59,6 +59,6 @@ async function checkLabels(page){
     await page.screenshot({path:'.work/screenshots/v02-mobile-names-'+width+'.png'});
   }
   assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
-  console.log('PASS: 0.2 fixed engineering order, locked stage drag, Orbit rotation, C3 label spacing, name toggle, 200% text and mobile; no external assets');
+  console.log('PASS: engineering order, settled stage anchors, Orbit rotation, C3 label spacing, name toggle, 200% text and mobile; no external assets');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1);});
