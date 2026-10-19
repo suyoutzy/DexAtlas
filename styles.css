@@ -7,7 +7,7 @@
 }
 * { box-sizing:border-box; }
 body { margin:0; overflow:hidden; }
-button,input { font:inherit; }
+button,input,select { font:inherit; }
 button,a,input { -webkit-tap-highlight-color:transparent; }
 button { color:inherit; cursor:pointer; border:0; }
 button:disabled { cursor:default; opacity:.4; }
@@ -55,6 +55,8 @@ button svg { width:23px; height:23px; fill:none; stroke:currentColor; stroke-wid
 .empty-search,.quiet { color:var(--muted); font-size:.875rem; }
 .settings-panel { top:50%; transform:translateY(-50%); width:min(360px,calc(100vw - 135px)); }
 .range-label { display:flex; justify-content:space-between; font-size:1.125rem; }
+#quality { width:100%; margin:10px 0 0; padding:9px 12px; color:var(--ink); background:#171629; border:1px solid var(--line); border-radius:9px; }
+#quality:focus-visible { outline:2px solid var(--cyan); outline-offset:3px; }
 #settings-panel input[type="range"] { width:100%; margin:20px 0 5px; accent-color:#c89fe2; }
 #settings-panel output { color:#a2e8eb; font-variant-numeric:tabular-nums; }
 details { border-top:1px solid var(--line); margin-top:21px; padding-top:17px; }

@@ -166,6 +166,7 @@ $('#settings-button').addEventListener('click',()=>{
   const opening=$('#settings-panel').hidden;closeSearch();$('#settings-panel').hidden=!opening;$('#settings-button').setAttribute('aria-expanded',String(opening));
 });
 $('#glow').addEventListener('input',event=>{$('#glow-value').textContent=event.target.value;scene?.setGlow(Number(event.target.value));});
+$('#quality').addEventListener('change',event=>scene?.setQuality(event.target.value));
 $('#term-search').addEventListener('input',()=>{searchIndex=0;renderSearch();});
 document.addEventListener('click',event=>{
   const button=event.target.closest('[data-action]');if(!button||!ready)return;
@@ -229,6 +230,7 @@ async function load() {
           $('#hover-caption').textContent=node?node.title:'';
           if(node)$('#hover-caption').style.setProperty('--node-color',node.color);
         }});
+        scene.setQuality($('#quality').value);
         scene.setGlow(Number($('#glow').value));
         graphAvailable=true;
       }catch(error){console.warn('3D scene unavailable; readable fallback retained.',error);}

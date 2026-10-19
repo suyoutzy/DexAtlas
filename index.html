@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#0A0B19">
-  <meta name="application-version" content="0.2.3">
+  <meta name="application-version" content="0.2.4">
   <meta name="description" content="在三维图谱中探索灵巧操作与策略学习，理解技术的工程位置与概念关系。">
   <title>DexAtlas · 灵巧操作术语图谱</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
@@ -34,6 +34,9 @@
     <section id="settings-panel" class="glass settings-panel" aria-label="图谱设置" hidden>
       <div class="panel-header"><h2>图谱设置</h2><button class="close-button" data-action="close-settings" aria-label="关闭设置">×</button></div>
       <p class="quiet">点击节点阅读 · 滚轮缩放<br>拖动旋转 · 中键平移 · 双击空白收起</p>
+      <label class="range-label" for="quality">画质</label>
+      <select id="quality" aria-label="画质"><option value="balanced">均衡</option><option value="high">高画质</option></select>
+      <p class="quiet">高画质更清晰，资源占用更高。</p>
       <label class="range-label" for="glow">发光强度 <output id="glow-value" for="glow">50</output></label>
       <input id="glow" type="range" min="0" max="100" value="50" step="1" aria-label="发光强度">
       <details><summary>节点配色</summary><div id="color-legend"></div></details>
