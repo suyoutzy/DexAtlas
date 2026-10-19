@@ -4,6 +4,8 @@
 
 项目与版本备份仓库：[suyoutzy/DexAtlas](https://github.com/suyoutzy/DexAtlas)。本地 `main` 跟踪 `origin/main`，临时文件与 `node_modules/` 不纳入版本备份。
 
+在线访问：[DexAtlas](https://suyoutzy.github.io/DexAtlas/)。
+
 当前版本 **0.2.3**。术语和工程节点的缩小退出阈值统一为 60%，支持中键平移、双击空白收起卡片；全图按钮再次点击可恢复正视图。关系分组标题固定并加深背景，各组卡片保持相同宽度。
 
 ## 本地预览
@@ -89,4 +91,6 @@ npm run test:browser
 
 ## GitHub Pages
 
-本轮只做本地预览。以后发布时运行构建，将 `index.html`、`styles.css`、`favicon.svg`、`assets/`、`data/` 和 `.nojekyll` 放入发布根目录。相对资源路径与 hash 状态适用于仓库子路径；发布不需要 `node_modules/`、测试及 `.work/`。依赖许可证随构建保存在 `assets/THIRD_PARTY_LICENSES.txt`。
+网站通过 [GitHub Pages](https://suyoutzy.github.io/DexAtlas/) 公开发布，发布源为 `main` 分支根目录，启用 HTTPS。推送到 `main` 后 GitHub 自动重新发布；修改源码或依赖后须先运行 `npm run build`，将生成的 `assets/` 一同提交。只修改 `data/` 中的 JSON 不需要重新打包。
+
+`index.html`、`styles.css`、`favicon.svg`、`assets/`、`data/` 和 `.nojekyll` 均已纳入仓库。相对资源路径与 hash 状态适用于仓库子路径，术语直接链接可保留聚焦状态。发布不需要 `node_modules/` 和 `.work/`；两者均被 Git 忽略。依赖许可证随构建保存在 `assets/THIRD_PARTY_LICENSES.txt`。
