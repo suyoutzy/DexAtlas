@@ -1,7 +1,8 @@
 export const CATEGORY_COLORS = {
   manipulation_tasks:'#dc82c7', robotics_foundations:'#9b9ee0', sensing_and_mapping:'#63cbd8',
   learning_foundations:'#92afe8', learning_paradigms:'#bb99df', learning_settings:'#7eb9d7',
-  learning_algorithms:'#a48bd6', policy_models:'#87b3e4', named_policy_methods:'#ce92cf', simulation_transfer:'#80c9d0'
+  learning_algorithms:'#a48bd6', policy_models:'#87b3e4', named_policy_methods:'#ce92cf', simulation_transfer:'#80c9d0',
+  hand_design:'#83b8d8', contact_mechanics:'#ac9bdd', motion_planning:'#8ca6dc'
 };
 export const endpoint = value => typeof value==='object' ? value.id : value;
 

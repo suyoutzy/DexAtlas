@@ -53,8 +53,8 @@ async function halo(page){return page.evaluate(()=>new Promise(resolve=>requestA
    await page.getByRole('button',{name:'阅读手内操作',exact:true}).click();await page.getByText('工程中的位置',{exact:true}).click();
    await page.locator('#reader-content [data-action="relation"][data-id="usage:'+id+'"]').click();
    assert.match(await page.locator('#reader-content').innerText(),id==='u2'?/定义手内操作任务/:/评估手内操作表现/);
-   assert.equal(await page.locator('#reader-content a[href*="0278364919887447"]').count(),1,'each usage exposes the journal source');
-   assert.match(await page.locator('#reader-content').innerText(),id==='u2'?/Section 2:/:/Section 6.2:/);await page.keyboard.press('Escape');
+   assert.equal(await page.locator('#reader-content a[href*="1808.00177v5"]').count(),1,'each usage exposes the exact public full-text version');
+   assert.match(await page.locator('#reader-content').innerText(),id==='u2'?/§2 Task/:/§6.2 Quantitative/);await page.keyboard.press('Escape');
   }
   await page.locator('#settings-button').click();
   for(const width of [1440,390]){

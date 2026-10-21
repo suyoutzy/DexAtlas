@@ -80,7 +80,7 @@ async function search(page,query){
     await page.waitForFunction(previous=>document.querySelector('#concept-lines').innerHTML!==previous,lines,{timeout:2000});
     await more.click();
     assert.equal(await page.locator('[data-extra]:visible').count(),0);
-    console.log('PASS: all 22 terms at desktop/tablet/mobile sizes, 200% text, real canvas hover and hover exit');
+    console.log('PASS: all terms at desktop/tablet/mobile sizes, 200% text, real canvas hover and hover exit');
     await page.close();
 
     const fallback=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'});

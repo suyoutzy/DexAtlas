@@ -31,7 +31,7 @@ test('engineering stages keep a left-to-right backbone with parallel method bran
   assert.equal(new Set(['design','demonstration','interaction'].map(id=>get(id).y)).size,3);
   for(const n of graph.nodes.filter(n=>n.kind==='stage'))assert.deepEqual([n.fx,n.fy,n.fz],[n.x,n.y,n.z]);
   for(const n of graph.nodes.filter(n=>n.kind==='term'))assert.equal(n.fx,undefined,'terms remain free to move');
-  assert.equal(graph.links.length,74,'layout cannot create or remove relationships');
+  assert.equal(graph.links.length,annotations.relations.length+framework.flows.length+framework.usages.length,'layout cannot create or remove relationships');
   assert.equal(framework.stages.some(s=>'x' in s||'fx' in s),false,'coordinates stay outside academic content');
 });
 

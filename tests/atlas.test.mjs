@@ -10,9 +10,9 @@ const framework = await read('framework.json').catch(()=>null);
 test('one canonical term node is shared by explicitly recorded stage usages', () => {
   assert.equal(typeof atlas.buildGraph,'function','typed scene builder is required');
   const graph = atlas.buildGraph(glossary, annotations, framework);
-  assert.equal(graph.nodes.filter(n=>n.kind==='term').length,22);
+  assert.equal(graph.nodes.filter(n=>n.kind==='term').length,glossary.terms.length);
   assert.equal(new Set(graph.nodes.map(n=>n.id)).size,graph.nodes.length);
-  assert.equal(graph.links.filter(e=>e.kind==='concept').length,32);
+  assert.equal(graph.links.filter(e=>e.kind==='concept').length,annotations.relations.length);
   const policy = graph.nodes.filter(n=>n.id==='policy');
   assert.equal(policy.length,1);
   assert.ok(graph.links.filter(e=>e.kind==='usage' && e.to==='policy').length>=2);

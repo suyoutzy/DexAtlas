@@ -1,6 +1,8 @@
 # DexAtlas · 灵巧操作术语图谱
 
-以全屏 3D 图谱探索技术的工程位置与概念关系。当前用 22 个词条、32 条概念关系验证界面，内容仍是研究样例。
+以全屏 3D 图谱探索技术的工程位置与概念关系。本地内容库 **1.0.0** 收录 64 个词条、101 条概念关系及 54 条工程用途；前端仍为 0.2.4。本轮内容尚未推送或公开发布，线上仍为已发布版本。
+
+查阅 [来源与权威性评估](docs/source-authority.md)（[网页阅读版](docs/source-authority.html)）及 [内容核查记录与目录](docs/content-review-v1.md)。定义、作用、应用和条件分别保留证据定位；来源记录实际版本与适用边界。编辑核查不等于外部同行评审。
 
 项目与版本备份仓库：[suyoutzy/DexAtlas](https://github.com/suyoutzy/DexAtlas)。本地 `main` 跟踪 `origin/main`，临时文件与 `node_modules/` 不纳入版本备份。
 
@@ -58,9 +60,10 @@ npm run build
 
 | 文件 | 职责 |
 | --- | --- |
-| `data/glossary.json` | 原始 22 个词条的独立副本；ID 不变。 |
-| `data/annotations.json` | 32 条有出处的概念关系与沿革依据；保留历史论文案例数据，首页不使用该案例。 |
-| `data/framework.json` | 9 个工程导航节点、13 条流程连接、29 个显式术语用途及依据。 |
+| `data/glossary.json` | 64 个词条、逐字段依据与唯一来源登记；原有术语 ID 不变。 |
+| `data/annotations.json` | 101 条有出处的概念关系与沿革依据；保留历史论文案例数据，首页不使用该案例。 |
+| `data/framework.json` | 9 个工程导航节点、13 条编辑性流程、54 个显式术语用途及依据。 |
+| `data/content-audit.json` | 原样例重审与新增内容的机器可读记录。 |
 | `src/atlas-model.mjs` | 三类连接、唯一术语节点、共用标签规则与直接链接解析。 |
 | `src/model.mjs` | 搜索和概念邻域等可复用的数据逻辑。 |
 | `src/graph-scene.mjs` | Orbit 相机、力导向布局、文字精灵、悬停与可选发光。 |
@@ -75,11 +78,11 @@ npm run build
 
 工程导航为“定义目标与验收条件 → 建立系统与接口 → 构建操作方法 → 部署与闭环运行 → 评估与迭代 → 达成验收条件”。方法构建提供设计与优化、从示范构建、从交互构建三个可组合入口，评估可反馈至方法构建。
 
-该导航参考 [MIT Robotic Manipulation](https://manipulation.mit.edu/)、[LeRobot](https://huggingface.co/docs/lerobot/il_robots) 和 [Isaac Lab](https://isaac-sim.github.io/IsaacLab/main/source/overview/core-concepts/task_workflows.html) 归纳，不宣称统一标准，也不表示所有技术组合都已实证。仿真、采集、训练按方法说明，不作为所有路线的必经环节。
+该导航参考 [MIT Robotic Manipulation](https://manipulation.mit.edu/) 与 [LeRobot](https://huggingface.co/docs/lerobot/il_robots) 等课程和实现背景归纳，不宣称统一标准，也不表示所有技术组合都已实证。Isaac Lab 工作流文档保留为背景候选。仿真、采集、训练按方法说明，不作为所有路线的必经环节。
 
 一个术语在全图只有一个节点，可被多个工程环节引用。`flow` 表示工程输入输出，`usage` 表示环节使用术语，`concept` 表示术语间概念关系。`from / to` 是记录方向，`label / explanation / evidence` 保存含义与出处。力导向距离及分类配色不生成技术关系；布局坐标不写入内容分类。沿革标签不等于性能或成熟度评分，依据不足时显示未评估。
 
-本轮补充 JMLR 综述、IJRR 的 Shadow Hand 实机研究和 RSS 的 ALOHA 示范学习案例。论文能支撑具体任务与实现路线；六阶段顺序及全部箭头仍为编辑性导航。逐项依据、发表信息与边界见 [工程依据记录](docs/engineering-evidence.md)。
+论文能支撑具体任务与实现路线；六阶段顺序及全部箭头仍为编辑性导航。当前逐项依据与修订见 [内容核查记录](docs/content-review-v1.md)，旧版论证保留在 [工程依据历史记录](docs/engineering-evidence.md)。
 
 ## 验证
 
@@ -90,7 +93,9 @@ npm run test:browser
 
 浏览器检查使用开发环境已有的 Playwright 与 Chrome；`PLAYWRIGHT_MODULE` 可指定模块绝对路径，`PLAYWRIGHT_CHANNEL` 选择通道，`PREVIEW_URL` 指定预览地址。额外设置 `PREVIEW_SUBPATH_URL` 可检查仓库子路径，例如 `http://127.0.0.1:4174/DexAtlas/`，该地址需由父目录 HTTP 服务提供。网站运行不依赖测试工具。
 
-测试覆盖规范节点、关系出处、搜索、预览与切换中心、返回、控制按钮、直接链接、真实 WebGL 交互、失败重试、无 WebGL 阅读、22 个词条的桌面与手机布局、200% 文字和减少动画。截图在 `.work/screenshots/`。当前 31 个节点的测试不代表较大规模图谱的性能结论。
+测试覆盖规范节点、关系出处、搜索、预览与切换中心、返回、控制按钮、直接链接、真实 WebGL 交互、失败重试、无 WebGL 阅读、全部词条的桌面与手机布局、200% 文字和减少动画。截图在 `.work/screenshots/`。64 个词条的交互检查不代表更大规模图谱的性能结论；0.2.4 性能报告的原测量样本仍为当时的 22 个词条。
+
+内容修改后运行 `npm run sync:relations`、`npm run check:content`、`npm run docs:content`。来源唯一登记在 `data/glossary.json`，其余文件只引用来源 ID；`related_terms` 从主关系表派生。`docs:content` 生成来源文档的 Markdown / HTML 与核查目录，脚本中的文档说明应随审核规则一起维护。
 
 基础浏览器检查覆盖工程节点顺序、减少动画时松手立即回位、三个入口并列、Orbit 旋转、HTML 标签避让、悬停邻居名称和关系文字始终关闭。
 

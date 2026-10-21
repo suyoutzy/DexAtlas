@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict');
-const {mkdir}=require('node:fs/promises');
+const {mkdir,readFile}=require('node:fs/promises');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const base=process.env.PREVIEW_URL||'http://127.0.0.1:4173/';
 async function anchor(page,id){return page.locator('#engineering-labels line[data-node-id="stage:'+id+'"]').evaluate(e=>({x:Number(e.getAttribute('x1')),y:Number(e.getAttribute('y1'))}));}
@@ -18,13 +18,24 @@ async function goldAlongSegment(page,from,to){
 (async()=>{
  const browser=await chromium.launch({headless:true,channel:process.env.PLAYWRIGHT_CHANNEL||'chrome'});
  try{
-  const page=await browser.newPage({viewport:{width:1440,height:960},reducedMotion:'no-preference'}),errors=[];
-  page.on('pageerror',e=>errors.push(e.message));
-  await page.goto(base);await page.locator('#graph[data-ready="true"]').waitFor();await page.waitForTimeout(150);
+  const errors=[],geometry=await browser.newPage({viewport:{width:1440,height:960},deviceScaleFactor:2,reducedMotion:'no-preference'});
+  geometry.on('pageerror',e=>errors.push(e.message));
+  // Isolate actual engineering data for geometry pixels: unrelated nodes can
+  // occlude a sampled segment in a larger graph. Full graph drag follows below.
+  for(const name of ['glossary','annotations','framework'])await geometry.route('**/data/'+name+'.json',async route=>{
+   const data=JSON.parse(await readFile('data/'+name+'.json','utf8'));
+   if(name==='glossary')data.terms=[];if(name==='annotations')data.relations=[];if(name==='framework')data.usages=[];
+   await route.fulfill({json:data});
+  });
+  await geometry.goto(base);await geometry.locator('#graph[data-ready="true"]').waitFor();await geometry.waitForTimeout(150);
   for(const [a,b] of [['goal','method'],['system','deployment'],['evaluation','method']]){
-   const hits=await goldAlongSegment(page,await anchor(page,a),await anchor(page,b));
+   const hits=await goldAlongSegment(geometry,await anchor(geometry,a),await anchor(geometry,b));
    assert.ok(hits.every(Boolean),'engineering connection '+a+' → '+b+' follows a straight segment: '+hits);
   }
+  await geometry.close();
+  const page=await browser.newPage({viewport:{width:1440,height:960},reducedMotion:'no-preference'});
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(base);await page.locator('#graph[data-ready="true"]').waitFor();await page.waitForTimeout(150);
   const goal=await anchor(page,'goal'),complete=await anchor(page,'complete');
   assert.ok(Math.abs(goal.y-complete.y)<1,'goal and completion align in the initial view');
   const branches=await Promise.all(['design','demonstration','interaction'].map(id=>anchor(page,id)));

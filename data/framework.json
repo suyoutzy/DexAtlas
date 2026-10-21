@@ -2,48 +2,12 @@
   "metadata": {
     "title": "机器人操作的通用工程导航",
     "version": "0.2.1",
-    "reviewed_on": "2026-10-18",
+    "reviewed_on": "2026-10-21",
     "scope": "供界面验证的编辑性工程导航；论文支持具体任务和实现环节，不对应某篇论文规定的统一六阶段流程。",
-    "note": "工程输入输出、工程用途与概念关系分别维护；分支可组合，仿真与训练不作为所有路径的必经节点。"
+    "note": "工程位置为显式编辑映射；每条用途列能力/实例定位与限定。六阶段和全部导航箭头非统一学术标准。",
+    "content_version": "1.0.0"
   },
-  "sources": [
-    {
-      "id": "pipeline_mit",
-      "title": "MIT Robotic Manipulation — Perception, Planning, and Control",
-      "url": "https://manipulation.mit.edu/",
-      "kind": "教材与课程"
-    },
-    {
-      "id": "pipeline_lerobot",
-      "title": "LeRobot — Imitation Learning on Real-World Robots",
-      "url": "https://huggingface.co/docs/lerobot/il_robots",
-      "kind": "官方实现文档"
-    },
-    {
-      "id": "pipeline_isaac",
-      "title": "Isaac Lab — Task Design Workflows",
-      "url": "https://isaac-sim.github.io/IsaacLab/main/source/overview/core-concepts/task_workflows.html",
-      "kind": "官方实现文档"
-    },
-    {
-      "id": "review_jmlr",
-      "title": "Kroemer et al. — A Review of Robot Learning for Manipulation (JMLR 22(30), 2021)",
-      "url": "https://jmlr.org/papers/v22/19-804.html",
-      "kind": "正式期刊综述；支持问题与方法组织，不规定本图阶段顺序"
-    },
-    {
-      "id": "in_hand_ijrr",
-      "title": "Andrychowicz et al. — Learning dexterous in-hand manipulation (IJRR 39(1), 2020)",
-      "url": "https://journals.sagepub.com/doi/10.1177/0278364919887447",
-      "kind": "正式机器人学期刊论文；Shadow Hand 实机案例"
-    },
-    {
-      "id": "aloha_rss",
-      "title": "Zhao et al. — Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware (RSS 2023)",
-      "url": "https://www.roboticsproceedings.org/rss19/p016.html",
-      "kind": "正式会议论文；双臂夹爪的示范学习案例，不是灵巧手案例"
-    }
-  ],
+  "sources": [],
   "stages": [
     {
       "id": "goal",
@@ -60,17 +24,15 @@
       "evidence": [
         {
           "source_id": "pipeline_mit",
-          "locator": "Introduction: tasks; perception, planning and control"
-        },
-        {
-          "source_id": "review_jmlr",
-          "locator": "Section 3: formalizing manipulation learning problems；支撑任务规格，不规定工程先后"
-        },
-        {
-          "source_id": "in_hand_rl",
-          "locator": "arXiv v5, Section 2: Task and System Overview；手内重定向目标"
+          "locator": "Introduction：perception, planning and control",
+          "support": "仅支持工程能力组织；该环节名称和排序由 DexAtlas 编辑归纳。"
         }
-      ]
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "system",
@@ -87,13 +49,15 @@
       "evidence": [
         {
           "source_id": "pipeline_mit",
-          "locator": "Chapter 2: robots, hands, sensors and HardwareStation"
-        },
-        {
-          "source_id": "in_hand_rl",
-          "locator": "arXiv v5, Section 2.1: Hardware；手、传感与低层控制接口"
+          "locator": "Introduction：perception, planning and control",
+          "support": "仅支持工程能力组织；该环节名称和排序由 DexAtlas 编辑归纳。"
         }
-      ]
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "method",
@@ -110,13 +74,15 @@
       "evidence": [
         {
           "source_id": "pipeline_mit",
-          "locator": "Motion Planning; Manipulator Control; Reinforcement Learning"
-        },
-        {
-          "source_id": "review_jmlr",
-          "locator": "Section 6: Learning Motor Control Policies；学习控制方法的组织"
+          "locator": "Introduction：perception, planning and control",
+          "support": "仅支持工程能力组织；该环节名称和排序由 DexAtlas 编辑归纳。"
         }
-      ]
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "design",
@@ -133,9 +99,15 @@
       "evidence": [
         {
           "source_id": "pipeline_mit",
-          "locator": "Chapters 3, 5, 6 and 8: kinematics, grasping, planning and control"
+          "locator": "Introduction：perception, planning and control",
+          "support": "仅支持工程能力组织；该环节名称和排序由 DexAtlas 编辑归纳。"
         }
-      ]
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "demonstration",
@@ -152,13 +124,15 @@
       "evidence": [
         {
           "source_id": "pipeline_lerobot",
-          "locator": "Record a dataset; train a policy; evaluate"
-        },
-        {
-          "source_id": "aloha_rss",
-          "locator": "Abstract: teleoperation interface → real demonstrations → ACT → real task results；支撑具体示范分支"
+          "locator": "Record / train / evaluate tutorial",
+          "support": "仅支持工程能力组织；该环节名称和排序由 DexAtlas 编辑归纳。"
         }
-      ]
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "interaction",
@@ -174,14 +148,16 @@
       "branch": true,
       "evidence": [
         {
-          "source_id": "pipeline_isaac",
-          "locator": "Task interfaces; observations, actions, rewards; RL environments"
-        },
-        {
-          "source_id": "in_hand_rl",
-          "locator": "arXiv v5, Sections 3–4: randomized simulations and control-policy learning"
+          "source_id": "pipeline_mit",
+          "locator": "Introduction：perception, planning and control",
+          "support": "仅支持工程能力组织；该环节名称和排序由 DexAtlas 编辑归纳。"
         }
-      ]
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "deployment",
@@ -198,13 +174,15 @@
       "evidence": [
         {
           "source_id": "pipeline_mit",
-          "locator": "Putting it all together; Manipulator Control"
-        },
-        {
-          "source_id": "in_hand_rl",
-          "locator": "arXiv v5, Figure 2(d): real camera pose and fingertip observations → policy → robot action"
+          "locator": "Introduction：perception, planning and control",
+          "support": "仅支持工程能力组织；该环节名称和排序由 DexAtlas 编辑归纳。"
         }
-      ]
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "evaluation",
@@ -220,14 +198,16 @@
       "branch": false,
       "evidence": [
         {
-          "source_id": "pipeline_lerobot",
-          "locator": "Evaluate your policy and visualize the results"
-        },
-        {
-          "source_id": "in_hand_rl",
-          "locator": "arXiv v5, Section 6.2: Quantitative Results；在实机上统计任务表现"
+          "source_id": "pipeline_mit",
+          "locator": "Introduction：perception, planning and control",
+          "support": "仅支持工程能力组织；该环节名称和排序由 DexAtlas 编辑归纳。"
         }
-      ]
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "complete",
@@ -243,10 +223,16 @@
       "branch": false,
       "evidence": [
         {
-          "source_id": "pipeline_lerobot",
-          "locator": "Evaluate: task outcomes and recorded episodes"
+          "source_id": "pipeline_mit",
+          "locator": "Introduction：perception, planning and control",
+          "support": "仅支持工程能力组织；该环节名称和排序由 DexAtlas 编辑归纳。"
         }
-      ]
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     }
   ],
   "flows": [
@@ -256,13 +242,20 @@
       "to": "system",
       "label": "任务规格与约束",
       "feedback": false,
-      "explanation": "工程导航中的输入输出：由「定义目标与验收条件」向「建立系统与接口」提供任务规格与约束。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "explanation": "编辑性工程导航：由「定义目标与验收条件」向「建立系统与接口」传递或反馈「任务规格与约束」。阶段可迭代或并行；来源提供工程背景，不证明每种技术组合均已实现。",
       "evidence": [
         {
           "source_id": "pipeline_mit",
-          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+          "locator": "Introduction：perception, planning and control",
+          "support": "六阶段及该箭头为编辑性导航，不是原教材明文规定的标准顺序。"
         }
-      ]
+      ],
+      "scope": "editorial_navigation",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "f2",
@@ -270,13 +263,20 @@
       "to": "method",
       "label": "目标与验收标准",
       "feedback": false,
-      "explanation": "工程导航中的输入输出：由「定义目标与验收条件」向「构建操作方法」提供目标与验收标准。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "explanation": "编辑性工程导航：由「定义目标与验收条件」向「构建操作方法」传递或反馈「目标与验收标准」。阶段可迭代或并行；来源提供工程背景，不证明每种技术组合均已实现。",
       "evidence": [
         {
           "source_id": "pipeline_mit",
-          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+          "locator": "Introduction：perception, planning and control",
+          "support": "六阶段及该箭头为编辑性导航，不是原教材明文规定的标准顺序。"
         }
-      ]
+      ],
+      "scope": "editorial_navigation",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "f3",
@@ -284,17 +284,20 @@
       "to": "method",
       "label": "观测、动作接口与系统约束",
       "feedback": false,
-      "explanation": "工程导航中的输入输出：由「建立系统与接口」向「构建操作方法」提供观测、动作接口与系统约束。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "explanation": "编辑性工程导航：由「建立系统与接口」向「构建操作方法」传递或反馈「观测、动作接口与系统约束」。阶段可迭代或并行；来源提供工程背景，不证明每种技术组合均已实现。",
       "evidence": [
         {
           "source_id": "pipeline_mit",
-          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
-        },
-        {
-          "source_id": "in_hand_rl",
-          "locator": "arXiv v5, Figure 2(b–d), Sections 2.1 and 3.1；该案例的观测与动作接口约定"
+          "locator": "Introduction：perception, planning and control",
+          "support": "六阶段及该箭头为编辑性导航，不是原教材明文规定的标准顺序。"
         }
-      ]
+      ],
+      "scope": "editorial_navigation",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "f4",
@@ -302,13 +305,20 @@
       "to": "design",
       "label": "模型、目标与约束",
       "feedback": false,
-      "explanation": "工程导航中的输入输出：由「构建操作方法」向「设计与优化」提供模型、目标与约束。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "explanation": "编辑性工程导航：由「构建操作方法」向「设计与优化」传递或反馈「模型、目标与约束」。阶段可迭代或并行；来源提供工程背景，不证明每种技术组合均已实现。",
       "evidence": [
         {
           "source_id": "pipeline_mit",
-          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+          "locator": "Introduction：perception, planning and control",
+          "support": "六阶段及该箭头为编辑性导航，不是原教材明文规定的标准顺序。"
         }
-      ]
+      ],
+      "scope": "editorial_navigation",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "f5",
@@ -316,13 +326,20 @@
       "to": "demonstration",
       "label": "可用示范与数据要求",
       "feedback": false,
-      "explanation": "工程导航中的输入输出：由「构建操作方法」向「从示范构建」提供可用示范与数据要求。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "explanation": "编辑性工程导航：由「构建操作方法」向「从示范构建」传递或反馈「可用示范与数据要求」。阶段可迭代或并行；来源提供工程背景，不证明每种技术组合均已实现。",
       "evidence": [
         {
           "source_id": "pipeline_mit",
-          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+          "locator": "Introduction：perception, planning and control",
+          "support": "六阶段及该箭头为编辑性导航，不是原教材明文规定的标准顺序。"
         }
-      ]
+      ],
+      "scope": "editorial_navigation",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "f6",
@@ -330,17 +347,20 @@
       "to": "interaction",
       "label": "交互条件与任务反馈",
       "feedback": false,
-      "explanation": "工程导航中的输入输出：由「构建操作方法」向「从交互构建」提供交互条件与任务反馈。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "explanation": "编辑性工程导航：由「构建操作方法」向「从交互构建」传递或反馈「交互条件与任务反馈」。阶段可迭代或并行；来源提供工程背景，不证明每种技术组合均已实现。",
       "evidence": [
         {
           "source_id": "pipeline_mit",
-          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
-        },
-        {
-          "source_id": "in_hand_rl",
-          "locator": "arXiv v5, Section 4.2: Actions and Rewards；交互训练中的任务反馈"
+          "locator": "Introduction：perception, planning and control",
+          "support": "六阶段及该箭头为编辑性导航，不是原教材明文规定的标准顺序。"
         }
-      ]
+      ],
+      "scope": "editorial_navigation",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "f7",
@@ -348,13 +368,20 @@
       "to": "deployment",
       "label": "规划结果或控制方法",
       "feedback": false,
-      "explanation": "工程导航中的输入输出：由「设计与优化」向「部署与闭环运行」提供规划结果或控制方法。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "explanation": "编辑性工程导航：由「设计与优化」向「部署与闭环运行」传递或反馈「规划结果或控制方法」。阶段可迭代或并行；来源提供工程背景，不证明每种技术组合均已实现。",
       "evidence": [
         {
           "source_id": "pipeline_mit",
-          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+          "locator": "Introduction：perception, planning and control",
+          "support": "六阶段及该箭头为编辑性导航，不是原教材明文规定的标准顺序。"
         }
-      ]
+      ],
+      "scope": "editorial_navigation",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "f8",
@@ -362,17 +389,20 @@
       "to": "deployment",
       "label": "策略与输入输出约定",
       "feedback": false,
-      "explanation": "工程导航中的输入输出：由「从示范构建」向「部署与闭环运行」提供策略与输入输出约定。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "explanation": "编辑性工程导航：由「从示范构建」向「部署与闭环运行」传递或反馈「策略与输入输出约定」。阶段可迭代或并行；来源提供工程背景，不证明每种技术组合均已实现。",
       "evidence": [
         {
-          "source_id": "pipeline_lerobot",
-          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
-        },
-        {
-          "source_id": "aloha_rss",
-          "locator": "Abstract: ACT learned from real demonstrations and evaluated in real manipulation；只验证该案例的学习策略部署"
+          "source_id": "pipeline_mit",
+          "locator": "Introduction：perception, planning and control",
+          "support": "六阶段及该箭头为编辑性导航，不是原教材明文规定的标准顺序。"
         }
-      ]
+      ],
+      "scope": "editorial_navigation",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "f9",
@@ -380,17 +410,20 @@
       "to": "deployment",
       "label": "策略参数与输入输出约定",
       "feedback": false,
-      "explanation": "工程导航中的输入输出：由「从交互构建」向「部署与闭环运行」提供策略参数与输入输出约定。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "explanation": "编辑性工程导航：由「从交互构建」向「部署与闭环运行」传递或反馈「策略参数与输入输出约定」。阶段可迭代或并行；来源提供工程背景，不证明每种技术组合均已实现。",
       "evidence": [
         {
           "source_id": "pipeline_mit",
-          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
-        },
-        {
-          "source_id": "in_hand_rl",
-          "locator": "arXiv v5, Figure 2(b,d): trained policy transferred to physical robot"
+          "locator": "Introduction：perception, planning and control",
+          "support": "六阶段及该箭头为编辑性导航，不是原教材明文规定的标准顺序。"
         }
-      ]
+      ],
+      "scope": "editorial_navigation",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "f10",
@@ -398,13 +431,20 @@
       "to": "deployment",
       "label": "机器人与运行接口",
       "feedback": false,
-      "explanation": "工程导航中的输入输出：由「建立系统与接口」向「部署与闭环运行」提供机器人与运行接口。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "explanation": "编辑性工程导航：由「建立系统与接口」向「部署与闭环运行」传递或反馈「机器人与运行接口」。阶段可迭代或并行；来源提供工程背景，不证明每种技术组合均已实现。",
       "evidence": [
         {
           "source_id": "pipeline_mit",
-          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+          "locator": "Introduction：perception, planning and control",
+          "support": "六阶段及该箭头为编辑性导航，不是原教材明文规定的标准顺序。"
         }
-      ]
+      ],
+      "scope": "editorial_navigation",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "f11",
@@ -412,17 +452,20 @@
       "to": "evaluation",
       "label": "运行记录与测试结果",
       "feedback": false,
-      "explanation": "工程导航中的输入输出：由「部署与闭环运行」向「评估与迭代」提供运行记录与测试结果。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "explanation": "编辑性工程导航：由「部署与闭环运行」向「评估与迭代」传递或反馈「运行记录与测试结果」。阶段可迭代或并行；来源提供工程背景，不证明每种技术组合均已实现。",
       "evidence": [
         {
           "source_id": "pipeline_mit",
-          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
-        },
-        {
-          "source_id": "in_hand_rl",
-          "locator": "arXiv v5, Section 6.2: Quantitative Results；实机运行后的任务统计"
+          "locator": "Introduction：perception, planning and control",
+          "support": "六阶段及该箭头为编辑性导航，不是原教材明文规定的标准顺序。"
         }
-      ]
+      ],
+      "scope": "editorial_navigation",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "f12",
@@ -430,13 +473,20 @@
       "to": "complete",
       "label": "满足验收条件的评估结论",
       "feedback": false,
-      "explanation": "工程导航中的输入输出：由「评估与迭代」向「达成验收条件」提供满足验收条件的评估结论。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "explanation": "编辑性工程导航：由「评估与迭代」向「达成验收条件」传递或反馈「满足验收条件的评估结论」。阶段可迭代或并行；来源提供工程背景，不证明每种技术组合均已实现。",
       "evidence": [
         {
-          "source_id": "pipeline_lerobot",
-          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+          "source_id": "pipeline_mit",
+          "locator": "Introduction：perception, planning and control",
+          "support": "六阶段及该箭头为编辑性导航，不是原教材明文规定的标准顺序。"
         }
-      ]
+      ],
+      "scope": "editorial_navigation",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     },
     {
       "id": "f13",
@@ -444,13 +494,20 @@
       "to": "method",
       "label": "改进需求与评估反馈",
       "feedback": true,
-      "explanation": "工程导航中的迭代反馈：由「评估与迭代」向「构建操作方法」提供改进需求与评估反馈。这是一种通用组织方式，不表示所有模块组合都已经由某项研究验证。",
+      "explanation": "编辑性工程导航：由「评估与迭代」向「构建操作方法」传递或反馈「改进需求与评估反馈」。阶段可迭代或并行；来源提供工程背景，不证明每种技术组合均已实现。",
       "evidence": [
         {
-          "source_id": "pipeline_lerobot",
-          "locator": "课程与框架流程的编辑性归纳；各分支可按任务选用与组合"
+          "source_id": "pipeline_mit",
+          "locator": "Introduction：perception, planning and control",
+          "support": "六阶段及该箭头为编辑性导航，不是原教材明文规定的标准顺序。"
         }
-      ]
+      ],
+      "scope": "editorial_navigation",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_navigation"
+      }
     }
   ],
   "usages": [
@@ -459,385 +516,1134 @@
       "stage_id": "goal",
       "term_id": "dexterous_manipulation",
       "label": "界定操作能力",
-      "explanation": "「定义目标与验收条件」中界定操作能力。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「定义目标与验收条件」中，界定操作能力。Shadow Hand 物体重定向任务目标；此处只抽象为能力需求。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
-          "source_id": "dexterous_il_survey",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "source_id": "in_hand_rl",
+          "locator": "§2 Task and System Overview",
+          "support": "Shadow Hand 物体重定向任务目标；此处只抽象为能力需求。"
         }
-      ]
+      ],
+      "scope": "case",
+      "context": "Shadow Hand 物体重定向任务目标；此处只抽象为能力需求。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u2",
       "stage_id": "goal",
       "term_id": "in_hand_manipulation",
       "label": "定义手内操作任务",
-      "explanation": "在目标阶段，手内操作用于界定要完成的任务，而不是指定训练算法。该论文把任务具体化为：让手中的物体达到给定目标姿态。此连接表示任务定义中的引用；不表示手内操作只发生在目标阶段，也不表示所有手内操作都必须采用这篇论文的方法。",
+      "explanation": "在「定义目标与验收条件」中，定义手内操作任务。Shadow Hand 的物体姿态目标，不指定所有手内任务都采用其实现。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "in_hand_rl",
-          "locator": "arXiv v5, Section 2: Task and System Overview；object reorientation and target configuration"
-        },
-        {
-          "source_id": "in_hand_ijrr",
-          "locator": "Task and system overview；同一研究的正式期刊版本，章节编号与预印本不同"
+          "locator": "§2 Task and System Overview",
+          "support": "Shadow Hand 的物体姿态目标，不指定所有手内任务都采用其实现。"
         }
-      ]
+      ],
+      "scope": "case",
+      "context": "Shadow Hand 的物体姿态目标，不指定所有手内任务都采用其实现。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u3",
       "stage_id": "system",
       "term_id": "tactile_sensing",
       "label": "提供接触观测",
-      "explanation": "「建立系统与接口」中提供接触观测。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「建立系统与接口」中，提供接触观测。选择装有触觉的系统时的一种可选观测设计。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "dexterous_il_survey",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "§IV-D Tactile Sensors",
+          "support": "选择装有触觉的系统时的一种可选观测设计。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "选择装有触觉的系统时的一种可选观测设计。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u4",
       "stage_id": "system",
       "term_id": "inverse_kinematics",
       "label": "连接任务空间与关节空间",
-      "explanation": "「建立系统与接口」中连接任务空间与关节空间。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「建立系统与接口」中，连接任务空间与关节空间。任务空间目标与关节构型之间的运动学接口归纳。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
-          "source_id": "ik_textbook",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "source_id": "mit_planning",
+          "locator": "Inverse Kinematics",
+          "support": "任务空间目标与关节构型之间的运动学接口归纳。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "任务空间目标与关节构型之间的运动学接口归纳。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u5",
       "stage_id": "method",
       "term_id": "policy",
       "label": "组织决策映射",
-      "explanation": "「构建操作方法」中组织决策映射。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「构建操作方法」中，组织决策映射。决策映射的通用建模用途，不限定网络或训练算法。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "rl_concepts",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "Policies",
+          "support": "决策映射的通用建模用途，不限定网络或训练算法。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "决策映射的通用建模用途，不限定网络或训练算法。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u6",
       "stage_id": "method",
       "term_id": "transformer",
       "label": "可选模型架构",
-      "explanation": "「构建操作方法」中可选模型架构。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「构建操作方法」中，可选模型架构。robomimic BC-Transformer 架构选项，非全部策略必选。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "robomimic_transformers",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "bc_transformer.json 配置",
+          "support": "robomimic BC-Transformer 架构选项，非全部策略必选。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "robomimic BC-Transformer 架构选项，非全部策略必选。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u7",
       "stage_id": "method",
       "term_id": "vision_language_action_model",
       "label": "可选策略模型类别",
-      "explanation": "「构建操作方法」中可选策略模型类别。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「构建操作方法」中，可选策略模型类别。OpenVLA 类视觉语言条件动作模型选项。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "openvla_project",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "v1 §3 The OpenVLA Model",
+          "support": "OpenVLA 类视觉语言条件动作模型选项。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "OpenVLA 类视觉语言条件动作模型选项。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u8",
       "stage_id": "method",
       "term_id": "offline_reinforcement_learning",
       "label": "按离线数据条件构建策略",
-      "explanation": "「构建操作方法」中按离线数据条件构建策略。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「构建操作方法」中，按离线数据条件构建策略。固定离线数据条件下的方法构建。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "offline_rl_review",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "§2.2 Offline Reinforcement Learning",
+          "support": "固定离线数据条件下的方法构建。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "固定离线数据条件下的方法构建。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u9",
       "stage_id": "design",
       "term_id": "force_closure",
       "label": "分析抓取约束",
-      "explanation": "「设计与优化」中分析抓取约束。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「设计与优化」中，分析抓取约束。用于抓取接触的理论分析，仍需检查实际可施力。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "force_closure_textbook",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "§12.2.3，actuation caveat",
+          "support": "用于抓取接触的理论分析，仍需检查实际可施力。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "用于抓取接触的理论分析，仍需检查实际可施力。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u10",
       "stage_id": "design",
       "term_id": "inverse_kinematics",
       "label": "求解运动学问题",
-      "explanation": "「设计与优化」中求解运动学问题。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「设计与优化」中，求解运动学问题。设计所需运动学求解器，不代表得到整段可行轨迹。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "ik_textbook",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "§6.2 Numerical IK",
+          "support": "设计所需运动学求解器，不代表得到整段可行轨迹。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "设计所需运动学求解器，不代表得到整段可行轨迹。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u11",
       "stage_id": "design",
       "term_id": "impedance_control",
       "label": "设计柔顺控制",
-      "explanation": "「设计与优化」中设计柔顺控制。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「设计与优化」中，设计柔顺控制。交互控制律设计，明确动力学与环境条件。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
-          "source_id": "impedance_notes",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "source_id": "impedance_review",
+          "locator": "§2；§2.1 stability",
+          "support": "交互控制律设计，明确动力学与环境条件。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "交互控制律设计，明确动力学与环境条件。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u12",
       "stage_id": "demonstration",
       "term_id": "motion_retargeting",
       "label": "可用于处理示教动作",
-      "explanation": "「从示范构建」中可用于处理示教动作。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「从示范构建」中，可用于处理示教动作。可选的人手到机器人手的几何映射。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "dex_retargeting",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "README / Examples / Position and Vector modes",
+          "support": "可选的人手到机器人手的几何映射。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "可选的人手到机器人手的几何映射。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u13",
       "stage_id": "demonstration",
       "term_id": "imitation_learning",
       "label": "从示范学习策略",
-      "explanation": "「从示范构建」中从示范学习策略。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「从示范构建」中，从示范学习策略。ALOHA 通过遥操作示范训练 ACT 的实例。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
-          "source_id": "dexterous_il_survey",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "source_id": "act_paper",
+          "locator": "§III / §IV",
+          "support": "ALOHA 通过遥操作示范训练 ACT 的实例。"
         }
-      ]
+      ],
+      "scope": "case",
+      "context": "ALOHA 通过遥操作示范训练 ACT 的实例。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u14",
       "stage_id": "demonstration",
       "term_id": "behavior_cloning",
       "label": "可选示范学习方法",
-      "explanation": "「从示范构建」中可选示范学习方法。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「从示范构建」中，可选示范学习方法。监督拟合示范动作的一种可选方法。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "robomimic_algorithms",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "BC",
+          "support": "监督拟合示范动作的一种可选方法。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "监督拟合示范动作的一种可选方法。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u15",
       "stage_id": "demonstration",
       "term_id": "dataset_aggregation",
       "label": "可选交互式示范学习方法",
-      "explanation": "「从示范构建」中可选交互式示范学习方法。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「从示范构建」中，可选交互式示范学习方法。交互查询专家并聚合数据；不是纯固定离线示范流程。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "dagger_paper",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "§3 Algorithm 3.1",
+          "support": "交互查询专家并聚合数据；不是纯固定离线示范流程。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "交互查询专家并聚合数据；不是纯固定离线示范流程。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u16",
       "stage_id": "demonstration",
       "term_id": "diffusion_policy",
       "label": "可选策略方法",
-      "explanation": "「从示范构建」中可选策略方法。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「从示范构建」中，可选策略方法。示范训练的动作扩散策略实例。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "diffusion_policy_project",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "§II；§III",
+          "support": "示范训练的动作扩散策略实例。"
         }
-      ]
+      ],
+      "scope": "case",
+      "context": "示范训练的动作扩散策略实例。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u17",
       "stage_id": "demonstration",
       "term_id": "action_chunking_with_transformers",
       "label": "可选策略方法",
-      "explanation": "「从示范构建」中可选策略方法。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「从示范构建」中，可选策略方法。原始 ACT 方法，不外推为多指手实机证明。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "act_paper",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "§IV",
+          "support": "原始 ACT 方法，不外推为多指手实机证明。"
         }
-      ]
+      ],
+      "scope": "case",
+      "context": "原始 ACT 方法，不外推为多指手实机证明。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u18",
       "stage_id": "interaction",
       "term_id": "markov_decision_process",
       "label": "建模决策过程",
-      "explanation": "「从交互构建」中建模决策过程。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「从交互构建」中，建模决策过程。可用 MDP 形式化，部分观测还需 POMDP 处理。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "rl_concepts",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "(Optional) Formalism",
+          "support": "可用 MDP 形式化，部分观测还需 POMDP 处理。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "可用 MDP 形式化，部分观测还需 POMDP 处理。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u19",
       "stage_id": "interaction",
       "term_id": "reinforcement_learning",
       "label": "利用交互反馈学习",
-      "explanation": "「从交互构建」中利用交互反馈学习。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「从交互构建」中，利用交互反馈学习。Shadow 仿真交互与奖励优化实例。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
-          "source_id": "rl_concepts",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "source_id": "in_hand_rl",
+          "locator": "§4；Appendix A.1",
+          "support": "Shadow 仿真交互与奖励优化实例。"
         }
-      ]
+      ],
+      "scope": "case",
+      "context": "Shadow 仿真交互与奖励优化实例。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u20",
       "stage_id": "interaction",
       "term_id": "proximal_policy_optimization",
       "label": "可选策略优化算法",
-      "explanation": "「从交互构建」中可选策略优化算法。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「从交互构建」中，可选策略优化算法。Shadow 策略训练使用 PPO。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
-          "source_id": "ppo_docs",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "source_id": "in_hand_rl",
+          "locator": "Appendix A.3 Proximal Policy Optimization",
+          "support": "Shadow 策略训练使用 PPO。"
         }
-      ]
+      ],
+      "scope": "case",
+      "context": "Shadow 策略训练使用 PPO。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u21",
       "stage_id": "interaction",
       "term_id": "soft_actor_critic",
       "label": "可选强化学习算法",
-      "explanation": "「从交互构建」中可选强化学习算法。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「从交互构建」中，可选强化学习算法。连续控制交互算法选项；不表示 Shadow 原论文使用 SAC。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
-          "source_id": "sac_docs",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "source_id": "sac_paper",
+          "locator": "§4 Soft Actor-Critic",
+          "support": "连续控制交互算法选项；不表示 Shadow 原论文使用 SAC。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "连续控制交互算法选项；不表示 Shadow 原论文使用 SAC。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u22",
       "stage_id": "interaction",
       "term_id": "domain_randomization",
       "label": "可用于仿真训练条件变化",
-      "explanation": "「从交互构建」中可用于仿真训练条件变化。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「从交互构建」中，可用于仿真训练条件变化。Shadow 仿真物理和观测变化。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
-          "source_id": "domain_randomization_paper",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "source_id": "in_hand_rl",
+          "locator": "§3.2 Randomizations",
+          "support": "Shadow 仿真物理和观测变化。"
         }
-      ]
+      ],
+      "scope": "case",
+      "context": "Shadow 仿真物理和观测变化。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u23",
       "stage_id": "interaction",
       "term_id": "policy",
       "label": "构建决策策略",
-      "explanation": "「从交互构建」中构建决策策略。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「从交互构建」中，构建决策策略。以奖励反馈学习决策规则的通用用途。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "rl_concepts",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "The RL Problem；Policies",
+          "support": "以奖励反馈学习决策规则的通用用途。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "以奖励反馈学习决策规则的通用用途。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u24",
       "stage_id": "deployment",
       "term_id": "policy",
       "label": "根据观测产生动作",
-      "explanation": "「部署与闭环运行」中根据观测产生动作。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「部署与闭环运行」中，根据观测产生动作。Shadow 运行时根据观测生成目标关节动作。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
-          "source_id": "rl_concepts",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "source_id": "in_hand_rl",
+          "locator": "§4.2；Appendix B.4 Control",
+          "support": "Shadow 运行时根据观测生成目标关节动作。"
         }
-      ]
+      ],
+      "scope": "case",
+      "context": "Shadow 运行时根据观测生成目标关节动作。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u25",
       "stage_id": "deployment",
       "term_id": "impedance_control",
       "label": "可用于执行层柔顺控制",
-      "explanation": "「部署与闭环运行」中可用于执行层柔顺控制。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「部署与闭环运行」中，可用于执行层柔顺控制。采用阻抗接口时的一种执行方式，非全部策略必需。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
-          "source_id": "impedance_notes",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "source_id": "impedance_review",
+          "locator": "§4.3 控制接口与 learned policy 的映射",
+          "support": "采用阻抗接口时的一种执行方式，非全部策略必需。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "采用阻抗接口时的一种执行方式，非全部策略必需。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u26",
       "stage_id": "deployment",
       "term_id": "tactile_sensing",
       "label": "可用于闭环接触反馈",
-      "explanation": "「部署与闭环运行」中可用于闭环接触反馈。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「部署与闭环运行」中，可用于闭环接触反馈。触觉系统运行时可提供接触反馈，不表示无触觉方案不可行。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "dexterous_il_survey",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "§IV-D；§IV-E3 Sensor Configuration",
+          "support": "触觉系统运行时可提供接触反馈，不表示无触觉方案不可行。"
         }
-      ]
+      ],
+      "scope": "general",
+      "context": "触觉系统运行时可提供接触反馈，不表示无触觉方案不可行。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u27",
       "stage_id": "deployment",
       "term_id": "sim_to_real_transfer",
       "label": "处理仿真与实机之间的差异",
-      "explanation": "「部署与闭环运行」中处理仿真与实机之间的差异。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「部署与闭环运行」中，处理仿真与实机之间的差异。Shadow 在实机运行并检验仿真策略。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "in_hand_rl",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "§6 Results；§6.3 Ablation of Randomizations",
+          "support": "Shadow 在实机运行并检验仿真策略。"
         }
-      ]
+      ],
+      "scope": "case",
+      "context": "Shadow 在实机运行并检验仿真策略。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u28",
       "stage_id": "evaluation",
       "term_id": "in_hand_manipulation",
       "label": "评估手内操作表现",
-      "explanation": "在评估阶段，仍以同一个手内操作任务作为检查对象。该论文统计连续完成的重定向目标数量，并以物体掉落、单个目标超时或达到试验上限作为终止条件。此连接表示对任务表现的评估引用，不是把手内操作归类为评估算法；全图复用同一个术语节点。",
+      "explanation": "在「评估与迭代」中，评估手内操作表现。统计连续姿态目标完成数、掉落及超时等终止条件。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "in_hand_rl",
-          "locator": "arXiv v5, Section 6.2: Quantitative Results；consecutive successful rotations and drop/timeout/trial-limit termination"
-        },
-        {
-          "source_id": "in_hand_ijrr",
-          "locator": "Results；同一研究的正式期刊版本，章节编号与预印本不同"
+          "locator": "§6.2 Quantitative Results",
+          "support": "统计连续姿态目标完成数、掉落及超时等终止条件。"
         }
-      ]
+      ],
+      "scope": "case",
+      "context": "统计连续姿态目标完成数、掉落及超时等终止条件。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     },
     {
       "id": "u29",
       "stage_id": "evaluation",
       "term_id": "sim_to_real_transfer",
       "label": "检查迁移后的任务表现",
-      "explanation": "「评估与迭代」中检查迁移后的任务表现。这里标明一种有来源的工程用途，不表示该环节必须使用这一技术，也不表示它可以与所有其他方法任意组合。",
+      "explanation": "在「评估与迭代」中，检查迁移后的任务表现。比较实机任务表现与随机化消融，不只看仿真回报。 环节位置是本项目的编辑性映射，不表示来源规定统一阶段顺序或该技术为必选。",
       "evidence": [
         {
           "source_id": "in_hand_rl",
-          "locator": "对应词条所列教材、论文或官方文档；此处为工程用途归纳"
+          "locator": "§6.2 / §6.3",
+          "support": "比较实机任务表现与随机化消融，不只看仿真回报。"
         }
-      ]
+      ],
+      "scope": "case",
+      "context": "比较实机任务表现与随机化消融，不只看仿真回报。",
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-degrees_of_freedom-system",
+      "stage_id": "system",
+      "term_id": "degrees_of_freedom",
+      "label": "明确机构运动维数",
+      "scope": "general",
+      "context": "区别自由度、配置坐标与驱动输入。",
+      "explanation": "明确机构运动维数。区别自由度、配置坐标与驱动输入。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "mr_configuration",
+          "locator": "§2.1",
+          "support": "区别自由度、配置坐标与驱动输入。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-underactuation-system",
+      "stage_id": "system",
+      "term_id": "underactuation",
+      "label": "检查输入可实现性",
+      "scope": "general",
+      "context": "输入矩阵和约束决定独立作用能力。",
+      "explanation": "检查输入可实现性。输入矩阵和约束决定独立作用能力。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "mit_underactuation",
+          "locator": "Definition",
+          "support": "输入矩阵和约束决定独立作用能力。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-tendon_driven_actuation-system",
+      "stage_id": "system",
+      "term_id": "tendon_driven_actuation",
+      "label": "选择和建模腱绳传动",
+      "scope": "general",
+      "context": "考虑路由、张紧、摩擦与磨损。",
+      "explanation": "选择和建模腱绳传动。考虑路由、张紧、摩擦与磨损。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "§IV-B1",
+          "support": "考虑路由、张紧、摩擦与磨损。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-proprioception-system",
+      "stage_id": "system",
+      "term_id": "proprioception",
+      "label": "配置自身状态观测",
+      "scope": "general",
+      "context": "明确信号来源、噪声与部署可得性；只借用通用定义。",
+      "explanation": "配置自身状态观测。明确信号来源、噪声与部署可得性；只借用通用定义。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "proprioception_review",
+          "locator": "§3.2.1 Proprioception",
+          "support": "明确信号来源、噪声与部署可得性；只借用通用定义。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-observation-system",
+      "stage_id": "system",
+      "term_id": "observation",
+      "label": "规定可用输入",
+      "scope": "general",
+      "context": "区分观测、潜在状态及训练特权信息。",
+      "explanation": "规定可用输入。区分观测、潜在状态及训练特权信息。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "States and Observations",
+          "support": "区分观测、潜在状态及训练特权信息。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-action_space-system",
+      "stage_id": "system",
+      "term_id": "action_space",
+      "label": "规定动作接口",
+      "scope": "general",
+      "context": "动作取值与下层控制接口一致。",
+      "explanation": "规定动作接口。动作取值与下层控制接口一致。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "§4.2 Actions and Rewards",
+          "support": "动作取值与下层控制接口一致。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-contact_model-system",
+      "stage_id": "system",
+      "term_id": "contact_model",
+      "label": "选择接触建模假设",
+      "scope": "general",
+      "context": "仿真接触近似与真实系统差异需单独评估。",
+      "explanation": "选择接触建模假设。仿真接触近似与真实系统差异需单独评估。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "mujoco_contact",
+          "locator": "Soft contact model",
+          "support": "仿真接触近似与真实系统差异需单独评估。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-forward_kinematics-design",
+      "stage_id": "design",
+      "term_id": "forward_kinematics",
+      "label": "计算任务空间几何",
+      "scope": "general",
+      "context": "由关节构型得到末端位姿。",
+      "explanation": "计算任务空间几何。由关节构型得到末端位姿。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "mr_fk",
+          "locator": "§4.1.1",
+          "support": "由关节构型得到末端位姿。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-jacobian-design",
+      "stage_id": "design",
+      "term_id": "jacobian",
+      "label": "建立速度与力映射",
+      "scope": "general",
+      "context": "注意坐标约定和奇异性。",
+      "explanation": "建立速度与力映射。注意坐标约定和奇异性。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "mr_jacobian",
+          "locator": "§5.1.1",
+          "support": "注意坐标约定和奇异性。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-grasp_matrix-design",
+      "stage_id": "design",
+      "term_id": "grasp_matrix",
+      "label": "分析接触力到物体受力",
+      "scope": "general",
+      "context": "采用指定的刚体、接触和坐标假设。",
+      "explanation": "分析接触力到物体受力。采用指定的刚体、接触和坐标假设。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "grasp_notes",
+          "locator": "Grasp Matrix",
+          "support": "采用指定的刚体、接触和坐标假设。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-form_closure-design",
+      "stage_id": "design",
+      "term_id": "form_closure",
+      "label": "检查几何约束",
+      "scope": "general",
+      "context": "区分一阶检验与一般形闭合。",
+      "explanation": "检查几何约束。区分一阶检验与一般形闭合。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "mr_form",
+          "locator": "§12.1.7",
+          "support": "区分一阶检验与一般形闭合。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-friction_cone-design",
+      "stage_id": "design",
+      "term_id": "friction_cone",
+      "label": "约束接触可行力",
+      "scope": "general",
+      "context": "给定库仑摩擦系数和接触模型。",
+      "explanation": "约束接触可行力。给定库仑摩擦系数和接触模型。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "mr_friction",
+          "locator": "§12.2.1",
+          "support": "给定库仑摩擦系数和接触模型。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-motion_planning-design",
+      "stage_id": "design",
+      "term_id": "motion_planning",
+      "label": "规划可行运动",
+      "scope": "general",
+      "context": "不能把无碰撞路径等同于成功操作。",
+      "explanation": "规划可行运动。不能把无碰撞路径等同于成功操作。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "mit_planning",
+          "locator": "Motion Planning 引言",
+          "support": "不能把无碰撞路径等同于成功操作。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-trajectory_optimization-design",
+      "stage_id": "design",
+      "term_id": "trajectory_optimization",
+      "label": "求解带约束轨迹",
+      "scope": "general",
+      "context": "检查局部最优、约束及离散化误差。",
+      "explanation": "求解带约束轨迹。检查局部最优、约束及离散化误差。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "mit_planning",
+          "locator": "Kinematic trajectory optimization",
+          "support": "检查局部最优、约束及离散化误差。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-model_predictive_control-design",
+      "stage_id": "design",
+      "term_id": "model_predictive_control",
+      "label": "构造滚动优化反馈",
+      "scope": "general",
+      "context": "求解器要满足实际反馈周期。",
+      "explanation": "构造滚动优化反馈。求解器要满足实际反馈周期。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "mit_trajopt",
+          "locator": "Model-Predictive Control",
+          "support": "求解器要满足实际反馈周期。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-admittance_control-design",
+      "stage_id": "design",
+      "term_id": "admittance_control",
+      "label": "设计力到运动的响应",
+      "scope": "general",
+      "context": "需要外力观测与合适运动内环。",
+      "explanation": "设计力到运动的响应。需要外力观测与合适运动内环。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "impedance_review",
+          "locator": "§2",
+          "support": "需要外力观测与合适运动内环。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-operational_space_control-design",
+      "stage_id": "design",
+      "term_id": "operational_space_control",
+      "label": "设计任务空间控制",
+      "scope": "general",
+      "context": "考虑雅可比、模型与驱动条件。",
+      "explanation": "设计任务空间控制。考虑雅可比、模型与驱动条件。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "khatib_osc",
+          "locator": "§II–III，pp.44–46",
+          "support": "考虑雅可比、模型与驱动条件。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-system_identification-system",
+      "stage_id": "system",
+      "term_id": "system_identification",
+      "label": "由实测校准模型",
+      "scope": "general",
+      "context": "可用于建模准备或迭代，不是全部方法必经阶段。",
+      "explanation": "由实测校准模型。可用于建模准备或迭代，不是全部方法必经阶段。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "mit_sysid",
+          "locator": "Multibody dynamics / Experiment design",
+          "support": "可用于建模准备或迭代，不是全部方法必经阶段。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-teleoperation-demonstration",
+      "stage_id": "demonstration",
+      "term_id": "teleoperation",
+      "label": "采集人类控制示范",
+      "scope": "general",
+      "context": "ALOHA 是已验证例子，其他接口需分别验证。",
+      "explanation": "采集人类控制示范。ALOHA 是已验证例子，其他接口需分别验证。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "act_paper",
+          "locator": "§III",
+          "support": "ALOHA 是已验证例子，其他接口需分别验证。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-action_chunking-demonstration",
+      "stage_id": "demonstration",
+      "term_id": "action_chunking",
+      "label": "定义多步动作预测",
+      "scope": "general",
+      "context": "预测长度与执行频率分开。",
+      "explanation": "定义多步动作预测。预测长度与执行频率分开。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "act_paper",
+          "locator": "§IV-A",
+          "support": "预测长度与执行频率分开。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-reward_function-interaction",
+      "stage_id": "interaction",
+      "term_id": "reward_function",
+      "label": "定义交互优化信号",
+      "scope": "general",
+      "context": "奖励与验收标准不能混同。",
+      "explanation": "定义交互优化信号。奖励与验收标准不能混同。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "Reward and Return",
+          "support": "奖励与验收标准不能混同。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-asymmetric_actor_critic-interaction",
+      "stage_id": "interaction",
+      "term_id": "asymmetric_actor_critic",
+      "label": "训练时利用额外真值",
+      "scope": "general",
+      "context": "actor 不使用部署不可得的 critic 特权状态。",
+      "explanation": "训练时利用额外真值。actor 不使用部署不可得的 critic 特权状态。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "§4.1",
+          "support": "actor 不使用部署不可得的 critic 特权状态。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-position_control-deployment",
+      "stage_id": "deployment",
+      "term_id": "position_control",
+      "label": "跟踪位置类动作",
+      "scope": "general",
+      "context": "策略输出相对关节目标，经位置控制执行。",
+      "explanation": "跟踪位置类动作。策略输出相对关节目标，经位置控制执行。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "§4.2 / Appendix B.4",
+          "support": "策略输出相对关节目标，经位置控制执行。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-torque_control-deployment",
+      "stage_id": "deployment",
+      "term_id": "torque_control",
+      "label": "执行力矩类指令",
+      "scope": "general",
+      "context": "只适用于提供相应接口的机器人。",
+      "explanation": "执行力矩类指令。只适用于提供相应接口的机器人。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "mit_robot",
+          "locator": "Torque-controlled robots",
+          "support": "只适用于提供相应接口的机器人。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
+    },
+    {
+      "id": "u-pose_estimation-deployment",
+      "stage_id": "deployment",
+      "term_id": "pose_estimation",
+      "label": "估计对象几何反馈",
+      "scope": "general",
+      "context": "Shadow 视觉反馈实例；非全部策略必需。",
+      "explanation": "估计对象几何反馈。Shadow 视觉反馈实例；非全部策略必需。 这是工程能力的有条件映射，不表示该环节必须使用本技术。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "§5",
+          "support": "Shadow 视觉反馈实例；非全部策略必需。"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "checked_on": "2026-10-21",
+        "basis": "editorial_mapping_with_cited_capability"
+      }
     }
   ]
 }

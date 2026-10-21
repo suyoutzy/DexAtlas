@@ -1,0 +1,1774 @@
+{
+  "checked_on": "2026-10-21",
+  "baseline": "a963efb",
+  "scope": "人工正文核查及编辑归纳；自动校验不证明语义真值。",
+  "terms": [
+    {
+      "id": "dexterous_manipulation",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "arXiv v5 §II-A：definition and tasks；§IV end-effectors",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "in_hand_manipulation",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "arXiv v5 §II-A：in-hand manipulation",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        },
+        {
+          "source_id": "in_hand_rl",
+          "locator": "arXiv v5 §2 Task and System Overview",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "force_closure",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "force_closure_textbook",
+          "locator": "§12.2.3 Transcript，尤其关于 actuator squeezing force 的限制",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "inverse_kinematics",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "ik_textbook",
+          "locator": "逆运动学定义、迭代求解与收敛限制。",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "impedance_control",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "impedance_review",
+          "locator": "§2，式(1)–(4)：impedance/admittance；§2.1 stability",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        },
+        {
+          "source_id": "impedance_notes",
+          "locator": "Joint stiffness control；Cartesian stiffness and operational space control",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "tactile_sensing",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "IV-D：传感信息、应用和局限。",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "motion_retargeting",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "dex_retargeting",
+          "locator": "README：Position / Vector / DexPilot optimizer configurations 与 Examples",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "markov_decision_process",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "(Optional) Formalism：MDP tuple / Markov property",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "policy",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "Policies：deterministic and stochastic policies；States and Observations",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "imitation_learning",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "II-B：范式定义与主要方法。",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "reinforcement_learning",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "回报最大化目标与策略学习。",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        },
+        {
+          "source_id": "in_hand_rl",
+          "locator": "灵巧手内重定向实例。",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "offline_reinforcement_learning",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "offline_rl_review",
+          "locator": "§2.2 Offline Reinforcement Learning；§2.4 distribution shift",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "behavior_cloning",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "robomimic_algorithms",
+          "locator": "Imitation Learning：BC / BC-RNN",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        },
+        {
+          "source_id": "dagger_paper",
+          "locator": "§1–2：sequential prediction distribution mismatch",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "dataset_aggregation",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "dagger_paper",
+          "locator": "§3 DAgger，Algorithm 3.1 与 expert queries",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "proximal_policy_optimization",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "ppo_paper",
+          "locator": "§2–4；Algorithm 1",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        },
+        {
+          "source_id": "ppo_docs",
+          "locator": "Background；Quick Facts；Pseudocode",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "soft_actor_critic",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "sac_paper",
+          "locator": "§2–4",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        },
+        {
+          "source_id": "sac_docs",
+          "locator": "Background；Quick Facts；Pseudocode",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "transformer",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "transformer_paper",
+          "locator": "§3 Model Architecture",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        },
+        {
+          "source_id": "robomimic_transformers",
+          "locator": "Training Transformers：bc_transformer configuration",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "diffusion_policy",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "diffusion_policy_project",
+          "locator": "§II-C Diffusion for Visuomotor Policy Learning；§III-A Network Architecture Options / §III-B Visual Encoder",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        },
+        {
+          "source_id": "robomimic_diffusion",
+          "locator": "Training Diffusion Policy：configuration and implementation",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "action_chunking_with_transformers",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "act_paper",
+          "locator": "§IV ACT，§V experiments",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        },
+        {
+          "source_id": "lerobot_act",
+          "locator": "ACT：Overview / implementation",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "vision_language_action_model",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "rt2_paper",
+          "locator": "v1 §3 Vision-Language-Action Models；§5 Limitations",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        },
+        {
+          "source_id": "openvla_project",
+          "locator": "v1 §3 The OpenVLA Model；§6 Discussion and Limitations",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "sim_to_real_transfer",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "arXiv v5 §3 Transferable Simulations；§6 results；§C.3 calibration",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "domain_randomization",
+      "action": "rechecked",
+      "definition_sources": [
+        {
+          "source_id": "domain_randomization_paper",
+          "locator": "v1 §III-A：visual domain randomization",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        },
+        {
+          "source_id": "in_hand_rl",
+          "locator": "v5 §3.2：physics / observation / appearance randomizations",
+          "support": "对照定位；作用、应用与限制为在来源条件内的简短归纳，非逐字引述或普遍性能保证。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "degrees_of_freedom",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mr_configuration",
+          "locator": "§2.1 Transcript：configuration space 与 dimension",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "configuration_space",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mr_configuration",
+          "locator": "§2.1 Transcript：two-joint robot 与 torus",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "forward_kinematics",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mr_fk",
+          "locator": "§4.1.1 Transcript：given joint angles, find end-effector configuration",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "jacobian",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mr_jacobian",
+          "locator": "§5.1.1 Transcript：joint velocity to twist",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "inverse_dynamics",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mr_inverse_dynamics",
+          "locator": "§8.3 Transcript：forward and backward Newton–Euler iterations",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "underactuation",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mit_underactuation",
+          "locator": "Definition / Input and state constraints",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "tendon_driven_actuation",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "arXiv v5 §IV-B1 Tendon-driven Approach",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "compliance",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "impedance_review",
+          "locator": "§1 Introduction；§2 impedance behavior",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "proprioception",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "proprioception_review",
+          "locator": "arXiv v2 §3.2.1 Proprioception",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "contact_model",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mujoco_contact",
+          "locator": "Computation：Soft contact model / Physical realism and soft contacts",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "friction_cone",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mr_friction",
+          "locator": "§12.2.1 Transcript：static Coulomb friction / friction cone",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "wrench",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mr_wrench",
+          "locator": "§3.4 Transcript：moment and force packaged as a 6-vector",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "form_closure",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mr_form",
+          "locator": "§12.1.7 Transcript：first-order conditions and conservative test",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "grasp_matrix",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "grasp_notes",
+          "locator": "Grasp Matrix；Force Closure",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "grasping",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "grasp_notes",
+          "locator": "Grasp Analysis 开篇；刚体与库仑摩擦假设",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "slip_detection",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "slip_fusion",
+          "locator": "§I Introduction；§III Model Description；§IV results",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "pose_estimation",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mit_pose",
+          "locator": "章节引言；已知几何与 partial views / occlusions",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "visuotactile_fusion",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "slip_fusion",
+          "locator": "§III 双视觉流与触觉图像输入；§IV 融合和单模态比较",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "teleoperation",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "act_paper",
+          "locator": "§III A Low-Cost Teleoperation System；§V 任务",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "motion_planning",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mit_planning",
+          "locator": "章节引言；Inverse Kinematics；Local minima",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "trajectory_optimization",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mit_planning",
+          "locator": "Kinematic trajectory optimization；Local minima in collision-free trajectory optimization",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "model_predictive_control",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mit_trajopt",
+          "locator": "Model-Predictive Control：measure / optimize / first action / repeat",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "position_control",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "impedance_notes",
+          "locator": "Manipulator-Control Toolbox；Position control / Joint stiffness control",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "torque_control",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mit_robot",
+          "locator": "Arms：Torque-controlled robots；Joint-torque sensing and control",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "admittance_control",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "impedance_review",
+          "locator": "§2 Variable Impedance Control：impedance/admittance schemes；§2.1 stability",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "operational_space_control",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "khatib_osc",
+          "locator": "Abstract；§II Generalized Task Specification Matrices；§III End-Effector Equations of Motion，pp.43–47",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "system_identification",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "mit_sysid",
+          "locator": "Multibody dynamics / Experiment design / Identifiability",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "partially_observable_markov_decision_process",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "pomdp_review",
+          "locator": "§3 Partially Observable Markov Decision Processes；belief-state discussion",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "observation",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "States and Observations",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "action_space",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "Action Spaces；Policies",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "reward_function",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "Reward and Return；The RL Problem；Formalism",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "value_function",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "Value Functions；Bellman Equations",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "policy_gradient",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "ppo_paper",
+          "locator": "§2 Background: Policy Gradient Methods",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "actor_critic",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "sac_paper",
+          "locator": "§2 maximum entropy RL；§4 Soft Actor-Critic",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "on_policy_learning",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "ppo_docs",
+          "locator": "Quick Facts；Pseudocode",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "off_policy_learning",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "sac_docs",
+          "locator": "Background / Quick Facts；replay buffer",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "experience_replay",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "sac_docs",
+          "locator": "Pseudocode：replay buffer D / sample batch",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "recurrent_neural_network",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "pytorch_rnn",
+          "locator": "RNN：hidden state recurrence formula",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "convolutional_neural_network",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "pytorch_conv",
+          "locator": "Conv2d 运算定义",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "action_chunking",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "act_paper",
+          "locator": "§IV-A Action Chunking；Temporal Ensembling",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "covariate_shift",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "covariate_shift_definition",
+          "locator": "Abstract / §1",
+          "support": "标准协变量偏移定义；机器人序贯应用另以 DAgger 为据。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    },
+    {
+      "id": "asymmetric_actor_critic",
+      "action": "added",
+      "definition_sources": [
+        {
+          "source_id": "asymmetric_paper",
+          "locator": "§IV-A Asymmetric Actor Critic；§IV-C；§V-B",
+          "support": "该定位支持本条所述定义、实现或明确限定的归纳。",
+          "basis": "source_paraphrase"
+        }
+      ]
+    }
+  ],
+  "legacy_concepts": [
+    {
+      "id": "ppo-rl",
+      "action": "revised",
+      "before": "属于",
+      "after": "强化学习算法",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "ppo_paper",
+          "locator": "§2 Policy Gradient Methods；§3–4 PPO",
+          "support": "PPO 是强化学习中的策略优化算法族；此处是方法归属，不把算法等同于学习范式。"
+        }
+      ]
+    },
+    {
+      "id": "sac-rl",
+      "action": "revised",
+      "before": "属于",
+      "after": "强化学习算法",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "sac_paper",
+          "locator": "Abstract；§4 Soft Actor-Critic",
+          "support": "SAC 是基于最大熵目标的异策略强化学习算法。"
+        }
+      ]
+    },
+    {
+      "id": "bc-il",
+      "action": "revised",
+      "before": "属于",
+      "after": "模仿学习方法",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "robomimic_algorithms",
+          "locator": "Imitation Learning / BC",
+          "support": "BC 使用示范观测与动作进行监督训练，是模仿学习的方法之一。"
+        }
+      ]
+    },
+    {
+      "id": "dagger-il",
+      "action": "revised",
+      "before": "属于",
+      "after": "交互式模仿学习算法",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "dagger_paper",
+          "locator": "§3 DAgger；Algorithm 3.1",
+          "support": "DAgger 在当前策略访问的状态上查询专家，并聚合示范标注训练。"
+        }
+      ]
+    },
+    {
+      "id": "offline-rl",
+      "action": "revised",
+      "before": "一种数据设置",
+      "after": "强化学习的数据设置",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "offline_rl_review",
+          "locator": "§2.2 Offline Reinforcement Learning",
+          "support": "离线强化学习按固定数据且训练时不再收集环境交互的条件界定，不是一种固定网络或单一算法。"
+        }
+      ]
+    },
+    {
+      "id": "mdp-rl",
+      "action": "revised",
+      "before": "提供数学框架",
+      "after": "提供决策形式化",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "(Optional) Formalism；States and Observations",
+          "support": "MDP 是描述强化学习问题的常用形式化；完全状态不可观测时还需要考虑部分可观测性。"
+        }
+      ]
+    },
+    {
+      "id": "rl-policy",
+      "action": "revised",
+      "before": "学习 / 改进",
+      "after": "学习或改进策略",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "The RL Problem；Policies；Value Functions",
+          "support": "强化学习使用奖励反馈优化决策行为，可显式学习策略或通过价值等表示获得行为。"
+        }
+      ]
+    },
+    {
+      "id": "bc-policy",
+      "action": "revised",
+      "before": "学习得到",
+      "after": "拟合示范策略",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "robomimic_algorithms",
+          "locator": "BC / BC_GMM / BC_RNN",
+          "support": "BC 拟合观测到动作的映射或条件分布，结果作为策略使用。"
+        }
+      ]
+    },
+    {
+      "id": "dagger-policy",
+      "action": "revised",
+      "before": "学习得到",
+      "after": "迭代训练策略",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "dagger_paper",
+          "locator": "§3 Algorithm 3.1",
+          "support": "DAgger 聚合专家标注后更新策略；具体监督学习器并非固定网络。"
+        }
+      ]
+    },
+    {
+      "id": "ppo-policy",
+      "action": "revised",
+      "before": "优化",
+      "after": "更新策略参数",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "ppo_docs",
+          "locator": "Background；Key Equations；Pseudocode",
+          "support": "PPO 优化策略梯度替代目标；PPO-Clip 与 PPO-Penalty 的目标形式不同。"
+        }
+      ]
+    },
+    {
+      "id": "sac-policy",
+      "action": "revised",
+      "before": "优化",
+      "after": "优化熵正则策略",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "sac_paper",
+          "locator": "§4.2 value and policy updates",
+          "support": "SAC 用价值估计指导随机策略更新，并在目标中考虑熵。"
+        }
+      ]
+    },
+    {
+      "id": "dagger-bc",
+      "action": "revised",
+      "before": "对比：数据收集",
+      "after": "区别：数据访问与专家查询",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "dagger_paper",
+          "locator": "§1–3，supervised learner 与 expert labeling",
+          "support": "单次 BC 从已有示范训练；DAgger 迭代访问当前策略状态并查询专家。两者不是互斥的网络类别。"
+        },
+        {
+          "source_id": "robomimic_algorithms",
+          "locator": "BC",
+          "support": "与另一来源共同核查两端定义、实现或比较维度。"
+        }
+      ]
+    },
+    {
+      "id": "ppo-sac",
+      "action": "revised",
+      "before": "对比：经验使用",
+      "after": "区别：同策略与异策略",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "ppo_docs",
+          "locator": "Quick Facts：on-policy；Pseudocode",
+          "support": "PPO 通常采用新采样的同策略数据；SAC 可用回放缓冲复用经验。此比较不构成性能排名。"
+        },
+        {
+          "source_id": "sac_docs",
+          "locator": "Quick Facts：off-policy；Pseudocode",
+          "support": "与另一来源共同核查两端定义、实现或比较维度。"
+        }
+      ]
+    },
+    {
+      "id": "offline-bc",
+      "action": "revised",
+      "before": "对比：学习目标",
+      "after": "区别：优化目标",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "offline_rl_review",
+          "locator": "§2.2 / §2.4，behavioral cloning discussion",
+          "support": "离线 RL 在固定数据条件下优化回报；BC 监督拟合示范动作。都可以使用固定数据，但学习目标不同。"
+        },
+        {
+          "source_id": "robomimic_algorithms",
+          "locator": "BC / Offline Reinforcement Learning",
+          "support": "与另一来源共同核查两端定义、实现或比较维度。"
+        }
+      ]
+    },
+    {
+      "id": "offline-sac",
+      "action": "revised",
+      "before": "区分：离线与异策略",
+      "after": "区别：离线与异策略",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "offline_rl_review",
+          "locator": "§2.2 / §2.4；§4.2 Distributional Shift",
+          "support": "SAC 的异策略经验复用不等于能直接可靠处理任意固定离线数据；离线训练还会遇到分布外动作和价值外推。"
+        },
+        {
+          "source_id": "sac_docs",
+          "locator": "Background；replay buffer",
+          "support": "与另一来源共同核查两端定义、实现或比较维度。"
+        }
+      ]
+    },
+    {
+      "id": "il-rl",
+      "action": "revised",
+      "before": "对比：学习信号",
+      "after": "区别：主要学习信号",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "§II-B；§III-A / §III-B",
+          "support": "IL 主要从专家示范等指导中学习，RL 主要通过奖励目标改进行为；实际系统可以结合两者。"
+        },
+        {
+          "source_id": "rl_concepts",
+          "locator": "The RL Problem",
+          "support": "与另一来源共同核查两端定义、实现或比较维度。"
+        }
+      ]
+    },
+    {
+      "id": "act-il",
+      "action": "revised",
+      "before": "属于",
+      "after": "示范学习方法",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "act_paper",
+          "locator": "§IV；§V",
+          "support": "原始 ACT 在 ALOHA 示范上学习观测条件动作序列，属于具名模仿学习方法。"
+        }
+      ]
+    },
+    {
+      "id": "diffusion-il",
+      "action": "revised",
+      "before": "原方法采用",
+      "after": "原方法采用示范学习",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "diffusion_policy_project",
+          "locator": "§II-C；§V-A Simulation Environments and datasets",
+          "support": "原始 Diffusion Policy 使用示范动作序列训练条件去噪模型；生成机制本身不等同于一种普遍学习范式。"
+        }
+      ]
+    },
+    {
+      "id": "act-transformer",
+      "action": "revised",
+      "before": "使用架构",
+      "after": "采用 Transformer 架构",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "act_paper",
+          "locator": "§IV-B / §IV-C",
+          "support": "ACT 使用 Transformer 构成其动作序列模型，架构是方法的组成而不是研究问题的上下位。"
+        }
+      ]
+    },
+    {
+      "id": "bc-transformer",
+      "action": "revised",
+      "before": "可采用架构",
+      "after": "可采用 Transformer",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "robomimic_transformers",
+          "locator": "bc_transformer.json 与 algorithm configuration",
+          "support": "robomimic 的 BC-Transformer 用 Transformer 参数化示范策略；BC 并不要求该架构。"
+        }
+      ]
+    },
+    {
+      "id": "diffusion-transformer",
+      "action": "revised",
+      "before": "可采用架构",
+      "after": "去噪网络可采用 Transformer",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "diffusion_policy_project",
+          "locator": "§III-A Network Architecture Options",
+          "support": "原论文同时比较 CNN 与 Transformer 去噪网络，不能将 Transformer 当作所有 Diffusion Policy 的必选结构。"
+        }
+      ]
+    },
+    {
+      "id": "act-diffusion",
+      "action": "revised",
+      "before": "对比：生成方式",
+      "after": "区别：动作生成机制",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "act_paper",
+          "locator": "§IV-B / §IV-C",
+          "support": "原 ACT 使用条件潜变量模型与 Transformer 解码动作序列，原 Diffusion Policy 通过迭代去噪生成序列；两者都可预测多步动作。"
+        },
+        {
+          "source_id": "diffusion_policy_project",
+          "locator": "§II；§III-A",
+          "support": "与另一来源共同核查两端定义、实现或比较维度。"
+        }
+      ]
+    },
+    {
+      "id": "vla-policy",
+      "action": "revised",
+      "before": "用于动作生成",
+      "after": "用于视觉语言条件决策",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "rt2_paper",
+          "locator": "v1 §3；§5 limitations",
+          "support": "RT-2 与 OpenVLA 将视觉、语言条件与机器人动作联系起来，形成可执行策略模型。"
+        }
+      ]
+    },
+    {
+      "id": "vla-transformer",
+      "action": "revised",
+      "before": "代表模型采用",
+      "after": "代表模型采用 Transformer",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "openvla_project",
+          "locator": "v1 §3.1 / §3.2",
+          "support": "OpenVLA 的语言骨干和多模态设计基于 Transformer；这是代表实现的组成，不是所有 VLA 的定义。"
+        }
+      ]
+    },
+    {
+      "id": "vla-diffusion",
+      "action": "revised",
+      "before": "区分：概念维度",
+      "after": "区别：描述维度",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "rt2_paper",
+          "locator": "v1 §3",
+          "support": "VLA 名称描述视觉、语言与动作的联系，Diffusion Policy 描述动作生成机制；这两种命名维度不能直接当成互斥的算法树分支。"
+        },
+        {
+          "source_id": "diffusion_policy_project",
+          "locator": "§II policy formulation",
+          "support": "与另一来源共同核查两端定义、实现或比较维度。"
+        }
+      ]
+    },
+    {
+      "id": "inhand-dexterous",
+      "action": "revised",
+      "before": "一类操作问题",
+      "after": "一类灵巧操作问题",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "arXiv v5 §II-A",
+          "support": "手内操作研究物体相对手的调整，是灵巧操作中一类任务；灵巧操作的范围不限于手内重定向。"
+        }
+      ]
+    },
+    {
+      "id": "tactile-inhand",
+      "action": "revised",
+      "before": "提供接触信息",
+      "after": "可提供局部接触信息",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "arXiv v5 §IV-D Tactile Sensors",
+          "support": "触觉可为手内操作提供接触与受力观测，但有些实现可不依赖触觉。"
+        }
+      ]
+    },
+    {
+      "id": "dr-transfer",
+      "action": "revised",
+      "before": "支持迁移",
+      "after": "一种迁移支持方法",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "domain_randomization_paper",
+          "locator": "v1 §III-A；§IV",
+          "support": "通过外观或物理条件变化训练以增强迁移鲁棒性；覆盖不足时仍可能迁移失败。"
+        }
+      ]
+    },
+    {
+      "id": "inhand-transfer",
+      "action": "revised",
+      "before": "已有迁移实例",
+      "after": "有仿真迁移实例",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "v5 §2 / §6",
+          "support": "Shadow Hand 论文先在仿真学习物体重定向策略，再在实机测试；不代表所有手内操作都需要仿真。"
+        }
+      ]
+    },
+    {
+      "id": "retarget-ik",
+      "action": "revised",
+      "before": "相关求解问题",
+      "after": "可涉及逆运动学问题",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "dex_retargeting",
+          "locator": "README：Position / Vector / DexPilot；Examples",
+          "support": "位置目标式重定向可通过目标手的运动学模型求满足人手几何目标的关节构型；向量和 DexPilot 优化目标有所不同。"
+        }
+      ]
+    },
+    {
+      "id": "impedance-policy",
+      "action": "revised",
+      "before": "不同控制层次",
+      "after": "可参数化为交互策略",
+      "reason": "撤销固定层级断言；正文允许阻抗律本身参数化为策略。",
+      "evidence": [
+        {
+          "source_id": "impedance_review",
+          "locator": "§4.3 VILC via Reinforcement Learning，policy parameterization",
+          "support": "变阻抗控制的轨迹与阻抗参数可构成可学习策略。原样例“固定处于不同层次”的说法过强：策略也可以直接表示交互控制律。"
+        }
+      ]
+    },
+    {
+      "id": "closure-inhand",
+      "action": "revised",
+      "before": "接触判据与动态任务",
+      "after": "区别：接触性质与操作任务",
+      "reason": "补充关系类型、适用范围及精确正文定位；保留经核查的命题。",
+      "evidence": [
+        {
+          "source_id": "force_closure_textbook",
+          "locator": "§12.2.3：actuation caveat",
+          "support": "力闭合描述给定接触下的理论可施力能力；手内操作描述物体调整任务。满足前者不等于能完成后者。"
+        },
+        {
+          "source_id": "in_hand_rl",
+          "locator": "§2 task definition",
+          "support": "与另一来源共同核查两端定义、实现或比较维度。"
+        }
+      ]
+    }
+  ],
+  "legacy_usages": [
+    {
+      "id": "u1",
+      "action": "revised",
+      "reason": "Shadow Hand 物体重定向任务目标；此处只抽象为能力需求。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "§2 Task and System Overview",
+          "support": "Shadow Hand 物体重定向任务目标；此处只抽象为能力需求。"
+        }
+      ]
+    },
+    {
+      "id": "u2",
+      "action": "revised",
+      "reason": "Shadow Hand 的物体姿态目标，不指定所有手内任务都采用其实现。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "§2 Task and System Overview",
+          "support": "Shadow Hand 的物体姿态目标，不指定所有手内任务都采用其实现。"
+        }
+      ]
+    },
+    {
+      "id": "u3",
+      "action": "revised",
+      "reason": "选择装有触觉的系统时的一种可选观测设计。",
+      "evidence": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "§IV-D Tactile Sensors",
+          "support": "选择装有触觉的系统时的一种可选观测设计。"
+        }
+      ]
+    },
+    {
+      "id": "u4",
+      "action": "revised",
+      "reason": "任务空间目标与关节构型之间的运动学接口归纳。",
+      "evidence": [
+        {
+          "source_id": "mit_planning",
+          "locator": "Inverse Kinematics",
+          "support": "任务空间目标与关节构型之间的运动学接口归纳。"
+        }
+      ]
+    },
+    {
+      "id": "u5",
+      "action": "revised",
+      "reason": "决策映射的通用建模用途，不限定网络或训练算法。",
+      "evidence": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "Policies",
+          "support": "决策映射的通用建模用途，不限定网络或训练算法。"
+        }
+      ]
+    },
+    {
+      "id": "u6",
+      "action": "revised",
+      "reason": "robomimic BC-Transformer 架构选项，非全部策略必选。",
+      "evidence": [
+        {
+          "source_id": "robomimic_transformers",
+          "locator": "bc_transformer.json 配置",
+          "support": "robomimic BC-Transformer 架构选项，非全部策略必选。"
+        }
+      ]
+    },
+    {
+      "id": "u7",
+      "action": "revised",
+      "reason": "OpenVLA 类视觉语言条件动作模型选项。",
+      "evidence": [
+        {
+          "source_id": "openvla_project",
+          "locator": "v1 §3 The OpenVLA Model",
+          "support": "OpenVLA 类视觉语言条件动作模型选项。"
+        }
+      ]
+    },
+    {
+      "id": "u8",
+      "action": "revised",
+      "reason": "固定离线数据条件下的方法构建。",
+      "evidence": [
+        {
+          "source_id": "offline_rl_review",
+          "locator": "§2.2 Offline Reinforcement Learning",
+          "support": "固定离线数据条件下的方法构建。"
+        }
+      ]
+    },
+    {
+      "id": "u9",
+      "action": "revised",
+      "reason": "用于抓取接触的理论分析，仍需检查实际可施力。",
+      "evidence": [
+        {
+          "source_id": "force_closure_textbook",
+          "locator": "§12.2.3，actuation caveat",
+          "support": "用于抓取接触的理论分析，仍需检查实际可施力。"
+        }
+      ]
+    },
+    {
+      "id": "u10",
+      "action": "revised",
+      "reason": "设计所需运动学求解器，不代表得到整段可行轨迹。",
+      "evidence": [
+        {
+          "source_id": "ik_textbook",
+          "locator": "§6.2 Numerical IK",
+          "support": "设计所需运动学求解器，不代表得到整段可行轨迹。"
+        }
+      ]
+    },
+    {
+      "id": "u11",
+      "action": "revised",
+      "reason": "交互控制律设计，明确动力学与环境条件。",
+      "evidence": [
+        {
+          "source_id": "impedance_review",
+          "locator": "§2；§2.1 stability",
+          "support": "交互控制律设计，明确动力学与环境条件。"
+        }
+      ]
+    },
+    {
+      "id": "u12",
+      "action": "revised",
+      "reason": "可选的人手到机器人手的几何映射。",
+      "evidence": [
+        {
+          "source_id": "dex_retargeting",
+          "locator": "README / Examples / Position and Vector modes",
+          "support": "可选的人手到机器人手的几何映射。"
+        }
+      ]
+    },
+    {
+      "id": "u13",
+      "action": "revised",
+      "reason": "ALOHA 通过遥操作示范训练 ACT 的实例。",
+      "evidence": [
+        {
+          "source_id": "act_paper",
+          "locator": "§III / §IV",
+          "support": "ALOHA 通过遥操作示范训练 ACT 的实例。"
+        }
+      ]
+    },
+    {
+      "id": "u14",
+      "action": "revised",
+      "reason": "监督拟合示范动作的一种可选方法。",
+      "evidence": [
+        {
+          "source_id": "robomimic_algorithms",
+          "locator": "BC",
+          "support": "监督拟合示范动作的一种可选方法。"
+        }
+      ]
+    },
+    {
+      "id": "u15",
+      "action": "revised",
+      "reason": "交互查询专家并聚合数据；不是纯固定离线示范流程。",
+      "evidence": [
+        {
+          "source_id": "dagger_paper",
+          "locator": "§3 Algorithm 3.1",
+          "support": "交互查询专家并聚合数据；不是纯固定离线示范流程。"
+        }
+      ]
+    },
+    {
+      "id": "u16",
+      "action": "revised",
+      "reason": "示范训练的动作扩散策略实例。",
+      "evidence": [
+        {
+          "source_id": "diffusion_policy_project",
+          "locator": "§II；§III",
+          "support": "示范训练的动作扩散策略实例。"
+        }
+      ]
+    },
+    {
+      "id": "u17",
+      "action": "revised",
+      "reason": "原始 ACT 方法，不外推为多指手实机证明。",
+      "evidence": [
+        {
+          "source_id": "act_paper",
+          "locator": "§IV",
+          "support": "原始 ACT 方法，不外推为多指手实机证明。"
+        }
+      ]
+    },
+    {
+      "id": "u18",
+      "action": "revised",
+      "reason": "可用 MDP 形式化，部分观测还需 POMDP 处理。",
+      "evidence": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "(Optional) Formalism",
+          "support": "可用 MDP 形式化，部分观测还需 POMDP 处理。"
+        }
+      ]
+    },
+    {
+      "id": "u19",
+      "action": "revised",
+      "reason": "Shadow 仿真交互与奖励优化实例。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "§4；Appendix A.1",
+          "support": "Shadow 仿真交互与奖励优化实例。"
+        }
+      ]
+    },
+    {
+      "id": "u20",
+      "action": "revised",
+      "reason": "Shadow 策略训练使用 PPO。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "Appendix A.3 Proximal Policy Optimization",
+          "support": "Shadow 策略训练使用 PPO。"
+        }
+      ]
+    },
+    {
+      "id": "u21",
+      "action": "revised",
+      "reason": "连续控制交互算法选项；不表示 Shadow 原论文使用 SAC。",
+      "evidence": [
+        {
+          "source_id": "sac_paper",
+          "locator": "§4 Soft Actor-Critic",
+          "support": "连续控制交互算法选项；不表示 Shadow 原论文使用 SAC。"
+        }
+      ]
+    },
+    {
+      "id": "u22",
+      "action": "revised",
+      "reason": "Shadow 仿真物理和观测变化。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "§3.2 Randomizations",
+          "support": "Shadow 仿真物理和观测变化。"
+        }
+      ]
+    },
+    {
+      "id": "u23",
+      "action": "revised",
+      "reason": "以奖励反馈学习决策规则的通用用途。",
+      "evidence": [
+        {
+          "source_id": "rl_concepts",
+          "locator": "The RL Problem；Policies",
+          "support": "以奖励反馈学习决策规则的通用用途。"
+        }
+      ]
+    },
+    {
+      "id": "u24",
+      "action": "revised",
+      "reason": "Shadow 运行时根据观测生成目标关节动作。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "§4.2；Appendix B.4 Control",
+          "support": "Shadow 运行时根据观测生成目标关节动作。"
+        }
+      ]
+    },
+    {
+      "id": "u25",
+      "action": "revised",
+      "reason": "采用阻抗接口时的一种执行方式，非全部策略必需。",
+      "evidence": [
+        {
+          "source_id": "impedance_review",
+          "locator": "§4.3 控制接口与 learned policy 的映射",
+          "support": "采用阻抗接口时的一种执行方式，非全部策略必需。"
+        }
+      ]
+    },
+    {
+      "id": "u26",
+      "action": "revised",
+      "reason": "触觉系统运行时可提供接触反馈，不表示无触觉方案不可行。",
+      "evidence": [
+        {
+          "source_id": "dexterous_il_survey",
+          "locator": "§IV-D；§IV-E3 Sensor Configuration",
+          "support": "触觉系统运行时可提供接触反馈，不表示无触觉方案不可行。"
+        }
+      ]
+    },
+    {
+      "id": "u27",
+      "action": "revised",
+      "reason": "Shadow 在实机运行并检验仿真策略。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "§6 Results；§6.3 Ablation of Randomizations",
+          "support": "Shadow 在实机运行并检验仿真策略。"
+        }
+      ]
+    },
+    {
+      "id": "u28",
+      "action": "revised",
+      "reason": "统计连续姿态目标完成数、掉落及超时等终止条件。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "§6.2 Quantitative Results",
+          "support": "统计连续姿态目标完成数、掉落及超时等终止条件。"
+        }
+      ]
+    },
+    {
+      "id": "u29",
+      "action": "revised",
+      "reason": "比较实机任务表现与随机化消融，不只看仿真回报。",
+      "evidence": [
+        {
+          "source_id": "in_hand_rl",
+          "locator": "§6.2 / §6.3",
+          "support": "比较实机任务表现与随机化消融，不只看仿真回报。"
+        }
+      ]
+    }
+  ],
+  "navigation": [
+    {
+      "id": "f1",
+      "action": "editorial_only",
+      "reason": "明确为编辑性导航，不声称来源规定统一顺序。"
+    },
+    {
+      "id": "f2",
+      "action": "editorial_only",
+      "reason": "明确为编辑性导航，不声称来源规定统一顺序。"
+    },
+    {
+      "id": "f3",
+      "action": "editorial_only",
+      "reason": "明确为编辑性导航，不声称来源规定统一顺序。"
+    },
+    {
+      "id": "f4",
+      "action": "editorial_only",
+      "reason": "明确为编辑性导航，不声称来源规定统一顺序。"
+    },
+    {
+      "id": "f5",
+      "action": "editorial_only",
+      "reason": "明确为编辑性导航，不声称来源规定统一顺序。"
+    },
+    {
+      "id": "f6",
+      "action": "editorial_only",
+      "reason": "明确为编辑性导航，不声称来源规定统一顺序。"
+    },
+    {
+      "id": "f7",
+      "action": "editorial_only",
+      "reason": "明确为编辑性导航，不声称来源规定统一顺序。"
+    },
+    {
+      "id": "f8",
+      "action": "editorial_only",
+      "reason": "明确为编辑性导航，不声称来源规定统一顺序。"
+    },
+    {
+      "id": "f9",
+      "action": "editorial_only",
+      "reason": "明确为编辑性导航，不声称来源规定统一顺序。"
+    },
+    {
+      "id": "f10",
+      "action": "editorial_only",
+      "reason": "明确为编辑性导航，不声称来源规定统一顺序。"
+    },
+    {
+      "id": "f11",
+      "action": "editorial_only",
+      "reason": "明确为编辑性导航，不声称来源规定统一顺序。"
+    },
+    {
+      "id": "f12",
+      "action": "editorial_only",
+      "reason": "明确为编辑性导航，不声称来源规定统一顺序。"
+    },
+    {
+      "id": "f13",
+      "action": "editorial_only",
+      "reason": "明确为编辑性导航，不声称来源规定统一顺序。"
+    }
+  ],
+  "final_review": {
+    "checked_on": "2026-10-21",
+    "method": "独立上下文审读全部词条和关系，重点复核原文定位；并非外部学术同行评审。",
+    "corrections": [
+      {
+        "area": "asymmetric_actor_critic",
+        "change": "方法改为 RSS2018 §IV-A，随机化 §IV-C，实机 §V-B；Shadow 应用另挂 in_hand_rl §4.1 / §6。"
+      },
+      {
+        "area": "diffusion_policy",
+        "change": "§II-C 观测条件化，§III-B Visual Encoder，§V-A 数据与评估；不将 §IV 性质说明写成实验章节。"
+      },
+      {
+        "area": "action_chunking",
+        "change": "ACT 动作分块与时间融合消融定位为 §VI-A，不称为附录。"
+      },
+      {
+        "area": "source_registry",
+        "change": "primary_source_ids 显式登记关于面板来源；分类 act_code 改引 lerobot_act；校验覆盖元数据来源数组。"
+      },
+      {
+        "area": "relation_types",
+        "change": "用当前谓词释义替换旧兼容类型表，检查主关系和派生关系的类型一致。"
+      }
+    ]
+  }
+}

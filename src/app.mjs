@@ -23,7 +23,7 @@ const announce=text=>$('#announcement').textContent=text;
 const safeURL=url=>{try{const u=new URL(url);return ['https:','http:'].includes(u.protocol)?u.href:'#';}catch{return '#';}};
 const sourceLinks=refs=>[...new Map((refs||[]).map(r=>[r.source_id+'|'+r.locator,r])).values()].map(ref=>{
   const source=sourceMap.get(ref.source_id);
-  return source?'<a class="source-link" href="'+esc(safeURL(source.url))+'" target="_blank" rel="noopener noreferrer">'+esc(source.title)+'<span>↗</span><small>'+esc(ref.locator||ref.use||source.kind)+'</small></a>':'';
+  return source?'<a class="source-link" href="'+esc(safeURL(source.url))+'" target="_blank" rel="noopener noreferrer">'+esc(source.title)+'<span>↗</span><small>'+esc(ref.locator||ref.use||source.kind)+'</small><small>'+esc(source.version||source.kind)+(source.checked_on?' · 核查 '+esc(source.checked_on):'')+'</small></a>':'';
 }).join('');
 const stageById=id=>framework.stages.find(s=>s.id===id);
 const chips=ids=>ids.map(id=>'<button class="term-chip" data-action="focus" data-kind="term" data-id="'+esc(id)+'">'+esc(name(id))+'</button>').join('');
@@ -99,13 +99,13 @@ function readTerm(id) {
     '<details><summary>当前价值与局限</summary><p>'+esc(term.current_value.status)+'</p><h3>适用条件</h3><p>'+esc(term.current_value.conditions)+'</p><h3>主要局限</h3><p>'+esc(term.current_value.limitations)+'</p></details>'+
     '<details><summary>典型应用</summary><ul>'+term.applications.map(a=>'<li>'+esc(a)+'</li>').join('')+'</ul></details>'+
     '<details><summary>'+esc(historyRecord?.label||'沿革未评估')+'</summary><p>'+esc(historyRecord?.basis||'尚未核实沿革标签，不据此判断技术是否过时。')+'</p>'+sourceLinks(historyRecord?.evidence)+'</details>'+
-    '<details><summary>来源与继续阅读</summary>'+sourceLinks(term.references.map(r=>({...r,locator:r.use})))+'</details>');
+    '<details><summary>来源与继续阅读</summary>'+Object.entries({definition:'定义依据',role:'作用依据',applications:'应用依据',current_value:'条件与局限依据'}).map(([key,title])=>'<h3>'+title+'</h3>'+sourceLinks(term.claim_evidence?.[key]||term.references.map(r=>({...r,locator:r.use})))).join('')+'<p class="quiet">中文解释为转述；工程作用、示例和限制含编辑归纳，适用范围见来源与关系说明。</p></details>');
 }
 function readRelation(id) {
   const relation=graphData.links.find(l=>l.id===id||l.recordId===id);
   if(!relation)return;
   const title=id=>id.startsWith('stage:')?stageById(id.slice(6)).title:termName(id);
-  openReader('<span class="eyebrow">'+({concept:'概念关系',flow:'工程输入输出',usage:'工程用途'}[relation.kind])+'</span><h2>'+esc(relation.label)+'</h2><div class="relationship-note"><p><strong>'+esc(title(relation.from))+'</strong><br>'+esc(relation.label)+'<br><strong>'+esc(title(relation.to))+'</strong></p><p>'+esc(relation.explanation||relation.label)+'</p></div><section><h3>关系依据</h3>'+sourceLinks(relation.evidence)+'</section>','关系说明');
+  openReader('<span class="eyebrow">'+({concept:'概念关系',flow:'工程输入输出',usage:'工程用途'}[relation.kind])+'</span><h2>'+esc(relation.label)+'</h2><div class="relationship-note"><p><strong>'+esc(title(relation.from))+'</strong><br>'+esc(relation.label)+'<br><strong>'+esc(title(relation.to))+'</strong></p><p>'+esc(relation.explanation||relation.label)+'</p></div>'+(relation.context?'<section><h3>适用范围</h3><p>'+esc(relation.context)+'</p></section>':'')+'<section><h3>关系依据</h3>'+sourceLinks(relation.evidence)+'</section>','关系说明');
 }
 function renderConcept() {
   const term=termMap.get(route.id),relations=neighborhood(route.id,annotations.relations);
@@ -237,7 +237,8 @@ async function load() {
     }
     $('#graph').dataset.ready=String(graphAvailable);
     $('#color-legend').innerHTML='<div class="legend-row"><span style="--swatch:#E3BE7C"></span>工程环节与流程</div>'+glossary.categories.map(c=>'<div class="legend-row"><span style="--swatch:'+CATEGORY_COLORS[c.id]+'"></span>'+esc(c.name)+'</div>').join('');
-    $('#about-sources').innerHTML=sourceLinks(framework.sources.map(s=>({source_id:s.id,locator:s.kind})));
+    $('#content-summary').textContent=glossary.terms.length+' 个词条 · '+annotations.relations.length+' 条概念关系 · 内容 '+glossary.metadata.version;
+    $('#about-sources').innerHTML=sourceLinks((glossary.metadata.primary_source_ids||[]).map(id=>({source_id:id,locator:sourceMap.get(id)?.kind})));
     $('#fallback-panel').innerHTML='<h1>探索术语</h1><p>当前浏览器未能显示三维画布，仍可搜索、阅读和查看关系来源。</p><div class="fallback-list">'+glossary.terms.map(t=>'<button data-action="focus" data-kind="term" data-id="'+esc(t.id)+'">'+esc(t.name.zh)+'<small>'+esc(t.name.abbreviation||t.type)+'</small></button>').join('')+'</div>';
     $('#fallback-panel').hidden=graphAvailable;
     $('#load-state').hidden=true;ready=true;
