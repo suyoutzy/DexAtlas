@@ -5,7 +5,7 @@ const names=new Map(g.terms.map(t=>[t.id,t.name.zh])),sources=new Map(g.sources.
 const link=(label,url)=>({label,url});
 const sections=[
  {title:'这份文档能证明什么',paragraphs:[
-  '核查日期：2026-10-21。内容库 1.0.0，本地待发布。本文记录选用理由、实际核查版本和证据边界，配合每条定义或关系中的章节定位阅读。',
+  '核查日期：2026-10-21。内容库 1.0.0 开发版，待网站发布。本文记录选用理由、实际核查版本和证据边界，配合每条定义或关系中的章节定位阅读。',
   '正式期刊和会议的出版记录有助于确认出处；教材作者正文有助于核对基础定义；算法原文说明具体方法；项目官方文档说明实际接口或实现。作者机构、GitHub 星数、论文年份都不能单独证明一条关系正确。',
   '本轮完成的是编辑核查，不是外部同行评审，也不是截至 2026 年的穷尽检索。reviewed 表示已按本项目规则对照来源；自动校验只检查结构与引用完整性，不能证明科学命题为真。'
  ]},
@@ -68,7 +68,7 @@ await writeFile(new URL('../docs/source-authority.md',import.meta.url),md.trimEn
 await writeFile(new URL('../docs/source-authority.html',import.meta.url),'<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>DexAtlas · 来源与权威性评估</title><style>body{margin:0;background:#0a0b19;color:#e8eaf4;font:17px/1.8 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1080px;margin:auto;padding:32px 24px 72px}a{color:#80d4e1;text-underline-offset:4px}h1{font-size:30px}h2{font-size:23px;margin-top:44px}h3{font-size:19px;overflow-wrap:anywhere}nav{color:#a6adc5;font-size:15px}p{max-width:88ch}article{margin:22px 0;padding:12px 22px;background:#141627;border:1px solid #303248;border-radius:12px;scroll-margin-top:20px}.table-scroll{overflow:auto}table{border-collapse:collapse;min-width:700px;width:100%;font-size:15px}td,th{padding:12px;border:1px solid #35374c;text-align:left;vertical-align:top}th{background:#191c31}dl{display:grid;grid-template-columns:96px 1fr;gap:8px 14px;font-size:15px}dt{color:#aeb8d2}dd{margin:0;overflow-wrap:anywhere}section{scroll-margin-top:20px}@media(max-width:500px){main{padding:18px 16px}h1{font-size:25px}article{padding:10px 14px}dl{grid-template-columns:1fr;gap:2px}dd{margin-bottom:12px}}</style><main>'+html+'</main></html>\n');
 
 const refs=rows=>rows.map(r=>'['+r.source_id+']('+sources.get(r.source_id)?.url+')：'+(r.locator||r.use)).join('；');
-let review='# DexAtlas 内容库 1.0.0 核查记录\n\n日期：2026-10-21。本地待发布；前端仍为 0.2.4。\n\n';
+let review='# DexAtlas 内容库 1.0.0 核查记录\n\n日期：2026-10-21。开发分支，待网站发布；前端仍为 0.2.4。\n\n';
 review+=`本轮共 ${g.terms.length} 个词条（原有 22 个重审，新增 42 个）、${a.relations.length} 条概念关系、${f.usages.length} 条环节用途，以及 ${f.flows.length} 条编辑性工程流程。原有 22 个术语 ID 和 32 个概念关系 ID 保留；含义过强的旧连接已修正。来源与边界见 [权威性文档](source-authority.md)，机器可读变更表见 [content-audit.json](../data/content-audit.json)。\n\n`;
 review+='## 如何核查\n\n第一轮按教材、综述及官方实现收集与去重；第二轮对照正文检查定义、两端概念、方向、适用范围和工程位置。既审旧样例，也审新增命题。reviewed 是编辑核查状态，不是外部学者认证；自动测试只验证引用、端点、兼容性和交互。\n\n技术类型与显示分类分别记录。算法、学习范式、数据设置、模型架构和研究问题不共用一棵上下位树。分组仅帮助导航，真实连接由独立关系记录表达。\n\n';
 review+='最终独立审查后的修正：\n\n'+(audit.final_review?.corrections||[]).map(c=>'- **'+c.area+'**：'+c.change).join('\n')+'\n\n章节定位以实际原文复核；自动测试用于发现悬空来源、类型矛盾和页面回归，不用固定字符串断言代替文献核查。\n\n';
